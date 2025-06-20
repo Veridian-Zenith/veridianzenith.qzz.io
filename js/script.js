@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.querySelector(".project-list");
   const starfield = document.querySelector(".starfield");
 
+  // Show loading spinner
+  container.classList.add("loading");
+
   // Fetch repos from GitHub org, sort by updated date desc
   async function fetchProjects() {
     try {
@@ -19,6 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (err) {
       console.error("Failed to fetch projects:", err);
       container.innerHTML = `<p class="error">Unable to load projects. Try again later.</p>`;
+    } finally {
+      container.classList.remove("loading");
     }
   }
 
@@ -29,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     card.style.opacity = "0";
 
     // Prepare description, fallback to null for now
-    let description = repo.description?.trim() || null;
+    const description = repo.description?.trim() || null;
 
     // Create basic card HTML
     card.innerHTML = `
@@ -179,7 +184,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  // Add Discord widget embed
+  const discordSection = document.createElement("section");
+  discordSection.className = "discord-section";
+  discordSection.innerHTML = `
+    <div class="discord-widget-container" style="margin: 40px auto; max-width: 400px; text-align: center;">
+      <h2 style="font-size:1.3em; font-weight:bold; margin-bottom:10px; background: linear-gradient(90deg, #7289da, #5865f2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Join the Veridian Zenith Discord</h2>
+      <iframe src="https://discord.com/widget?id=1114470638745301092&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      <div style="margin-top:10px; color:#aaa; font-size:0.95em;">Powered by Discord</div>
+    </div>
+  `;
+  // Insert Discord section before the footer or at the end of body
+  document.body.appendChild(discordSection);
+
   // Kick it all off
   fetchProjects();
   generateStarfield();
+
+  // Animated nav underline effect
+  const nav = document.querySelector('.main-nav');
+  const underline = nav?.querySelector('.nav-underline');
+  const links = nav?.querySelectorAll('.nav-link');
+  function updateUnderline(el) {
+    if (!underline || !el) return;
+    const rect = el.getBoundingClientRect();
+    const navRect = nav.getBoundingClientRect();
+    underline.style.left = (rect.left - navRect.left) + "px";
+    underline.style.width = rect.width + "px";
+  }
+  links?.forEach(link => {
+    link.addEventListener('mouseenter', e => updateUnderline(e.currentTarget));
+    link.addEventListener('focus', e => updateUnderline(e.currentTarget));
+    link.addEventListener('mouseleave', () => {
+      const active = nav.querySelector('.nav-link.active');
+      updateUnderline(active);
+    });
+    link.addEventListener('blur', () => {
+      const active = nav.querySelector('.nav-link.active');
+      updateUnderline(active);
+    });
+  });
+  // Set underline to active on load
+  const active = nav?.querySelector('.nav-link.active');
+  if (active) updateUnderline(active);
 });
