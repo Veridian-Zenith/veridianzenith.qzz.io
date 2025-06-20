@@ -1,17 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Inter:wght@400;500;700&display=swap');
 
+/* === Vanta Bloom Theme === */
 :root {
-  --primary: #5b9cff;
-  --primary-gradient: linear-gradient(90deg, #5b9cff 0%, #a6e3ff 100%);
-  --background: #f3f6fa;
-  --glass-bg: rgba(255,255,255,0.7);
-  --glass-blur: 24px;
-  --border: rgba(90, 120, 255, 0.15);
-  --shadow: 0 8px 32px 0 rgba(60, 100, 200, 0.10);
-  --text-main: #222b3a;
-  --text-muted: #6b7a90;
-  --accent: #00e0d3;
-  --accent-gradient: linear-gradient(90deg, #00e0d3 0%, #5b9cff 100%);
+  --void-black: #0A0A0A;
+  --royal-gold: #FFD700;
+  --neon-fuchsia: #FF2AAF;
+  --dahlia-purple: #8B00FF;
+  --autumn-red: #B22222;
+  --cloud-chrome: #CCCCCC;
+  --primary-gradient: linear-gradient(90deg, var(--royal-gold) 0%, var(--neon-fuchsia) 40%, var(--dahlia-purple) 80%, var(--royal-gold) 100%);
+  --accent-gradient: linear-gradient(90deg, var(--dahlia-purple) 0%, var(--neon-fuchsia) 100%);
+  --glass-bg: rgba(18, 16, 24, 0.82);
+  --glass-blur: 16px;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 8px 32px 0 rgba(80, 40, 120, 0.13);
+  --text-main: var(--cloud-chrome);
+  --text-muted: rgba(204, 204, 204, 0.8);
+  --transition-speed: 0.3s;
 }
 
 html, body {
@@ -19,16 +24,22 @@ html, body {
 }
 body {
   font-family: 'Gamja Flower', 'Segoe UI', Arial, sans-serif;
-  background: #0a0812;
-  color: #fff;
+  background: var(--void-black);
+  min-height: 100vh;
+  color: var(--cloud-chrome);
   margin: 0;
   padding: 0;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+.main-content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .starfield {
@@ -36,9 +47,9 @@ body {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at 60% 20%, rgba(255, 0, 204, 0.12) 0%, transparent 70%),
+  background: radial-gradient(ellipse at 60% 20%, rgba(255, 42, 175, 0.13) 0%, transparent 70%),
               radial-gradient(ellipse at 20% 80%, rgba(255, 215, 0, 0.10) 0%, transparent 70%),
-              radial-gradient(ellipse at 80% 70%, rgba(128, 0, 255, 0.10) 0%, transparent 70%);
+              radial-gradient(ellipse at 80% 70%, rgba(139, 0, 255, 0.10) 0%, transparent 70%);
   animation: bgMove 18s ease-in-out infinite alternate;
 }
 @keyframes bgMove {
@@ -99,28 +110,25 @@ nav ul li a:hover, nav ul li a:focus {
   position: relative;
   z-index: 2;
   margin: 0 auto;
-  padding: 80px 0 60px 0;
+  padding: 90px 20px 70px 20px;
   text-align: center;
-  max-width: 700px;
-  background: rgba(18, 16, 24, 0.72);
-  border-radius: 32px;
-  box-shadow: 0 8px 48px 0 rgba(255,0,204,0.08), 0 2px 16px 0 rgba(255,215,0,0.08);
-  backdrop-filter: blur(12px) saturate(1.1);
-  animation: heroPop 1.2s cubic-bezier(.4,0,.2,1);
-}
-@keyframes heroPop {
-  0% { opacity: 0; transform: translateY(40px) scale(0.98); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+  max-width: 90%;
+  background: rgba(18, 16, 24, 0.82);
+  border-radius: 36px;
+  box-shadow: 0 8px 48px 0 var(--neon-fuchsia), 0 2px 16px 0 var(--royal-gold);
+  backdrop-filter: blur(16px) saturate(1.1);
+  opacity: 0;
+  animation: fadeIn 1.2s cubic-bezier(.4,0,.2,1) forwards;
 }
 .hero h2 {
-  font-size: 2.7em;
+  font-size: 2.8em;
   font-weight: 900;
   margin-bottom: 0.2em;
-  background: linear-gradient(90deg, #ffd700 0%, #f0c 40%, #80f 80%, #ffd700 100%);
+  background: linear-gradient(90deg, var(--royal-gold) 0%, var(--neon-fuchsia) 40%, var(--dahlia-purple) 80%, var(--royal-gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 2px 16px #f0c8, 0 1px 0 #ffd700, 0 0 8px #80f8;
+  text-shadow: 0 2px 16px var(--neon-fuchsia), 0 1px 0 var(--royal-gold), 0 0 8px var(--dahlia-purple);
   letter-spacing: 0.04em;
   animation: popText 1.2s cubic-bezier(.4,0,.2,1);
 }
@@ -130,10 +138,10 @@ nav ul li a:hover, nav ul li a:focus {
 }
 .hero p {
   font-size: 1.35em;
-  color: #fff8;
+  color: var(--cloud-chrome);
   margin-top: 0.5em;
   margin-bottom: 0;
-  text-shadow: 0 1px 8px #f0c8, 0 0 4px #ffd70088;
+  text-shadow: 0 1px 8px var(--neon-fuchsia), 0 0 4px var(--royal-gold);
   animation: fadeIn 1.6s cubic-bezier(.4,0,.2,1);
 }
 @keyframes fadeIn {
@@ -161,9 +169,10 @@ nav ul li a:hover, nav ul li a:focus {
 }
 
 #projects {
-  margin: 48px auto 0 auto;
-  max-width: 1100px;
-  padding: 0 16px;
+  margin: 48px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+  width: 100%;
 }
 #projects h2 {
   font-size: 1.5em;
@@ -175,11 +184,15 @@ nav ul li a:hover, nav ul li a:focus {
   flex-wrap: wrap;
   gap: 32px;
   justify-content: center;
+  align-items: center;
   background: none;
   border-radius: 0;
   padding: 0;
   min-height: 120px;
   position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
 }
 .project-list.loading::before {
   content: '';
@@ -210,7 +223,7 @@ nav ul li a:hover, nav ul li a:focus {
   backdrop-filter: blur(var(--glass-blur));
   box-shadow: var(--shadow);
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-  opacity: 1;
+  opacity: 0;
   animation: fadeIn 0.8s ease forwards;
   display: flex;
   flex-direction: column;
@@ -251,25 +264,41 @@ footer.glass-footer {
   margin-top: 64px;
   padding: 32px 0 18px 0;
   border-top: 1.5px solid var(--border);
-  background: var(--glass-bg);
+  background: rgba(18, 16, 24, 0.82);
   color: var(--text-muted);
   border-radius: 32px 32px 0 0;
-  box-shadow: 0 -4px 16px 0 rgba(90,120,255,0.08);
-  font-size: 1em;
-  flex-shrink: 0;
-  background: rgba(18, 16, 24, 0.82);
   box-shadow: 0 -4px 32px 0 rgba(80,40,120,0.13);
-  border-top: 1.5px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
   backdrop-filter: blur(18px) saturate(1.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+footer.glass-footer p {
+  margin: 0;
+  font-size: 1em;
+  color: var(--cloud-chrome);
+}
+.footer-note {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.98em;
+  color: var(--royal-gold);
+  letter-spacing: 0.01em;
+}
+.heart {
+  color: var(--neon-fuchsia);
+  font-size: 1.1em;
+  vertical-align: middle;
 }
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 .nav-bar {
@@ -290,14 +319,14 @@ footer.glass-footer {
   border-radius: 18px;
   background: none;
   color: #fff;
-  text-shadow: 0 2px 16px #f0c8, 0 1px 0 #ffd700, 0 0 8px #80f8;
-  filter: drop-shadow(0 2px 8px #ffd70044);
+  text-shadow: 0 2px 16px var(--neon-fuchsia), 0 1px 0 var(--royal-gold), 0 0 8px var(--dahlia-purple);
+  filter: drop-shadow(0 2px 8px var(--royal-gold));
   transition: text-shadow 0.2s, filter 0.2s;
   user-select: text;
 }
 .site-logo:hover {
-  text-shadow: 0 4px 32px #ffd700, 0 2px 8px #f0c, 0 0 16px #80f;
-  filter: drop-shadow(0 4px 16px #f0c8);
+  text-shadow: 0 4px 32px var(--royal-gold), 0 2px 8px var(--neon-fuchsia), 0 0 16px var(--dahlia-purple);
+  filter: drop-shadow(0 4px 16px var(--neon-fuchsia));
 }
 
 .gradient-text {
@@ -410,14 +439,17 @@ footer.glass-footer {
   .hero {
     border-radius: 18px;
     padding: 24px 4vw 16px 4vw;
+    font-size: 0.9em;
   }
   .project-card {
     border-radius: 14px;
     padding: 16px 8px 12px 8px;
+    width: 90vw;
   }
   footer.glass-footer {
     border-radius: 18px 18px 0 0;
     padding: 18px 0 10px 0;
+    font-size: 0.9em;
   }
   .chat-join-buttons {
     flex-direction: column;
@@ -432,6 +464,127 @@ footer.glass-footer {
   }
 }
 
+/* Add touch-specific styles for mobile devices */
+/* Mobile and touch device styles */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .project-card:hover,
+  .nav-link:hover,
+  .cta-btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Increase tap targets for better touch interaction */
+  .nav-link {
+    padding: 12px 20px;
+  }
+
+  .project-card a {
+    padding: 12px 24px;
+  }
+
+  /* Adjust animations for better performance on mobile */
+  .parallax-section {
+    transition: opacity 0.5s ease;
+  }
+
+  /* Ensure the cursor glow effect doesn't show on touch devices */
+  .cursor-glow {
+    display: none;
+  }
+
+  /* Prevent font scaling on mobile */
+  html {
+    -webkit-text-size-adjust: none;
+  }
+
+  /* Improve performance by reducing some effects */
+  .animated-blobs svg {
+    opacity: 0.25;
+    filter: blur(0.3px);
+  }
+
+  .orbit-particle {
+    opacity: 0.5;
+    box-shadow: 0 0 8px 2px var(--neon-fuchsia);
+  }
+
+  /* Ensure proper viewport scaling */
+  body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* === Vanta Bloom Animated Blobs & Particles === */
+.animated-blobs {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 1 !important;
+  transition: none !important;
+  will-change: auto;
+}
+.animated-blobs svg {
+  position: absolute;
+  filter: blur(0.5px) saturate(1.2);
+  opacity: 0.38;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Orbiting particles */
+.orbit-particles {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+}
+.orbit-particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+  will-change: transform;
+  box-shadow: 0 0 16px 4px var(--neon-fuchsia), 0 0 8px 2px var(--dahlia-purple);
+}
+
+/* Glowing cursor trail */
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  background: radial-gradient(circle, var(--neon-fuchsia) 0%, var(--dahlia-purple) 60%, transparent 100%);
+  box-shadow: 0 0 32px 8px var(--royal-gold), 0 0 64px 16px var(--neon-fuchsia);
+  opacity: 0.7;
+  mix-blend-mode: lighten;
+  transition: transform 0.08s cubic-bezier(.4,0,.2,1), opacity 0.2s;
+}
+
+/* Parallax/fade-in for sections */
+.parallax-section {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
+}
+.parallax-section.visible {
+  opacity: 1;
+}
+
+/* Utility: hide visually but keep for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
 /* Add more pop to nav links */
 .nav-link {
   font-family: 'Gamja Flower', 'Segoe UI', Arial, sans-serif;
@@ -439,15 +592,15 @@ footer.glass-footer {
   font-weight: 700;
   letter-spacing: 0.02em;
   color: #fff;
-  text-shadow: 0 1px 8px #f0c8, 0 0 4px #ffd70088;
+  text-shadow: 0 1px 8px var(--neon-fuchsia), 0 0 4px var(--royal-gold);
   background: none;
   border-radius: 10px;
   margin: 0 2px;
   transition: color 0.18s, background 0.18s, box-shadow 0.18s, text-shadow 0.18s;
 }
 .nav-link.active, .nav-link:hover, .nav-link:focus {
-  color: #ffd700;
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.18) 0%, rgba(240, 0, 204, 0.13) 100%);
-  box-shadow: 0 2px 12px 0 rgba(255,215,0,0.13);
-  text-shadow: 0 2px 16px #ffd700, 0 1px 0 #f0c, 0 0 8px #80f8;
+  color: var(--royal-gold);
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.18) 0%, rgba(255, 42, 175, 0.13) 100%);
+  box-shadow: 0 2px 12px 0 var(--royal-gold);
+  text-shadow: 0 2px 16px var(--royal-gold), 0 1px 0 var(--neon-fuchsia), 0 0 8px var(--dahlia-purple);
 }

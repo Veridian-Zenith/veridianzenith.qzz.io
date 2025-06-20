@@ -50,6 +50,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     setTimeout(() => {
       card.style.opacity = "1";
       card.style.animation = "fadeIn 0.6s ease-out forwards";
+      setTimeout(() => {
+        card.style.opacity = "1";
+        card.style.animation = "none";
+      }, 600);
     }, 200 * index);
 
     // If no description, try to get fallback from README first paragraph
@@ -184,47 +188,216 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Add Discord widget embed
-  const discordSection = document.createElement("section");
-  discordSection.className = "discord-section";
-  discordSection.innerHTML = `
-    <div class="discord-widget-container" style="margin: 40px auto; max-width: 400px; text-align: center;">
-      <h2 style="font-size:1.3em; font-weight:bold; margin-bottom:10px; background: linear-gradient(90deg, #7289da, #5865f2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Join the Veridian Zenith Discord</h2>
-      <iframe src="https://discord.com/widget?id=1114470638745301092&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-      <div style="margin-top:10px; color:#aaa; font-size:0.95em;">Powered by Discord</div>
-    </div>
-  `;
-  // Insert Discord section before the footer or at the end of body
-  document.body.appendChild(discordSection);
-
   // Kick it all off
   fetchProjects();
   generateStarfield();
 
-  // Animated nav underline effect
-  const nav = document.querySelector('.main-nav');
-  const underline = nav?.querySelector('.nav-underline');
-  const links = nav?.querySelectorAll('.nav-link');
-  function updateUnderline(el) {
-    if (!underline || !el) return;
-    const rect = el.getBoundingClientRect();
-    const navRect = nav.getBoundingClientRect();
-    underline.style.left = (rect.left - navRect.left) + "px";
-    underline.style.width = rect.width + "px";
+  // Animated nav underline effect - updated with more robust checks
+  try {
+    const nav = document.querySelector('.main-nav');
+    if (!nav) {
+      console.log("Main navigation element not found");
+      return;
+    }
+
+    const underline = nav.querySelector('.nav-underline');
+    if (!underline) {
+      console.log("Navigation underline element not found");
+      return;
+    }
+
+    const links = nav.querySelectorAll('.nav-link');
+    if (!links || links.length === 0) {
+      console.log("No navigation links found");
+      return;
+    }
+
+    function updateUnderline(el) {
+      if (!el) {
+        console.log("Element not provided for underline update");
+        return;
+      }
+
+      try {
+        const rect = el.getBoundingClientRect();
+        const navRect = nav.getBoundingClientRect();
+        underline.style.left = `${rect.left - navRect.left}px`;
+        underline.style.width = `${rect.width}px`;
+      } catch (e) {
+        console.error("Error updating underline position:", e);
+      }
+    }
+
+    // Only add event listeners if we have valid elements
+    links.forEach(link => {
+      if (!link) return;
+
+      link.addEventListener('mouseenter', e => updateUnderline(e.currentTarget));
+      link.addEventListener('focus', e => updateUnderline(e.currentTarget));
+
+      link.addEventListener('mouseleave', () => {
+        const active = nav.querySelector('.nav-link.active');
+        if (active) updateUnderline(active);
+      });
+
+      link.addEventListener('blur', () => {
+        const active = nav.querySelector('.nav-link.active');
+        if (active) updateUnderline(active);
+      });
+    });
+
+    // Set underline to active on load if an active link exists
+    const activeLink = nav.querySelector('.nav-link.active');
+    if (activeLink) {
+      // Use setTimeout to ensure DOM is fully ready
+      setTimeout(() => updateUnderline(activeLink), 100);
+    }
+  } catch (error) {
+    console.error("Error in navigation underline effect initialization:", error);
   }
-  links?.forEach(link => {
-    link.addEventListener('mouseenter', e => updateUnderline(e.currentTarget));
-    link.addEventListener('focus', e => updateUnderline(e.currentTarget));
-    link.addEventListener('mouseleave', () => {
-      const active = nav.querySelector('.nav-link.active');
-      updateUnderline(active);
+
+  // === Vanta Bloom Animated Blobs, Particles, Cursor, Parallax ===
+
+  // --- SVG Blobs (JS-morphed, not <animate>) ---
+  function createAnimatedBlobs() {
+    let blobLayer = document.querySelector('.animated-blobs');
+    if (!blobLayer) {
+      blobLayer = document.createElement('div');
+      blobLayer.className = 'animated-blobs';
+      document.body.appendChild(blobLayer);
+    }
+    // Only add SVGs if not present
+    if (!document.getElementById('blob1svg')) {
+      blobLayer.innerHTML = `
+        <svg id="blob1svg" width="520" height="520" style="left:5vw;top:8vh;" viewBox="0 0 520 520">
+          <defs><radialGradient id="blob1g" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FF2AAF"/><stop offset="100%" stop-color="#0A0A0A"/></radialGradient></defs>
+          <path id="blob1" fill="url(#blob1g)" d="M260,60Q340,100,400,180Q460,260,400,340Q340,420,260,400Q180,380,120,320Q60,260,120,180Q180,100,260,60Z"/>
+        </svg>
+        <svg id="blob2svg" width="340" height="340" style="right:8vw;bottom:10vh;" viewBox="0 0 340 340">
+          <defs><radialGradient id="blob2g" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD700"/><stop offset="100%" stop-color="#8B00FF"/></radialGradient></defs>
+          <path id="blob2" fill="url(#blob2g)" d="M170,40Q220,80,270,170Q320,260,220,300Q120,340,70,250Q20,160,70,100Q120,40,170,40Z"/>
+        </svg>
+      `;
+    }
+    morphBlobs();
+  }
+
+  // Morphing function for blobs
+  function morphBlobs() {
+    // Keyframes for each blob
+    const blob1Frames = [
+      "M260,60Q340,100,400,180Q460,260,400,340Q340,420,260,400Q180,380,120,320Q60,260,120,180Q180,100,260,60Z",
+      "M260,80Q350,120,410,200Q470,280,410,350Q350,420,260,420Q170,400,110,320Q50,240,110,170Q170,100,260,80Z"
+    ];
+    const blob2Frames = [
+      "M170,40Q220,80,270,170Q320,260,220,300Q120,340,70,250Q20,160,70,100Q120,40,170,40Z",
+      "M170,60Q230,100,290,170Q350,240,250,290Q150,340,90,250Q30,160,90,90Q150,20,170,60Z"
+    ];
+    const lerp = (a, b, t) => a + (b - a) * t;
+    // Interpolate SVG path (simple, same # of points)
+    function interpolatePath(pathA, pathB, t) {
+      // Only works for these specific paths (same structure)
+      const numsA = pathA.match(/-?\d+\.?\d*/g).map(Number);
+      const numsB = pathB.match(/-?\d+\.?\d*/g).map(Number);
+      const nums = numsA.map((a, i) => lerp(a, numsB[i], t));
+      // Rebuild path string (hardcoded for these blobs)
+      if (nums.length === 26) {
+        return `M${nums[0]},${nums[1]}Q${nums[2]},${nums[3]},${nums[4]},${nums[5]}Q${nums[6]},${nums[7]},${nums[8]},${nums[9]}Q${nums[10]},${nums[11]},${nums[12]},${nums[13]}Q${nums[14]},${nums[15]},${nums[16]},${nums[17]}Q${nums[18]},${nums[19]},${nums[20]},${nums[21]}Q${nums[22]},${nums[23]},${nums[24]},${nums[25]}Z`;
+      }
+      return pathA;
+    }
+    let t = 0, dir = 1;
+    function animate() {
+      t += dir * 0.008;
+      if (t > 1) { t = 1; dir = -1; }
+      if (t < 0) { t = 0; dir = 1; }
+      const blob1 = document.getElementById('blob1');
+      const blob2 = document.getElementById('blob2');
+      if (blob1 && blob2) {
+        blob1.setAttribute('d', interpolatePath(blob1Frames[0], blob1Frames[1], t));
+        blob2.setAttribute('d', interpolatePath(blob2Frames[0], blob2Frames[1], t));
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  // --- Orbiting Particles ---
+  function createOrbitParticles(count = 12) {
+    if (document.querySelector('.orbit-particles')) return;
+    const layer = document.createElement('div');
+    layer.className = 'orbit-particles';
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'orbit-particle';
+      const size = Math.random() * 12 + 8;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      p.style.background = `radial-gradient(circle, #FF2AAF 0%, #8B00FF 80%, transparent 100%)`;
+      layer.appendChild(p);
+    }
+    document.body.appendChild(layer);
+    animateOrbitParticles();
+  }
+  function animateOrbitParticles() {
+    const particles = document.querySelectorAll('.orbit-particle');
+    const t0 = Date.now();
+    function animate() {
+      const t = (Date.now() - t0) / 1000;
+      particles.forEach((p, i) => {
+        const angle = t * (0.18 + 0.04 * i) + i * (Math.PI * 2 / particles.length);
+        const r = 120 + 60 * Math.sin(t * 0.2 + i);
+        const cx = window.innerWidth / 2 + Math.cos(angle) * r;
+        const cy = window.innerHeight / 2 + Math.sin(angle) * r * 0.6;
+        p.style.left = `${cx}px`;
+        p.style.top = `${cy}px`;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  // --- Glowing Cursor Trail ---
+  function createCursorGlow() {
+    if (document.querySelector('.cursor-glow')) return;
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    document.body.appendChild(glow);
+    let lastX = window.innerWidth/2, lastY = window.innerHeight/2;
+    document.addEventListener('pointermove', e => {
+      lastX = e.clientX;
+      lastY = e.clientY;
+      glow.style.transform = `translate(${lastX-16}px,${lastY-16}px)`;
+      glow.style.opacity = '1';
     });
-    link.addEventListener('blur', () => {
-      const active = nav.querySelector('.nav-link.active');
-      updateUnderline(active);
+    document.addEventListener('pointerleave', () => {
+      glow.style.opacity = '0';
     });
+  }
+
+  // --- Parallax/Fade-in Sections ---
+  function setupParallaxSections() {
+    const sections = document.querySelectorAll('.parallax-section');
+    function onScrollOrLoad() {
+      const wh = window.innerHeight;
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < wh * 0.92) {
+          sec.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', onScrollOrLoad);
+    window.addEventListener('resize', onScrollOrLoad);
+    // Run on load as well
+    onScrollOrLoad();
+  }
+
+  // --- INIT ---
+  document.addEventListener('DOMContentLoaded', () => {
+    createAnimatedBlobs();
+    createOrbitParticles();
+    createCursorGlow();
+    setupParallaxSections();
   });
-  // Set underline to active on load
-  const active = nav?.querySelector('.nav-link.active');
-  if (active) updateUnderline(active);
 });
