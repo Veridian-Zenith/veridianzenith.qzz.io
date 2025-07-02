@@ -1,41 +1,53 @@
-# vz.strangled.net
+# vz.strangled.net API Guide
 
-Please visit the URL below:
-
-[Veridian Zenith](https://vz.strangled.net:777/)
+Welcome! To interact with the API or visit the main site, please use the following links and instructions carefully.
 
 ---
 
-## IMPORTANT: You must provide your own SID for API use!
+## 🌐 Website Access
 
-### How to obtain your SID:
-
-You can visit this URL directly from any browser:
-
-```
-https://vz.strangled.net/api/auth
-```
-
-Or use this POST command (note: **POST access with password is restricted and permission-based**):
-
-```bash
-curl -k -X POST -H "Content-Type: application/json" -d '{"password":"<your-app-password>"}' https://vz.strangled.net/api/auth
-```
-
-> **Warning:** Developers using POST must have explicit permission from Dae Euhwa. Sharing the password without authorization will result in immediate revocation of all access and a password reset.
+Visit the main site here:
+[vz.strangled.net](https://vz.strangled.net:777/)
 
 ---
 
-### Example JSON response:
+## 🔐 Authentication & API Usage
+
+### You **must** provide your own SID to use the API.
+
+---
+
+### How to Obtain Your SID
+
+1. **Via browser (simple way):**
+   Open this URL to authenticate and get your SID:
+
+   ```
+   https://vz.strangled.net/api/auth
+   ```
+
+2. **Via command line (POST request):**
+   *(Note: POST access requires explicit permission from Dae Euhwa and a password.)*
+
+   ```bash
+   curl -X POST "https://pi.hole/api/auth" --data '{"password":"your-password"}'
+   ```
+
+   > **⚠️ Warning:**
+   > Sharing passwords or using POST without permission will immediately revoke your access and force a password reset. Permission must be obtained from Dae Euhwa.
+
+---
+
+### Example JSON Response After Authentication
 
 ```json
 {
   "session": {
     "valid": true,
     "totp": true,
-    "sid": "***",          // This line is important
+    "sid": "***",           // Your session ID - essential for API calls
     "csrf": "***",
-    "validity": 1800,      // Valid for 30 minutes
+    "validity": 1800,       // Session valid for 30 minutes
     "message": "***"
   },
   "took": 0.000014305114746093
@@ -44,23 +56,44 @@ curl -k -X POST -H "Content-Type: application/json" -d '{"password":"<your-app-p
 
 ---
 
-### Using the API with your SID
+### Using the API with Your SID
 
-To call API endpoints, include the SID in the `X-FTL-SID` header. For example, to check if blocking is enabled:
+Include your SID in the request header or as a query parameter when calling API endpoints.
+
+**Example: Check if DNS blocking is enabled**
 
 ```bash
-curl -k -H "X-FTL-SID:<Insert SID>" "https://vz.strangled.net/api/dns/blocking"
+curl -X GET "https://pi.hole/api/dns/blocking?sid=<Your SID>"
 ```
+
 ---
 
-# A valid example looks like this
-```bash
-❯ curl -k -H "X-FTL-SID:bdumlu****" "https://vz.strangled.net/api/dns/blocking"
+### Sample Valid Request & Response
 
-# Response:
+```bash
+❯ curl -X GET "https://pi.hole/api/dns/blocking?sid=53p27a******"
+
 {
   "blocking": "enabled",
   "timer": null,
-  "took": 6.6280364990234375e-05
+  "took": 3.0279159545898438e-05
 }
 ```
+
+---
+
+### Ending Your Session (Logging Out)
+
+To log out and invalidate your SID:
+
+```bash
+curl -X DELETE "https://pi.hole/api/auth?sid=<Your SID>"
+```
+
+---
+
+## ⚠️ Troubleshooting
+
+* If the website or API is **not responding**, it might be temporarily down or the SSL certificates need renewal.
+* For assistance, contact **Dae Euhwa** at:
+  📧 **[daedaevibin@naver.com](mailto:daedaevibin@naver.com)**
