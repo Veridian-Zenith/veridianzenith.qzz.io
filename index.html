@@ -2,36 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Veridian Zenith</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
   <script defer src="js/script.js"></script>
 </head>
 <body>
+  <div class="floating-elements" id="floatingElements"></div>
   <div class="starfield"></div>
-  <header class="glass main-header">
+  <header class="glass">
     <div class="nav-bar">
-      <span class="site-logo gradient-text">Veridian Zenith <span class="wave-emoji">🌊</span></span>
-      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open navigation menu" />
-      <label for="nav-toggle" class="nav-toggle-label" tabindex="0">
-        <span></span><span></span><span></span>
-      </label>
+      <a href="index.html" class="site-logo">Veridian Zenith <span class="wave-emoji">🌊</span></a>
       <nav class="main-nav">
-        <a href="index.html" class="nav-link active"><span>Home</span></a>
-        <a href="pages/projects.html" class="nav-link"><span>Projects</span></a>
-        <a href="pages/about.html" class="nav-link"><span>About</span></a>
-        <a href="pages/community.html" class="nav-link"><span>Community</span></a>
-        <span class="nav-underline"></span>
+        <a href="index.html">Home</a>
+        <a href="pages/projects.html">Projects</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/community.html">Community</a>
       </nav>
     </div>
   </header>
-  <main class="main-content">
+  <!-- Vanta Bloom animated blobs and particles background -->
+  <div class="animated-blobs" aria-hidden="true"></div>
+  <div class="orbit-particles" aria-hidden="true"></div>
+  <!-- End Vanta Bloom blobs/particles -->
+  <main>
     <section class="hero parallax-section">
-      <h2>Welcome to Veridian Zenith <span class="sparkle">✨</span></h2>
-      <p>Where curiosity meets creation!<br>Made to be useful, or for learning proccesses, mostly by Dae Euhwa.</p>
+      <h2>Welcome to Veridian Zenith</h2>
+      <p>Where curiosity meets creation! (Mobile Website WIP)<br>Made to be useful, or for learning processes, mostly by Dae Euhwa.</p>
     </section>
   </main>
   <footer class="glass-footer">

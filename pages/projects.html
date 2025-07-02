@@ -24,13 +24,20 @@
   <div class="orbit-particles" aria-hidden="true"></div>
   <!-- End Vanta Bloom blobs/particles -->
   <main>
-    <section class="hero parallax-section">
-      <h2>Our Projects</h2>
-      <p>Explore what we’re building and maintaining at Veridian Zenith.</p>
-    </section>
-    <section id="projects" class="parallax-section">
-      <div class="project-list"></div>
-    </section>
+<section class="hero parallax-section">
+  <h2>Our Projects</h2>
+  <p>Explore the amazing projects we've been working on.</p>
+  <div class="project-list" id="projectList">
+    <!-- Projects will be dynamically loaded here -->
+  </div>
+</section>
+<script>
+  // Ensure the script is loaded and executed
+  const script = document.createElement('script');
+  script.src = '../js/script.js';
+  script.defer = true;
+  document.head.appendChild(script);
+</script>
   </main>
   <footer class="glass-footer">
     <p>&copy; 2025 Veridian Zenith. All rights reserved.<br><span class="footer-note">Made with <span class="heart">❤️</span> by Dae Euhwa</span></p>
