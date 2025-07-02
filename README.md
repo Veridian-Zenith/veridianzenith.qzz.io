@@ -30,7 +30,7 @@ Visit the main site here:
    *(Note: POST access requires explicit permission from Dae Euhwa and a password.)*
 
    ```bash
-   curl -X POST "https://pi.hole/api/auth" --data '{"password":"your-password"}'
+   curl -X POST "https://vz.strangled.net/api/auth" --data '{"password":"your-password"}'
    ```
 
    > **⚠️ Warning:**
@@ -63,7 +63,7 @@ Include your SID in the request header or as a query parameter when calling API 
 **Example: Check if DNS blocking is enabled**
 
 ```bash
-curl -X GET "https://pi.hole/api/dns/blocking?sid=<Your SID>"
+curl -X GET "https://vz.strangled.net/api/dns/blocking?sid=<Your SID>"
 ```
 
 ---
@@ -71,7 +71,7 @@ curl -X GET "https://pi.hole/api/dns/blocking?sid=<Your SID>"
 ### Sample Valid Request & Response
 
 ```bash
-❯ curl -X GET "https://pi.hole/api/dns/blocking?sid=53p27a******"
+❯ curl -X GET "https://vz.strangled.net/api/dns/blocking?sid=53p27a******"
 
 {
   "blocking": "enabled",
@@ -87,7 +87,7 @@ curl -X GET "https://pi.hole/api/dns/blocking?sid=<Your SID>"
 To log out and invalidate your SID:
 
 ```bash
-curl -X DELETE "https://pi.hole/api/auth?sid=<Your SID>"
+curl -X DELETE "https://vz.strangled.net/api/auth?sid=<Your SID>"
 ```
 
 ---
