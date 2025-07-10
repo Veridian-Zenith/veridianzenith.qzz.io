@@ -1,53 +1,56 @@
-# vz.strangled.net API Guide
+---
 
-Welcome! To interact with the API or visit the main site, please use the following links and instructions carefully.
+# 🌐 `vz.strangled.net` API Guide
+
+Welcome! This guide will help you interact with the Veridian Zenith API. Please follow the instructions carefully to ensure proper usage and avoid lockouts.
 
 ---
 
-## 🌐 Website Access
+## ⚖️ Legal Disclaimer
+
+**Veridian Zenith** is a digital label and project organization operated by **Jeremy Matlock**, also known as **Dae Euhwa**.
+All works published under this name are the intellectual property of Jeremy Matlock unless otherwise stated.
+
+---
+
+## 🖥️ Website Access
 
 Visit the main site here:
-[vz.strangled.net](https://vz.strangled.net:777/)
+🔗 [https://vz.strangled.net:777/](https://vz.strangled.net:777/)
 
 ---
 
 ## 🔐 Authentication & API Usage
 
-### You **must** provide your own SID to use the API.
+### You **must** provide your own **SID** to use the API.
 
 ---
 
-### How to Obtain Your SID
+### 🔑 How to Obtain Your SID
 
-1. **Via browser (simple way):**
-   Open this URL to authenticate and get your SID:
+To authenticate via CLI, make a POST request:
 
-   ```
-   https://vz.strangled.net/api/auth
-   ```
+```bash
+curl -X POST "https://vz.strangled.net/api/auth" --data '{"password":"your-password"}'
+```
 
-2. **Via command line (POST request):**
-   *(Note: POST access requires explicit permission from Dae Euhwa and a password.)*
-
-   ```bash
-   curl -X POST "https://vz.strangled.net/api/auth" --data '{"password":"your-password"}'
-   ```
-
-   > **⚠️ Warning:**
-   > Sharing passwords or using POST without permission will immediately revoke your access and force a password reset. Permission must be obtained from Dae Euhwa.
+> **⚠️ Warning:**
+>
+> * POST access requires explicit permission from **Dae Euhwa**.
+> * Sharing passwords or using POST without authorization will immediately revoke access and reset credentials.
 
 ---
 
-### Example JSON Response After Authentication
+### ✅ Example JSON Response
 
 ```json
 {
   "session": {
     "valid": true,
     "totp": true,
-    "sid": "***",           // Your session ID - essential for API calls
+    "sid": "***",           // Your session ID — required for all requests
     "csrf": "***",
-    "validity": 1800,       // Session valid for 30 minutes
+    "validity": 1800,       // In seconds (30 minutes)
     "message": "***"
   },
   "took": 0.000014305114746093
@@ -56,11 +59,16 @@ Visit the main site here:
 
 ---
 
-### Using the API with Your SID
+## 📡 Using the API with Your SID
 
-Include your SID in the request header or as a query parameter when calling API endpoints.
+Include your **SID** as either:
 
-**Example: Check if DNS blocking is enabled**
+* A **query parameter**, or
+* A **header** (if supported by your client/tooling)
+
+---
+
+### 🔍 Example: Check DNS Blocking Status
 
 ```bash
 curl -X GET "https://vz.strangled.net/api/dns/blocking?sid=<Your SID>"
@@ -68,7 +76,7 @@ curl -X GET "https://vz.strangled.net/api/dns/blocking?sid=<Your SID>"
 
 ---
 
-### Sample Valid Request & Response
+### 📥 Example Response
 
 ```bash
 ❯ curl -X GET "https://vz.strangled.net/api/dns/blocking?sid=53p27a******"
@@ -82,9 +90,9 @@ curl -X GET "https://vz.strangled.net/api/dns/blocking?sid=<Your SID>"
 
 ---
 
-### Ending Your Session (Logging Out)
+## 🚪 Logging Out (Ending Your Session)
 
-To log out and invalidate your SID:
+To terminate your session and invalidate the SID:
 
 ```bash
 curl -X DELETE "https://vz.strangled.net/api/auth?sid=<Your SID>"
@@ -92,8 +100,13 @@ curl -X DELETE "https://vz.strangled.net/api/auth?sid=<Your SID>"
 
 ---
 
-## ⚠️ Troubleshooting
+## ⚠️ Troubleshooting & Contact
 
-* If the website or API is **not responding**, it might be temporarily down or the SSL certificates need renewal.
-* For assistance, contact **Dae Euhwa** at:
+* If the API or website is unresponsive, it may be:
+
+  * Temporarily offline
+  * Experiencing SSL issues (expired or invalid certs)
+* For direct support, contact:
   📧 **[daedaevibin@naver.com](mailto:daedaevibin@naver.com)**
+
+---
