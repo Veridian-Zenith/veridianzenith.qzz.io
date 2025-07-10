@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects – Veridian Zenith</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <script defer src="../js/script.js"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="starfield"></div>
-  <header class="glass">
+  <button class="theme-toggle" id="themeToggle">Toggle Theme</button>
+  <header>
     <div class="nav-bar">
-      <a href="../index.html" class="site-logo">Veridian Zenith <span class="wave-emoji">🌊</span></a>
+      <a href="../index.html" class="site-logo">
+        <img src="../assets/logo.png" alt="Veridian Zenith Logo" class="logo-img">
+        <span>Veridian Zenith</span>
+      </a>
       <nav class="main-nav">
-        <a href="../index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="community.html">Community</a>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../pages/about.html">About</a></li>
+          <li><a href="../pages/community.html">Community</a></li>
+        </ul>
       </nav>
     </div>
   </header>
-  <!-- Vanta Bloom animated blobs and particles background -->
-  <div class="animated-blobs" aria-hidden="true"></div>
-  <div class="orbit-particles" aria-hidden="true"></div>
-  <!-- End Vanta Bloom blobs/particles -->
   <main>
-<section class="hero parallax-section">
-  <h2>Our Projects</h2>
-  <p>Explore the amazing projects we've been working on.</p>
-  <div class="project-list" id="projectList">
-    <!-- Projects will be dynamically loaded here -->
-  </div>
-</section>
-<script>
-  // Ensure the script is loaded and executed
-  const script = document.createElement('script');
-  script.src = '../js/script.js';
-  script.defer = true;
-  document.head.appendChild(script);
-</script>
+    <section class="hero">
+      <h1>Our Projects</h1>
+      <p>Explore the amazing projects we've been working on.</p>
+    </section>
+    <section id="projects">
+      <h2>Project List</h2>
+      <div class="project-list" id="projectList">
+        <!-- Projects will be dynamically loaded here -->
+      </div>
+    </section>
   </main>
-  <footer class="glass-footer">
+  <footer>
     <p>&copy; 2025 Veridian Zenith. All rights reserved.<br><span class="footer-note">Made with <span class="heart">❤️</span> by Dae Euhwa</span></p>
   </footer>
+  <script src="../js/script.js"></script>
 </body>
 </html>

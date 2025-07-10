@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About – Veridian Zenith</title>
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="floating-elements" id="floatingElements"></div>
-  <div class="starfield"></div>
-  <header class="glass">
+  <button class="theme-toggle" id="themeToggle">Toggle Theme</button>
+  <header>
     <div class="nav-bar">
-      <a href="../index.html" class="site-logo">Veridian Zenith <span class="wave-emoji">🌊</span></a>
+      <a href="../index.html" class="site-logo">
+        <img src="../assets/logo.png" alt="Veridian Zenith Logo" class="logo-img">
+        <span>Veridian Zenith</span>
+      </a>
       <nav class="main-nav">
-        <a href="../index.html">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="community.html">Community</a>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../pages/projects.html">Projects</a></li>
+          <li><a href="../pages/community.html">Community</a></li>
+        </ul>
       </nav>
     </div>
   </header>
-  <!-- Vanta Bloom animated blobs and particles background -->
-  <div class="animated-blobs" aria-hidden="true"></div>
-  <div class="orbit-particles" aria-hidden="true"></div>
-  <!-- End Vanta Bloom blobs/particles -->
   <main>
-    <section class="hero parallax-section">
-      <h2>About Veridian Zenith</h2>
-      <p>Learn more about our mission, vision, and the people behind the projects.</p>
+    <section class="hero">
+      <h1>About Veridian Zenith</h1>
+      <p>Learn more about our mission and team.</p>
     </section>
-    <section class="hero parallax-section">
-        <h3>Who We Are</h3>
-        <p>Veridian Zenith is a collective of curious minds and creators, led by Dae Euhwa, focused on building useful, beautiful, and innovative digital experiences.</p>
-        <h3>Our Philosophy</h3>
-        <p>We believe in open knowledge, creative exploration, and making technology accessible and inspiring for everyone.</p>
+    <section class="content">
+      <h2>Our Story</h2>
+      <p>Veridian Zenith is a passionate collective of creators and innovators dedicated to pushing the boundaries of technology and design.</p>
     </section>
   </main>
-  <footer class="glass-footer">
+  <footer>
     <p>&copy; 2025 Veridian Zenith. All rights reserved.<br><span class="footer-note">Made with <span class="heart">❤️</span> by Dae Euhwa</span></p>
   </footer>
+  <script src="../js/script.js"></script>
 </body>
 </html>

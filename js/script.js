@@ -1,118 +1,131 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Check if we're on the projects page
-  if (window.location.pathname.includes('projects.html')) {
-    fetchGitHubProjects();
+  // Theme toggle functionality remains the same
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+    body.classList.add('light');
   }
 
-  const floatingElements = document.getElementById('floatingElements');
-  if (floatingElements) {
-    const numStars = 20;
-    const numFlowers = 10;
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function() {
+      body.classList.toggle('light');
+      const isLight = body.classList.contains('light');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      themeToggle.textContent = isLight ? 'Switch to Dark Theme' : 'Switch to Light Theme';
+    });
 
-    // Create floating stars
-    for (let i = 0; i < numStars; i++) {
-      const star = document.createElement('div');
-      star.className = 'floating-star';
-      star.style.width = `${Math.random() * 10 + 5}px`;
-      star.style.height = star.style.width;
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.animationDuration = `${Math.random() * 10 + 10}s`;
-      star.style.animationDelay = `${Math.random() * 5}s`;
-      floatingElements.appendChild(star);
-    }
-
-    // Create floating flowers
-    for (let i = 0; i < numFlowers; i++) {
-      const flower = document.createElement('div');
-      flower.className = 'floating-flower';
-      flower.style.width = `${Math.random() * 20 + 10}px`;
-      flower.style.height = flower.style.width;
-      flower.style.left = `${Math.random() * 100}%`;
-      flower.style.top = `${Math.random() * 100}%`;
-      flower.style.animationDuration = `${Math.random() * 15 + 10}s`;
-      flower.style.animationDelay = `${Math.random() * 5}s`;
-      floatingElements.appendChild(flower);
-    }
+    const isLight = body.classList.contains('light');
+    themeToggle.textContent = isLight ? 'Switch to Dark Theme' : 'Switch to Light Theme';
   }
 
-  // Add sparkle effect to the hero text
-  const heroText = document.querySelector('.hero h2');
-  if (heroText) {
-    heroText.style.textShadow = '0 0 8px var(--neon-fuchsia), 0 0 16px var(--royal-gold)';
-    heroText.style.transition = 'text-shadow 0.5s ease-in-out';
-    setInterval(() => {
-      heroText.style.textShadow = '0 0 8px var(--neon-fuchsia), 0 0 16px var(--royal-gold)';
-      setTimeout(() => {
-        heroText.style.textShadow = '0 0 12px var(--neon-fuchsia), 0 0 20px var(--royal-gold)';
-      }, 500);
-    }, 1000);
-  }
-
-  // Fetch projects from GitHub API
-  async function fetchGitHubProjects() {
-    try {
-      const response = await fetch('https://api.github.com/orgs/Veridian-Zenith/repos');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const repos = await response.json();
-      const projectsWithDescriptions = await Promise.all(repos.map(async repo => {
-        try {
-          const readmeResponse = await fetch(`https://api.github.com/repos/Veridian-Zenith/${repo.name}/readme`);
-          if (readmeResponse.ok) {
-            const readmeData = await readmeResponse.json();
-            const readmeContent = atob(readmeData.content);
-            // Extract first paragraph or first few lines as description
-            const shortDescription = readmeContent.split('\n').find(line => line.trim().length > 0) || 'No description available.';
-            return { ...repo, description: shortDescription };
-          }
-        } catch (error) {
-          console.error(`Error fetching README for ${repo.name}:`, error);
-          return { ...repo, description: repo.description || 'No description available.' };
-        }
-        return { ...repo, description: repo.description || 'No description available.' };
-      }));
-      displayProjects(projectsWithDescriptions);
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-      // Fallback to static projects if API fails
-      const fallbackProjects = [
-        {
-          name: "Project One",
-          description: "This is the first project. It's amazing and does wonderful things.",
-          html_url: "#"
-        },
-        {
-          name: "Project Two",
-          description: "This is the second project. It's even more amazing than the first one.",
-          html_url: "#"
-        },
-        {
-          name: "Project Three",
-          description: "The third project is here. It's the most amazing one yet.",
-          html_url: "#"
-        }
-      ];
-      displayProjects(fallbackProjects);
-    }
-  }
-
-  // Display projects on the page
-  function displayProjects(projects) {
+  if (document.getElementById('projectList')) {
     const projectList = document.getElementById('projectList');
-    if (projectList) {
-      projectList.innerHTML = '';
-      projects.forEach(project => {
-        const projectCard = document.createElement('div');
-        projectCard.className = 'project-card';
-        projectCard.innerHTML = `
-          <h3>${project.name || project.title}</h3>
-          <p>${project.description || 'No description available.'}</p>
-          <a href="${project.html_url || '#'}" class="cta-btn" target="_blank">View Project</a>
-        `;
-        projectList.appendChild(projectCard);
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.className = 'loading-indicator';
+    loadingIndicator.textContent = 'Loading projects...';
+    projectList.appendChild(loadingIndicator);
+
+    fetch('https://api.github.com/orgs/Veridian-Zenith/repos')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(projects => {
+        projectList.innerHTML = '';
+        projects.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+        const recentProjects = projects.slice(0, 6);
+
+        if (recentProjects.length === 0) {
+          projectList.innerHTML = '<p>No projects found.</p>';
+          return;
+        }
+
+        recentProjects.forEach(project => {
+          // First fetch the README content for each project
+          fetch(`https://api.github.com/repos/Veridian-Zenith/${project.name}/readme`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('No README found for this project');
+              }
+              return response.json();
+            })
+            .then(readmeData => {
+              // Extract the first paragraph from the README content
+              const readmeContent = atob(readmeData.content);
+              const firstParagraph = readmeContent.split('\n\n')[0]
+                .replace(/#/g, '')
+                .replace(/\*\*/g, '')
+                .replace(/\*/g, '')
+                .replace(/`/g, '')
+                .replace(/\[.*?\]\(.*?\)/g, '')
+                .trim();
+
+              const projectCard = document.createElement('div');
+              projectCard.className = 'project-card';
+
+              const projectName = document.createElement('h3');
+              projectName.textContent = project.name;
+
+              const projectDescription = document.createElement('p');
+              projectDescription.textContent = firstParagraph || 'No description available';
+
+              const projectLink = document.createElement('a');
+              projectLink.href = project.html_url;
+              projectLink.textContent = 'View on GitHub';
+              projectLink.target = '_blank';
+              projectLink.rel = 'noopener noreferrer';
+
+              const projectUpdated = document.createElement('p');
+              projectUpdated.className = 'project-meta';
+              projectUpdated.textContent = `Updated: ${new Date(project.updated_at).toLocaleDateString()}`;
+
+              projectCard.appendChild(projectName);
+              projectCard.appendChild(projectDescription);
+              projectCard.appendChild(projectUpdated);
+              projectCard.appendChild(projectLink);
+
+              projectList.appendChild(projectCard);
+            })
+            .catch(error => {
+              console.error(`Error fetching README for ${project.name}:`, error);
+              // If README fetch fails, create card with basic info
+              const projectCard = document.createElement('div');
+              projectCard.className = 'project-card';
+
+              const projectName = document.createElement('h3');
+              projectName.textContent = project.name;
+
+              const projectDescription = document.createElement('p');
+              projectDescription.textContent = 'No description available';
+
+              const projectLink = document.createElement('a');
+              projectLink.href = project.html_url;
+              projectLink.textContent = 'View on GitHub';
+              projectLink.target = '_blank';
+              projectLink.rel = 'noopener noreferrer';
+
+              const projectUpdated = document.createElement('p');
+              projectUpdated.className = 'project-meta';
+              projectUpdated.textContent = `Updated: ${new Date(project.updated_at).toLocaleDateString()}`;
+
+              projectCard.appendChild(projectName);
+              projectCard.appendChild(projectDescription);
+              projectCard.appendChild(projectUpdated);
+              projectCard.appendChild(projectLink);
+
+              projectList.appendChild(projectCard);
+            });
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching projects:', error);
+        projectList.innerHTML = '<p>Error loading projects. Please try again later.</p>';
       });
-    }
   }
 });
