@@ -1,5 +1,3 @@
----
-
 ## ⚖️ Legal Disclaimer
 
 **Veridian Zenith** is a digital label and project organization operated by **Jeremy Matlock**, also known as **Dae Euhwa**.
@@ -25,5 +23,3 @@ For our DNS Admins:
   * Experiencing SSL issues (expired or invalid certs)
 * For direct support, contact:
   📧 **[Dae Euhwa](mailto:daedaevibin@naver.com)**
-
----
