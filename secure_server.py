@@ -1,16 +1,18 @@
 import os
 import http.server
-import ssl
 import mimetypes
+import ssl
 
-PORT = 777
-DOCUMENT_ROOT = "/home/dae/VZ/git/vz.strangled.net"  # Use current directory where script runs
-CERT_FILE = "/etc/letsencrypt/live/vz.strangled.net/fullchain.pem"
-KEY_FILE = "/etc/letsencrypt/live/vz.strangled.net/privkey.pem"
+PORT = 2087
+DOCUMENT_ROOT = "/home/dae/Gamez/Dev/vz.strangled.net"  # Keep serving your project files
+
+# Use the qzz.io certificate instead
+CERT_FILE = "/etc/letsencrypt/live/veridianzenith.qzz.io/fullchain.pem"
+KEY_FILE = "/etc/letsencrypt/live/veridianzenith.qzz.io/privkey.pem"
 
 class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        requested_path = self.path.split('?',1)[0].lstrip('/')
+        requested_path = self.path.split('?', 1)[0].lstrip('/')
         safe_path = os.path.normpath(requested_path)
         if safe_path.startswith(".."):
             self.send_error(403, "Forbidden")
@@ -44,7 +46,7 @@ if __name__ == "__main__":
     ssl_context.load_cert_chain(certfile=CERT_FILE, keyfile=KEY_FILE)
     httpd.socket = ssl_context.wrap_socket(httpd.socket, server_side=True)
 
-    print(f"🚀 HTTPS Static Server running on https://0.0.0.0:{PORT}")
+    print(f"🚀 HTTPS Server ready on https://0.0.0.0:{PORT}")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
@@ -52,4 +54,3 @@ if __name__ == "__main__":
     finally:
         httpd.server_close()
         print("Server stopped.")
-
