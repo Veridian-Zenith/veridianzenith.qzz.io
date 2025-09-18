@@ -4,7 +4,7 @@ import mimetypes
 import ssl
 
 PORT = 2087
-DOCUMENT_ROOT = "/home/dae/Gamez/Dev/vz.strangled.net"  # Keep serving your project files
+DOCUMENT_ROOT = "/home/dae/Gamez/Dev/veridianzenith.qzz.io"  # Keep serving your project files
 
 # Use the qzz.io certificate instead
 CERT_FILE = "/etc/letsencrypt/live/veridianzenith.qzz.io/fullchain.pem"
