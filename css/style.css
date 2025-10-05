@@ -11,6 +11,7 @@
   --transition-speed: 0.3s;
   --logo-size: 40px;
   --primary-gradient: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  --border-radius: 12px; /* Added for rounded corners */
 }
 
 body {
@@ -108,7 +109,7 @@ nav ul {
 
 nav a {
   padding: 0.5rem 1rem;
-  border-radius: 0;
+  border-radius: var(--border-radius); /* Rounded corners */
   font-family: 'Press Start 2P', cursive;
   transition: all var(--transition-speed);
   border: 2px solid transparent;
@@ -174,7 +175,7 @@ main {
 .project-card {
   background-color: var(--card-bg);
   border: 2px solid var(--primary-color);
-  border-radius: 0;
+  border-radius: var(--border-radius); /* Rounded corners */
   padding: 1.8rem;
   box-shadow: var(--shadow);
   transition: all var(--transition-speed);
@@ -214,7 +215,7 @@ main {
   color: var(--accent-color);
   background-color: transparent;
   border: 2px solid var(--accent-color);
-  border-radius: 0;
+  border-radius: var(--border-radius); /* Rounded corners */
   padding: 0.8rem 1.5rem;
   text-decoration: none;
   cursor: pointer;
@@ -234,18 +235,27 @@ main {
 }
 
 .matrix-join-btn, .discord-join-btn {
-  background-color: var(--primary-color);
-  border: 2px solid var(--accent-color);
-  padding: 1rem 2rem;
-  color: var(--accent-color);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-  text-shadow: 0 0 5px var(--accent-color);
+  display: inline-block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  color: var(--text-color);
+  background-color: transparent;
+  border: 2px solid var(--text-color);
+  border-radius: var(--border-radius); /* Rounded corners */
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  margin-top: 0.5rem;
+  image-rendering: pixelated;
+  box-shadow: 0 0 5px var(--text-color);
 }
 
 .matrix-join-btn:hover, .discord-join-btn:hover {
-  box-shadow: 0 0 20px var(--accent-color);
-  background-color: var(--accent-color);
+  background-color: var(--text-color);
   color: var(--bg-color);
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px var(--text-color);
 }
 
 .content {
@@ -298,7 +308,7 @@ footer {
   background: transparent;
   color: var(--accent-color);
   border: 2px solid var(--accent-color);
-  border-radius: 0;
+  border-radius: var(--border-radius); /* Rounded corners */
   padding: 0.5rem 1rem;
   font-family: 'Press Start 2P', cursive;
   font-size: 0.8rem;
@@ -314,29 +324,112 @@ footer {
 
 /* Light Mode Support */
 body.light {
-  --bg-color: var(--light-bg);
-  --text-color: var(--light-text);
-  --card-bg: #ffffff;
-  --accent-color: #444;
-  --shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --bg-color: #fdf6e3; /* Solarized Light */
+  --text-color: #586e75; /* Solarized Base1 */
+  --accent-color: #b58900; /* Solarized Yellow */
+  --primary-color: #2aa198; /* Solarized Cyan */
+  --card-bg: #eee8d5; /* Solarized Base2 */
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+  background: linear-gradient(-45deg, #fdf6e3, #eee8d5, #fdf6e3, #eee8d5);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+body.light h1, body.light h2, body.light h3, body.light h4, body.light h5, body.light h6 {
+  color: #cb4b16; /* Solarized Orange */
+  text-shadow: none;
+  animation: none;
+}
+
+body.light a:hover {
+  color: #d33682; /* Solarized Magenta */
+}
+
+body.light nav a:hover {
+  color: #fdf6e3; /* Solarized Base3 */
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+  transition: all var(--transition-speed);
 }
 
 /* Responsive Design */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1.1rem;
+  }
+  .project-list {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   body {
     font-size: 14px;
   }
 
   .nav-bar {
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row; /* Keep it as a row */
+    justify-content: space-between;
+    align-items: center;
   }
 
   nav ul {
+    display: none;
     flex-direction: column;
     text-align: center;
-    gap: 0.5rem;
+    gap: 1rem;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--accent-color);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  nav a {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
   }
 
   .hero h1 {
@@ -344,25 +437,16 @@ body.light {
   }
 
   .hero p {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .project-list {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  footer {
-    font-size: 0.6rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .site-logo {
-    font-size: 1.2rem;
-  }
-
-  .hero h1 {
-    font-size: 1.8rem;
+  .project-card {
+    padding: 1.5rem;
   }
 
   .project-card h3 {
@@ -374,7 +458,50 @@ body.light {
   }
 
   .project-card a, .btn, .custom-join-btn {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  footer {
+    padding: 1rem;
+    font-size: 0.7rem;
+  }
+
+  .theme-toggle {
+    top: 0.8rem;
+    right: 0.8rem;
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .project-card a, .btn, .custom-join-btn {
     font-size: 0.9rem;
     padding: 0.6rem 1.2rem;
+  }
+
+  .chat-join-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .theme-toggle {
+    top: 0.6rem;
+    right: 0.6rem;
+    font-size: 0.6rem;
+    padding: 0.3rem 0.6rem;
   }
 }
