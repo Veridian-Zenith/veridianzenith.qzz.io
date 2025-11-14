@@ -1,54 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects – Veridian Zenith</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Veridian Zenith</title>
+    <meta name="description" content="Explore our portfolio of digital projects bridging ancient wisdom and cutting-edge technology.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNGMTAwMDAiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTAiIGZpbGw9IiNFQzcwMDAiLz4KPHN2Zz4=">
 </head>
 <body>
-  <button class="theme-toggle" id="themeToggle">Toggle Theme</button>
-  <header>
-    <div class="nav-bar">
-      <a href="../index.html" class="site-logo">
-        <img src="../assets/logo.png" alt="Veridian Zenith Logo" class="logo-img">
-        <span>Veridian Zenith</span>
-      </a>
-      <nav class="main-nav" id="mainNav">
-        <button class="hamburger-menu" id="hamburgerMenu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="community.html">Community</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <section class="hero">
-      <h1>Our Projects</h1>
-      <p>Explore the amazing projects we've been working on.</p>
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="nav" id="navigation">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-icon">VZ</span>
+                <span class="logo-text">Veridian Zenith</span>
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="projects.html" class="nav-link active">Projects</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="community.html" class="nav-link">Community</a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="https://github.com/Veridian-Zenith" class="github-link" aria-label="GitHub">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="theme-icon sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Section -->
+    <section class="projects-main">
+        <div class="container">
+            <div class="page-header">
+                <div class="runic-decoration page-rune">ᛈᚱᚩᛁᛖᚳᛏᛋ</div>
+                <h1 class="page-title">Projects</h1>
+                <p class="page-subtitle">Exploring the intersection of ancient wisdom and modern innovation</p>
+            </div>
+            
+            <!-- Project Filters -->
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="system">System Tools</button>
+                <button class="filter-btn" data-filter="application">Applications</button>
+                <button class="filter-btn" data-filter="game">Games</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="kernel">Kernel/OS</button>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="projects-grid">
+                <!-- Voix - Sudo Replacement -->
+                <div class="project-card" data-category="system">
+                    <div class="project-image">
+                        <img src="../images/project1.jpg" alt="Voix Sudo Replacement" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Veridian-Zenith/Voix" class="project-link" aria-label="View Source Code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tech">
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">CMake</span>
+                            <span class="tech-tag">PAM</span>
+                            <span class="tech-tag">Lua</span>
+                        </div>
+                        <h3 class="project-title">Voix - Sudo Replacement</h3>
+                        <p class="project-description">
+                            Modern privilege escalation tool combining the simplicity of doas with the power of sudo. Features fine-grained access control, structured logging, and GUI integration with Polkit.
+                        </p>
+                        <div class="project-meta">
+                            <span class="project-status">Active</span>
+                            <span class="project-date">v0.0.20b</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meshiji - File Explorer -->
+                <div class="project-card" data-category="application">
+                    <div class="project-image">
+                        <img src="../images/project2.jpg" alt="Meshiji File Explorer" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Veridian-Zenith/meshiji" class="project-link" aria-label="View Source Code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tech">
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">Lua</span>
+                        </div>
+                        <h3 class="project-title">Meshiji - File Explorer</h3>
+                        <p class="project-description">
+                            Modern file explorer for Linux with plugin system, search capabilities, and performance optimizations. Features directory size caching, trash management, and Lua plugin support.
+                        </p>
+                        <div class="project-meta">
+                            <span class="project-status">Beta</span>
+                            <span class="project-date">v0.0.20b</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vaelix - Web Browser -->
+                <div class="project-card" data-category="application">
+                    <div class="project-image">
+                        <img src="../images/project1.jpg" alt="Vaelix Web Browser" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Veridian-Zenith/Vaelix" class="project-link" aria-label="View Source Code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tech">
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">Kotlin</span>
+                        </div>
+                        <h3 class="project-title">Vaelix - Web Browser</h3>
+                        <p class="project-description">
+                            Flutter-based web browser for Android with cross-platform ambitions. Early development with Windows runner initialized for multi-platform support.
+                        </p>
+                        <div class="project-meta">
+                            <span class="project-status">Early Dev</span>
+                            <span class="project-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peguni Draem'la - Game -->
+                <div class="project-card" data-category="game">
+                    <div class="project-image">
+                        <img src="../images/project2.jpg" alt="Peguni Draem'la Game" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Veridian-Zenith/peguni_draem-la" class="project-link" aria-label="View Source Code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tech">
+                            <span class="tech-tag">Lua</span>
+                            <span class="tech-tag">Vaesktöng</span>
+                            <span class="tech-tag">JSON</span>
+                        </div>
+                        <h3 class="project-title">Peguni Draem'la</h3>
+                        <p class="project-description">
+                            Text-based virtual pet simulator featuring the constructed language Vaesktöng. Create bonds with your digital companion through interactive care, exploration, and personalized adventures.
+                        </p>
+                        <div class="project-meta">
+                            <span class="project-status">Complete</span>
+                            <span class="project-date">v0.1.9b</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aura-Core - Kernel -->
+                <div class="project-card" data-category="kernel">
+                    <div class="project-image">
+                        <img src="../images/project1.jpg" alt="Aura-Core Kernel" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Veridian-Zenith/aura-core" class="project-link" aria-label="View Source Code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tech">
+                            <span class="tech-tag">CachyOS</span>
+                            <span class="tech-tag">EEVDF</span>
+                            <span class="tech-tag">ThinLTO</span>
+                            <span class="tech-tag">Madvsie</span>
+                        </div>
+                        <h3 class="project-title">Aura-Core Kernel</h3>
+                        <p class="project-description">
+                            Rebuild of CachyOS EEVDF kernel enhanced with ThinLTO optimization and Madvsie for Transparent Huge Pages management. Performance-focused Linux kernel variant.
+                        </p>
+                        <div class="project-meta">
+                            <span class="project-status">Active</span>
+                            <span class="project-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Veridian Zenith Website -->
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <img src="../images/project1.jpg" alt="Veridian Zenith Website" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://ih30y9t0x0rc.space.minimax.io" class="project-link" aria-label="View Live Site">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                        <polyline points="15,3 21,3 21,9"/>
+                                        <line x1="10" y1="14" x2="21" y2="3"/>
+                                    </svg>
+                                </a>
+                                <a href="https://github.com/Veridian-Zenith/veridianzenith.qzz.io" class="project-link" aria-label="View Source Code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <h3 class="project-title">Veridian Zenith Website</h3>
+                        <p class="project-description">
+                            Mystical minimalism approach to digital presence, blending Nordic aesthetics with futuristic design. Features golden particle systems, runic decorative elements, and responsive design.
+                        </p>
+                        <div class="project-meta">
+                            <span class="project-status">Live</span>
+                            <span class="project-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Coming Soon Section -->
+            <div class="coming-soon">
+                <div class="mystical-card">
+                    <div class="card-content">
+                        <h2>More Projects Coming Soon</h2>
+                        <p>We're constantly exploring new ways to bridge ancient wisdom with cutting-edge technology. Follow our GitHub repository to stay updated on our latest developments.</p>
+                        
+                        <div class="coming-soon-actions">
+                            <a href="https://github.com/Veridian-Zenith" class="btn btn-primary">
+                                <span class="btn-text">Follow on GitHub</span>
+                                <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    <section id="projects">
-      <h2>Project List</h2>
-      <div class="project-list" id="projectList">
-        <!-- Projects will be dynamically loaded here -->
-      </div>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2025 Veridian Zenith. All rights reserved.<br>
-      <span class="footer-note">Veridian Zenith is a digital label and project organization operated by Jeremy Matlock, also known as Dae Euhwa.<br>
-      All works published under this name are copyright of Jeremy Matlock unless otherwise stated.<br>
-      Made with <span class="heart">❤️</span>.</span>
-    </p>
-  </footer>
-  <script src="../js/script.js"></script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="footer-title">Veridian Zenith</h3>
+                    <p class="footer-tagline">Where curiosity meets creation</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../index.html">Home</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="about.html">About</a>
+                    <a href="community.html">Community</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/Veridian-Zenith/veridianzenith.qzz.io" aria-label="GitHub Repository">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="footer-text">
+                    <p>&copy; 2025 Veridian Zenith. All works copyright of Jeremy Matlock (Dae Euhwa) unless otherwise stated.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/particle-system.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

@@ -8,10 +8,7 @@ All works published under this name are the intellectual property of Jeremy Matl
 ## 🖥️ Website Access
 
 Visit the main site here:
-🔗 [veridianzenith.qzz.io](https://veridianzenith.qzz.io:2087/)
-
-For our DNS Admins:
-[Technitium Admin Portal](https://veridianzenith.qzz.io:2083/)
+🔗 [veridianzenith.qzz.io](https://veridianzenith.qzz.io/)
 
 ---
 
