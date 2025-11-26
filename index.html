@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veridian Zenith - Where Curiosity Meets Creation</title>
     <meta name="description" content="Digital label and project organization exploring the boundaries of technology and design.">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNGMTAwMDAiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTAiIGZpbGw9IiNFQzcwMDAiLz4KPHN2Zz4=">
 </head>
 <body>
     <!-- Particle Canvas -->
     <canvas id="particleCanvas" class="particle-canvas"></canvas>
-    
+
     <!-- Navigation -->
     <nav class="nav" id="navigation">
         <div class="nav-container">
@@ -28,29 +28,21 @@
                 <span class="logo-icon">VZ</span>
                 <span class="logo-text">Veridian Zenith</span>
             </a>
-            
+
             <div class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="pages/projects.html" class="nav-link">Projects</a>
-                <a href="pages/about.html" class="nav-link">About</a>
-                <a href="pages/community.html" class="nav-link">Community</a>
+                <a href="index.html" class="nav-link active" data-translate="nav.home">Home</a>
+                <a href="pages/projects.html" class="nav-link" data-translate="nav.projects">Projects</a>
+                <a href="pages/about.html" class="nav-link" data-translate="nav.about">About</a>
+                <a href="pages/community.html" class="nav-link" data-translate="nav.community">Community</a>
             </div>
-            
+
             <div class="nav-actions">
                 <a href="https://github.com/Veridian-Zenith" class="github-link" aria-label="GitHub">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                     </svg>
                 </a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <svg class="theme-icon sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="5"/>
-                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                    </svg>
-                    <svg class="theme-icon moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
-                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" data-translate="nav.theme">Toggle Theme</button>
                 <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                     <span></span>
                     <span></span>
@@ -65,31 +57,31 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">
-                    <span class="hero-badge-text">Digital Label</span>
-                    <div class="runic-decoration">ᚡᛖᚱᛁᛞᛁᚪᚾ</div>
+                    <span class="hero-badge-text" data-translate="hero.badge">Welcome to the Future</span>
+                    <div class="runic-decoration">✨</div>
                 </div>
-                
+
                 <h1 class="hero-title">
-                    <span class="hero-title-main">Veridian Zenith</span>
-                    <span class="hero-title-sub">Where curiosity meets creation!</span>
+                    <span class="hero-title-main" data-translate="hero.title">Veridian Zenith</span>
+                    <span class="hero-title-sub" data-translate="hero.subtitle">Where Technology Meets Mystery</span>
                 </h1>
-                
-                <p class="hero-description">
-                    A digital label and project organization exploring the boundaries between ancient wisdom and future innovation. Join us on a journey through technology, design, and mystical creativity.
+
+                <p class="hero-description" data-translate="hero.description">
+                    Discover cutting-edge innovations in technology, development, and digital experiences. Explore our portfolio of forward-thinking projects that bridge the gap between advanced engineering and elegant design.
                 </p>
-                
+
                 <div class="hero-actions">
                     <a href="pages/projects.html" class="btn btn-primary">
-                        <span class="btn-text">Explore Projects</span>
+                        <span class="btn-text" data-translate="hero.get_started">Get Started</span>
                         <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
                     <a href="pages/about.html" class="btn btn-secondary">
-                        <span class="btn-text">Learn More</span>
+                        <span class="btn-text" data-translate="hero.view_work">View Work</span>
                     </a>
                 </div>
-                
+
                 <div class="hero-stats">
                     <div class="stat">
                         <div class="stat-value">∞</div>
@@ -105,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="hero-visual">
                 <div class="mystical-orb">
                     <div class="orb-inner">
@@ -118,14 +110,14 @@
                     </div>
                 </div>
                 <div class="floating-runes">
-                    <span class="rune">ᚡ</span>
-                    <span class="rune">ᛖ</span>
-                    <span class="rune">ᚱ</span>
-                    <span class="rune">ᛁ</span>
-                    <span class="rune">ᛞ</span>
-                    <span class="rune">ᛁ</span>
-                    <span class="rune">ᚪ</span>
-                    <span class="rune">ᚾ</span>
+                    <span class="rune">✨</span>
+                    <span class="rune">✨</span>
+                    <span class="rune">✨</span>
+                    <span class="rune">✨</span>
+                    <span class="rune">✨</span>
+                    <span class="rune">✨</span>
+                    <span class="rune">✨</span>
+                    <span class="rune">✨</span>
                 </div>
             </div>
         </div>
@@ -135,10 +127,10 @@
     <section class="features">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">What We Do</h2>
-                <p class="section-description">Bridging ancient wisdom with cutting-edge technology</p>
+                <h2 class="section-title" data-translate="features.title">What We Do</h2>
+                <p class="section-description" data-translate="features.subtitle">Expertise that drives innovation forward</p>
             </div>
-            
+
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -148,20 +140,20 @@
                             <path d="M2 12l10 5 10-5"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Digital Organization</h3>
-                    <p class="feature-description">Systematic approach to digital project management and creative workflows</p>
+                    <h3 class="feature-title" data-translate="features.web_dev.title">Web Development</h3>
+                    <p class="feature-description" data-translate="features.web_dev.desc">Creating responsive, modern web applications with cutting-edge technologies and optimal user experiences.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Creative Innovation</h3>
-                    <p class="feature-description">Pushing boundaries between traditional aesthetics and futuristic design</p>
+                    <h3 class="feature-title" data-translate="features.ai_ml.title">AI & Machine Learning</h3>
+                    <p class="feature-description" data-translate="features.ai_ml.desc">Developing intelligent systems and machine learning solutions that solve complex real-world problems.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -169,8 +161,8 @@
                             <path d="M12 6v6l4 2"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Timeless Quality</h3>
-                    <p class="feature-description">Creating works that honor the past while embracing the future</p>
+                    <h3 class="feature-title" data-translate="features.cloud.title">Cloud Solutions</h3>
+                    <p class="feature-description" data-translate="features.cloud.desc">Scalable cloud infrastructure and deployment solutions for modern digital businesses.</p>
                 </div>
             </div>
         </div>
@@ -182,13 +174,13 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3 class="footer-title">Veridian Zenith</h3>
-                    <p class="footer-tagline">Where curiosity meets creation</p>
+                    <p class="footer-tagline" data-translate="footer.tagline">Innovating tomorrow's technology today</p>
                 </div>
                 <div class="footer-links">
-                    <a href="index.html">Home</a>
-                    <a href="pages/projects.html">Projects</a>
-                    <a href="pages/about.html">About</a>
-                    <a href="pages/community.html">Community</a>
+                    <a href="index.html" data-translate="nav.home">Home</a>
+                    <a href="pages/projects.html" data-translate="nav.projects">Projects</a>
+                    <a href="pages/about.html" data-translate="nav.about">About</a>
+                    <a href="pages/community.html" data-translate="nav.community">Community</a>
                 </div>
                 <div class="footer-social">
                     <a href="https://github.com/Veridian-Zenith/veridianzenith.qzz.io" aria-label="GitHub Repository">
@@ -198,14 +190,17 @@
                     </a>
                 </div>
                 <div class="footer-text">
-                    <p>&copy; 2025 Veridian Zenith. All works copyright of Jeremy Matlock (Dae Euhwa) unless otherwise stated.</p>
+                    <p data-translate="footer.copyright">© 2025 Veridian Zenith. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
+    <script src="anime.min.js"></script>
     <script src="js/particle-system.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/anime-enhancements.js"></script>
+    <script src="js/translations.js"></script>
 </body>
 </html>
