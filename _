@@ -1,0 +1,55 @@
+projects:
+  - title: "Voix - Sudo Replacement"
+    description: "Modern privilege escalation tool combining the simplicity of doas with the power of sudo. Features fine-grained access control, structured logging, and GUI integration with Polkit."
+    category: "system"
+    image: "project1.jpg"
+    github_url: "https://github.com/Veridian-Zenith/Voix"
+    technologies: ["C++", "CMake", "PAM", "Lua"]
+    status: "Active"
+    version: "v0.0.20b"
+
+  - title: "Meshiji - File Explorer"
+    description: "Modern file explorer for Linux with plugin system, search capabilities, and performance optimizations. Features directory size caching, trash management, and Lua plugin support."
+    category: "application"
+    image: "project2.jpg"
+    github_url: "https://github.com/Veridian-Zenith/meshiji"
+    technologies: ["Dart", "Flutter", "C++", "Lua"]
+    status: "Beta"
+    version: "v0.0.20b"
+
+  - title: "Vaelix - Web Browser"
+    description: "Flutter-based web browser for Android with cross-platform ambitions. Early development with Windows runner initialized for multi-platform support."
+    category: "application"
+    image: "project1.jpg"
+    github_url: "https://github.com/Veridian-Zenith/Vaelix"
+    technologies: ["Dart", "Flutter", "C++", "Kotlin"]
+    status: "Early Dev"
+    version: "2025"
+
+  - title: "Peguni Draem'la"
+    description: "Text-based virtual pet simulator featuring the constructed language Vaesktöng. Create bonds with your digital companion through interactive care, exploration, and personalized adventures."
+    category: "game"
+    image: "project2.jpg"
+    github_url: "https://github.com/Veridian-Zenith/peguni_draem-la"
+    technologies: ["Lua", "Vaesktöng", "JSON"]
+    status: "Complete"
+    version: "v0.1.9b"
+
+  - title: "Aura-Core Kernel"
+    description: "Rebuild of CachyOS EEVDF kernel enhanced with ThinLTO optimization and Madvsie for Transparent Huge Pages management. Performance-focused Linux kernel variant."
+    category: "kernel"
+    image: "project1.jpg"
+    github_url: "https://github.com/Veridian-Zenith/aura-core"
+    technologies: ["CachyOS", "EEVDF", "ThinLTO", "Madvsie"]
+    status: "Active"
+    version: "2025"
+
+  - title: "Veridian Zenith Website"
+    description: "Mystical minimalism approach to digital presence, blending Nordic aesthetics with futuristic design. Features golden particle systems, clean Unicode symbols, and responsive design."
+    category: "web"
+    image: "project1.jpg"
+    live_url: "https://veridianzenith.qzz.io"
+    github_url: "https://github.com/Veridian-Zenith/veridianzenith.qzz.io"
+    technologies: ["HTML", "CSS", "JavaScript"]
+    status: "Live"
+    version: "2025"
