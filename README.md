@@ -16,7 +16,8 @@ Visit the main site here:
 
 * If the website is unresponsive, it may be:
 
-  * Temporarily offline
-  * Experiencing SSL issues (expired or invalid certs)
+  * Temporarily offline due to maintenance.
+  * Experiencing server issues.
+  
 * For direct support, contact:
   📧 **[Dae Euhwa](mailto:daedaevibin@veridianzenith.qzz.io)**
