@@ -29,14 +29,10 @@ npm run build
 ```
 This creates a `dist` folder with optimized production files.
 
-### 3. Deploy to GitHub Pages
-```bash
-npm run deploy
-```
 This will:
 - Build the application
 - Deploy the `dist` folder to GitHub Pages
-- Make your site available at `https://veridian-zenith.github.io/veridianzenith.qzz.io`
+- Make your site available at `https://veridianzenith.qzz.io/`
 
 ### 4. Configure GitHub Repository Settings
 
