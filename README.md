@@ -19,4 +19,4 @@ Visit the main site here:
   * Temporarily offline
   * Experiencing SSL issues (expired or invalid certs)
 * For direct support, contact:
-  📧 **[Dae Euhwa](mailto:daedaevibin@naver.com)**
+  📧 **[Dae Euhwa](mailto:daedaevibin@veridianzenith.qzz.io)**
