@@ -42,7 +42,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({ className = '' }) => {
       status: 'active',
       date: '2024',
       links: {
-        github: 'https://github.com/veridian-zenith/voix'
+        github: 'https://github.com/Veridian-Zenith/voix'
       }
     },
     {
@@ -54,7 +54,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({ className = '' }) => {
       status: 'active',
       date: '2024',
       links: {
-        github: 'https://github.com/veridian-zenith/meshiji'
+        github: 'https://github.com/Veridian-Zenith/meshiji'
       }
     },
     {
@@ -66,7 +66,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({ className = '' }) => {
       status: 'development',
       date: '2024',
       links: {
-        github: 'https://github.com/veridian-zenith/vaelix'
+        github: 'https://github.com/Veridian-Zenith/vaelix'
       }
     },
     {
@@ -78,7 +78,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({ className = '' }) => {
       status: 'completed',
       date: '2023',
       links: {
-        github: 'https://github.com/veridian-zenith/peguni-draemla'
+        github: 'https://github.com/Veridian-Zenith/peguni-draemla'
       }
     },
     {
@@ -90,7 +90,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({ className = '' }) => {
       status: 'maintenance',
       date: '2024',
       links: {
-        github: 'https://github.com/veridian-zenith/aura-core-kernel'
+        github: 'https://github.com/Veridian-Zenith/aura-core-kernel'
       }
     },
     {
@@ -102,7 +102,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({ className = '' }) => {
       status: 'active',
       date: '2024',
       links: {
-        github: 'https://github.com/veridian-zenith/veridianzenith.qzz.io'
+        github: 'https://github.com/Veridian-Zenith/veridianzenith.qzz.io'
       }
     }
   ];
@@ -240,7 +240,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({ className = '' }) => {
                   Follow our development journey and join us in building the future of independent software.
                 </p>
                 <div className="coming-soon-actions">
-                  <a href="https://github.com/veridian-zenith" className="btn btn-primary">
+                  <a href="https://github.com/Veridian-Zenith" className="btn btn-primary">
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                     </svg>

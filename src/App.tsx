@@ -170,7 +170,7 @@ const AppContent: React.FC = () => {
                       Contribute, report issues, or fork our repositories to get started.
                     </p>
                     <div style={{ marginTop: 'var(--space-4)' }}>
-                      <a href="https://github.com/veridian-zenith" className="btn btn-primary">
+                      <a href="https://github.com/Veridian-Zenith" className="btn btn-primary">
                         Visit GitHub
                       </a>
                     </div>
@@ -198,7 +198,7 @@ const AppContent: React.FC = () => {
                       Check out our projects and see how you can help.
                     </p>
                     <div style={{ marginTop: 'var(--space-4)' }}>
-                      <a href="https://github.com/veridian-zenith" className="btn btn-primary">
+                      <a href="https://github.com/Veridian-Zenith" className="btn btn-primary">
                         Get Involved
                       </a>
                     </div>

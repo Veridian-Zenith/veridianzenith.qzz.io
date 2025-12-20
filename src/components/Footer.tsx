@@ -17,7 +17,7 @@ const Footer: React.FC<FooterProps> = ({ className = '', onNavigate }) => {
 
   const socialLinks = [
     {
-      href: 'https://github.com/veridian-zenith',
+      href: 'https://github.com/Veridian-Zenith',
       label: 'GitHub',
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

@@ -45,20 +45,21 @@ const ParticleSystem: React.FC<ParticleSystemProps> = ({ className = '' }) => {
       return {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 2,
-        vy: (Math.random() - 0.5) * 2,
-        size: Math.random() * 6 + 4,
-        opacity: Math.random() * 0.8 + 0.4,
+        vx: (Math.random() - 0.5) * 1, // Slower movement
+        vy: (Math.random() - 0.5) * 1, // Slower movement
+        size: Math.random() * 3 + 2, // Smaller particles
+        opacity: Math.random() * 0.6 + 0.2, // Lower opacity
         color: colors[Math.floor(Math.random() * colors.length)],
         life: 0,
-        maxLife: Math.random() * 500 + 300,
+        maxLife: Math.random() * 1000 + 500, // Longer life to reduce respawns
       };
     };
 
     const initParticles = () => {
       particlesRef.current = [];
-      const particleCount = Math.min(100, Math.floor(canvas.width * canvas.height / 12000));
-      console.log('Creating', particleCount, 'particles');
+      // Reduced particle count significantly for better performance
+      const particleCount = Math.min(30, Math.floor(canvas.width * canvas.height / 40000));
+      console.log('Creating', particleCount, 'optimized particles');
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push(createParticle());
       }
@@ -91,7 +92,7 @@ const ParticleSystem: React.FC<ParticleSystemProps> = ({ className = '' }) => {
       // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw particles with high visibility
+      // Draw particles with optimized rendering
       particlesRef.current.forEach((particle) => {
         ctx.save();
         ctx.globalAlpha = particle.opacity;
@@ -100,26 +101,28 @@ const ParticleSystem: React.FC<ParticleSystemProps> = ({ className = '' }) => {
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Add strong glow effect
-        ctx.shadowBlur = 20;
+        // Reduced glow effect for performance
+        ctx.shadowBlur = 8;
         ctx.shadowColor = particle.color;
         ctx.fill();
         ctx.restore();
       });
 
-      // Draw some connections between nearby particles
+      // Optimized connections - only check nearby particles
       particlesRef.current.forEach((particle, i) => {
-        particlesRef.current.slice(i + 1).forEach((otherParticle) => {
+        // Only check next 10 particles instead of all
+        const nearbyParticles = particlesRef.current.slice(i + 1, i + 11);
+        nearbyParticles.forEach((otherParticle) => {
           const dx = particle.x - otherParticle.x;
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) {
-            const opacity = (1 - distance / 150) * 0.4;
+          if (distance < 100) { // Reduced connection distance
+            const opacity = (1 - distance / 100) * 0.2; // Reduced opacity
             ctx.save();
             ctx.globalAlpha = opacity;
-            ctx.strokeStyle = 'rgba(255, 179, 71, 0.6)';
-            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(255, 179, 71, 0.3)'; // Reduced opacity
+            ctx.lineWidth = 0.5; // Thinner lines
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
@@ -130,16 +133,27 @@ const ParticleSystem: React.FC<ParticleSystemProps> = ({ className = '' }) => {
       });
     };
 
-    const animate = () => {
-      updateParticles();
-      drawParticles();
+    // Throttle animation for better performance
+    let lastFrameTime = 0;
+    const animate = (timestamp: number) => {
+      // Only animate every other frame (30fps instead of 60fps)
+      if (timestamp - lastFrameTime > 16) {
+        updateParticles();
+        drawParticles();
+        lastFrameTime = timestamp;
+      }
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    // Initialize with timestamp parameter
+    const startAnimation = () => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
     // Initialize
     resizeCanvas();
     initParticles();
-    animate();
+    startAnimation();
 
     console.log('Particle system initialized');
 

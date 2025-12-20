@@ -8,20 +8,20 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({ className = '' }) => {
   const features = [
     {
       icon: '⚡',
-      title: 'System Tools',
-      description: 'Practical utilities designed to enhance productivity and solve real-world problems.',
+      title: 'Practical Tools',
+      description: 'Software that helps you get things done efficiently and effectively in your daily work.',
       className: 'feature-card'
     },
     {
       icon: '🌟',
-      title: 'Innovation',
-      description: 'Cutting-edge applications that push the boundaries of what\'s possible in software development.',
+      title: 'Innovative Solutions',
+      description: 'Creative approaches to common problems that make technology more accessible and useful.',
       className: 'feature-card'
     },
     {
       icon: '🔬',
-      title: 'Experimentation',
-      description: 'Research-driven architectures exploring new paradigms and emerging technologies.',
+      title: 'Experimental Projects',
+      description: 'Exploring new ideas and technologies to discover better ways of building software.',
       className: 'feature-card'
     }
   ];

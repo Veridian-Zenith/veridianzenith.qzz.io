@@ -48,10 +48,24 @@ const Navigation: React.FC<NavigationProps> = ({
     <>
       <nav className="nav">
         <div className="nav-container">
-          {/* Logo */}
+          {/* Logo - Enhanced with proper branding */}
           <a href="/" className="nav-logo" onClick={(e) => { e.preventDefault(); handleLinkClick('home'); }}>
-            <div className="logo-icon">VZ</div>
-            <span className="logo-text">Veridian Zenith</span>
+            <div className="logo-icon" style={{
+              background: 'linear-gradient(135deg, var(--amber-700), var(--gold-500))',
+              boxShadow: '0 0 15px rgba(255, 179, 71, 0.5)',
+              transition: 'all var(--motion-smooth) var(--easing-smooth)'
+            }}>
+              VZ
+            </div>
+            <span className="logo-text" style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: '600',
+              fontSize: 'var(--text-lg)',
+              color: 'var(--neutral-50)',
+              transition: 'color var(--motion-fast) var(--easing-out)'
+            }}>
+              Veridian Zenith
+            </span>
           </a>
 
           {/* Desktop Navigation */}

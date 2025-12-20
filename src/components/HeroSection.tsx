@@ -46,7 +46,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
 
           {/* Description */}
           <p className="hero-description">
-            An independent development initiative creating practical system tools, innovative applications, and experimental architectures. All projects are open source and focused on solving real problems.
+            We create practical tools and innovative software to solve real-world problems. Our open-source projects focus on quality, usability, and making technology accessible to everyone.
           </p>
 
           {/* Hero Actions */}
@@ -68,21 +68,31 @@ const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
           </div>
 
           {/* Hero Stats */}
-          <div className="hero-actions" style={{ justifyContent: 'center', gap: '4rem' }}>
+          <div className="hero-stats" style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 'var(--space-12)',
+            marginTop: 'var(--space-8)',
+            flexWrap: 'wrap'
+          }}>
             {heroStats.map((stat, index) => (
-              <div key={index} style={{ textAlign: 'center' }}>
+              <div key={index} style={{
+                textAlign: 'center',
+                padding: 'var(--space-4)',
+                minWidth: '120px'
+              }}>
                 <div style={{
                   fontSize: '2.5rem',
                   fontWeight: 'bold',
                   color: 'var(--amber-500)',
-                  marginBottom: '0.5rem',
+                  marginBottom: 'var(--space-2)',
                   fontFamily: 'var(--font-mystical)'
                 }}>
                   {stat.value}
                 </div>
                 <div style={{
-                  fontSize: '0.875rem',
-                  color: 'var(--amber-300)',
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--neutral-100)',
                   fontWeight: '500'
                 }}>
                   {stat.label}
