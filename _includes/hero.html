@@ -1,0 +1,65 @@
+<!-- Hero Section -->
+<section id="hero" class="hero{% if page.hero_class %} {{ page.hero_class }}{% endif %}">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-text" data-translate="{{ page.badge_key | default: 'hero.badge' }}">{{ page.badge_text | default: 'Welcome to the Future' }}</span>
+                <div class="runic-decoration">✨</div>
+            </div>
+
+            <h1 class="hero-title">
+                <span class="hero-title-main" data-translate="{{ page.title_key | default: 'hero.title' }}">{{ page.title | default: 'Veridian Zenith' }}</span>
+                <span class="hero-title-sub" data-translate="{{ page.subtitle_key | default: 'hero.subtitle' }}">{{ page.subtitle | default: 'Where Technology Meets Mystery' }}</span>
+            </h1>
+
+            <p class="hero-description" data-translate="{{ page.description_key | default: 'hero.description' }}">
+                {{ page.description | default: 'Discover cutting-edge innovations in technology, development, and digital experiences. Explore our portfolio of forward-thinking projects that bridge the gap between advanced engineering and elegant design.' }}
+            </p>
+
+            <div class="hero-actions">
+                {% for action in page.hero_actions %}
+                <a href="{{ action.url }}" class="btn {{ action.class }}">
+                    <span class="btn-text" data-translate="{{ action.text_key }}">{{ action.text }}</span>
+                    {% if action.icon %}
+                    <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </div>
+
+            <div class="hero-stats">
+                {% for stat in page.hero_stats %}
+                <div class="stat">
+                    <div class="stat-value">{{ stat.value }}</div>
+                    <div class="stat-label">{{ stat.label }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="mystical-orb">
+                <div class="orb-inner">
+                    <div class="orb-core"></div>
+                    <div class="orb-rings">
+                        <div class="orb-ring"></div>
+                        <div class="orb-ring"></div>
+                        <div class="orb-ring"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="floating-runes">
+                <span class="rune">✨</span>
+                <span class="rune">✨</span>
+                <span class="rune">✨</span>
+                <span class="rune">✨</span>
+                <span class="rune">✨</span>
+                <span class="rune">✨</span>
+                <span class="rune">✨</span>
+                <span class="rune">✨</span>
+            </div>
+        </div>
+    </div>
+</section>

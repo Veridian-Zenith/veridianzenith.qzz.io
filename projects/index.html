@@ -1,0 +1,117 @@
+---
+layout: default
+title: "Projects"
+description: "Explore our portfolio of digital projects bridging ancient wisdom and cutting-edge technology."
+page_class: "projects-page"
+hero_class: "projects-hero"
+badge_text: "Our Portfolio"
+title: "Projects"
+subtitle: "Exploring Ancient Wisdom & Modern Innovation"
+description: "Discover our portfolio of forward-thinking projects that bridge the gap between advanced engineering and elegant design. Each project represents our commitment to pushing technological boundaries while honoring timeless principles."
+hero_actions:
+  - text: "View GitHub"
+    text_key: "projects.view_github"
+    url: "https://github.com/Veridian-Zenith"
+    icon: true
+    class: "btn-primary"
+  - text: "Contact Us"
+    text_key: "projects.contact_us"
+    url: "mailto:daedaevibin@veridianzenith.qzz.io"
+    class: "btn-secondary"
+hero_stats:
+  - value: "∞"
+    label: "Innovation"
+  - value: "∞"
+    label: "Quality"
+  - value: "∞"
+    label: "Vision"
+custom_js:
+  - "/js/projects-filter.js"
+---
+
+{% include hero.html %}
+
+<!-- Feature Highlight Section (Projects Page Version) -->
+<section class="features projects-features">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-translate="projects.categories_title">Project Categories</h2>
+            <p class="section-description" data-translate="projects.categories_subtitle">Explore our diverse portfolio of innovative solutions</p>
+        </div>
+
+        <!-- Project Filters -->
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all" data-translate="projects.filter_all">All Projects</button>
+            <button class="filter-btn" data-filter="system" data-translate="projects.filter_system">System Tools</button>
+            <button class="filter-btn" data-filter="application" data-translate="projects.filter_application">Applications</button>
+            <button class="filter-btn" data-filter="game" data-translate="projects.filter_game">Games</button>
+            <button class="filter-btn" data-filter="web" data-translate="projects.filter_web">Web</button>
+            <button class="filter-btn" data-filter="kernel" data-translate="projects.filter_kernel">Kernel/OS</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            {% for project in site.data.projects.projects %}
+            <div class="project-card" data-category="{{ project.category }}">
+                <div class="project-image">
+                    <img src="{{ site.baseurl }}/images/{{ project.image }}" alt="{{ project.title }}" loading="lazy">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            {% if project.live_url %}
+                            <a href="{{ project.live_url }}" class="project-link" aria-label="View Live Site">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                    <polyline points="15,3 21,3 21,9"/>
+                                    <line x1="10" y1="14" x2="21" y2="3"/>
+                                </svg>
+                            </a>
+                            {% endif %}
+                            <a href="{{ project.github_url }}" class="project-link" aria-label="View Source Code">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div class="project-tech">
+                        {% for tech in project.technologies %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <h3 class="project-title">{{ project.title }}</h3>
+                    <p class="project-description">
+                        {{ project.description }}
+                    </p>
+                    <div class="project-meta">
+                        <span class="project-status">{{ project.status }}</span>
+                        <span class="project-date">{{ project.version }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Coming Soon Section -->
+<div class="coming-soon">
+    <div class="container">
+        <div class="mystical-card">
+            <div class="card-content">
+                <h2 data-translate="projects.coming_soon_title">More Projects Coming Soon</h2>
+                <p data-translate="projects.coming_soon_desc">We're constantly exploring new ways to bridge ancient wisdom with cutting-edge technology. Follow our GitHub repository to stay updated on our latest developments.</p>
+
+                <div class="coming-soon-actions">
+                    <a href="https://github.com/Veridian-Zenith" class="btn btn-primary">
+                        <span class="btn-text" data-translate="projects.follow_github">Follow on GitHub</span>
+                        <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
