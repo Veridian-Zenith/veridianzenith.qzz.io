@@ -4,8 +4,8 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 const RUNES = [
-  "ᚦ","ᚧ","ᚨ","ᚱ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ",
-  "ᛈ","ᛇ","ᛉ","ᛊ","ᛏ","ᛒ","ᛖ","ᛗ","ᛚ","ᛝ","ᛟ","ᛞ"
+  "ᚦ", "ᚧ", "ᚨ", "ᚱ", "ᚷ", "ᚹ", "ᚺ", "ᚾ", "ᛁ", "ᛃ",
+  "ᛈ", "ᛇ", "ᛉ", "ᛊ", "ᛏ", "ᛒ", "ᛖ", "ᛗ", "ᛚ", "ᛝ", "ᛟ", "ᛞ"
 ];
 
 export const BackgroundEffect = () => {
@@ -14,7 +14,7 @@ export const BackgroundEffect = () => {
   const ySpring = useSpring(yRange, { stiffness: 50, damping: 20 });
 
   // Pre-generate positions for consistency
-  const massiveRunes = [...Array(15)].map((_, i) => ({
+  const massiveRunes = [...Array(6)].map((_, i) => ({
     left: `${(i * 17) % 100}%`,
     top: `${(i * 23) % 100}%`,
     size: `${10 + Math.random() * 15}rem`,
@@ -23,7 +23,7 @@ export const BackgroundEffect = () => {
     rune: RUNES[i % RUNES.length],
   }));
 
-  const tinyRunes = [...Array(60)].map(() => ({
+  const tinyRunes = [...Array(15)].map(() => ({
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
     size: `${Math.random() * 0.8 + 0.5}rem`,
@@ -46,7 +46,7 @@ export const BackgroundEffect = () => {
         {massiveRunes.map((r, i) => (
           <motion.div
             key={`massive-${i}`}
-            className="absolute text-amber-500/40 font-serif select-none pointer-events-none filter blur-[0.5px]"
+            className="absolute text-amber-500/40 font-serif select-none pointer-events-none"
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
               x: [0, r.direction * 50, 0],
@@ -61,13 +61,14 @@ export const BackgroundEffect = () => {
       </motion.div>
 
       {/* 3. Surface Layer: Microscopic Grid Runes */}
-      <div className="absolute inset-0 opacity-[0.1] pointer-events-none grid grid-cols-10 gap-16 p-10 rotate-12 scale-150">
-        {[...Array(200)].map((_, i) => (
+      <div className="absolute inset-0 opacity-[0.1] pointer-events-none grid grid-cols-6 gap-24 p-10 rotate-12 scale-150">
+        {[...Array(40)].map((_, i) => (
           <motion.span
             key={i}
             className="text-2xl font-serif text-amber-500 block text-center"
-            animate={{ opacity: [0.2, 0.7, 0.2] }}
-            transition={{ duration: 4, delay: i * 0.02, repeat: Infinity, ease: "easeInOut" }}
+            initial={{ opacity: 0.2 }}
+            animate={{ opacity: [0.2, 0.5, 0.2] }}
+            transition={{ duration: 3, delay: i * 0.1, repeat: Infinity, ease: "easeInOut" }}
           >
             {RUNES[i % RUNES.length]}
           </motion.span>

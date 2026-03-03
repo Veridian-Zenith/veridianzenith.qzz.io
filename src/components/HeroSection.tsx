@@ -11,8 +11,8 @@ export const HeroSection = () => {
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
       {/* Background Particles */}
-      <div className="absolute inset-0 z-0">
-        {[...Array(20)].map((_, i) => (
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-amber-500 rounded-full"
@@ -43,7 +43,7 @@ export const HeroSection = () => {
             duration: 1.2,
             ease: [0.16, 1, 0.3, 1]
           }}
-          className="text-6xl sm:text-8xl font-black mb-6 bg-gradient-to-b from-amber-400 via-red-500 to-gold-500 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(255,179,71,0.6)] filter brightness-110 tracking-tighter"
+          className="text-6xl sm:text-8xl font-black mb-6 bg-gradient-to-b from-amber-400 via-red-500 to-gold-500 bg-clip-text text-transparent filter brightness-110 tracking-tighter"
         >
           Veridian Zenith
         </motion.h1>

@@ -34,7 +34,7 @@ function App() {
 
       <div className={cn(
         "min-h-screen bg-[#000000] text-gray-100 selection:bg-amber-500/30 font-rosemary transition-all duration-75 relative overflow-x-hidden",
-        glitch && "animate-glitch-intense"
+        glitch && "will-change-transform animate-glitch-intense"
       )}>
         {/* BackgroundEffect is placed here, z-index will be managed inside it */}
         <BackgroundEffect />

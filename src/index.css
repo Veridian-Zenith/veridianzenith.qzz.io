@@ -47,22 +47,22 @@
     }
 
     20% {
-      transform: translate(-5px, 5px);
+      transform: translate(-2px, 2px);
       clip-path: inset(10% 0 80% 0);
     }
 
     40% {
-      transform: translate(5px, -5px);
+      transform: translate(2px, -2px);
       clip-path: inset(60% 0 5% 0);
     }
 
     60% {
-      transform: translate(-5px, 0);
+      transform: translate(-2px, 0);
       clip-path: inset(20% 0 40% 0);
     }
 
     80% {
-      transform: translate(5px, 5px);
+      transform: translate(2px, 2px);
       clip-path: inset(80% 0 20% 0);
     }
 
@@ -137,4 +137,3 @@ body {
     top: 100%;
   }
 }
-
