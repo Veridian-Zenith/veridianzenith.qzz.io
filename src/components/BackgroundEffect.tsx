@@ -46,14 +46,14 @@ export const BackgroundEffect = () => {
         {massiveRunes.map((r, i) => (
           <motion.div
             key={`massive-${i}`}
-            className="absolute text-amber-500/40 font-serif select-none pointer-events-none"
+            className="absolute text-amber-500/40 font-serif select-none pointer-events-none transform-gpu"
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
               x: [0, r.direction * 50, 0],
               rotate: [0, 360, 0],
               opacity: [0.1, 0.2, 0.1]
             }}
-            transition={{ duration: r.speed, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: r.speed, repeat: Infinity, ease: "linear" }}
           >
             {r.rune}
           </motion.div>
@@ -63,15 +63,12 @@ export const BackgroundEffect = () => {
       {/* 3. Surface Layer: Microscopic Grid Runes */}
       <div className="absolute inset-0 opacity-[0.1] pointer-events-none grid grid-cols-6 gap-24 p-10 rotate-12 scale-150">
         {[...Array(40)].map((_, i) => (
-          <motion.span
+          <span
             key={i}
-            className="text-2xl font-serif text-amber-500 block text-center"
-            initial={{ opacity: 0.2 }}
-            animate={{ opacity: [0.2, 0.5, 0.2] }}
-            transition={{ duration: 3, delay: i * 0.1, repeat: Infinity, ease: "easeInOut" }}
+            className="text-2xl font-serif text-amber-500 block text-center opacity-20"
           >
             {RUNES[i % RUNES.length]}
-          </motion.span>
+          </span>
         ))}
       </div>
 
@@ -80,7 +77,7 @@ export const BackgroundEffect = () => {
         {tinyRunes.map((r, i) => (
           <motion.div
             key={`tiny-${i}`}
-            className="absolute text-amber-400 select-none font-serif drop-shadow-[0_0_10px_rgba(255,179,71,0.6)]"
+            className="absolute text-amber-400 select-none font-serif transform-gpu"
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
               y: [0, -50, 0],
@@ -89,7 +86,7 @@ export const BackgroundEffect = () => {
             transition={{
               duration: r.speed,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: "linear",
               delay: Math.random() * 5
             }}
           >

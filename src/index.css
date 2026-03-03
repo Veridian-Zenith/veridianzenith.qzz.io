@@ -119,13 +119,7 @@ body {
 }
 
 .scanline {
-  width: 100%;
-  height: 2px;
-  background: rgba(215, 38, 56, 0.1);
-  position: fixed;
-  z-index: 1000;
-  pointer-events: none;
-  animation: scanline 4s linear infinite;
+  display: none;
 }
 
 @keyframes scanline {
