@@ -13,8 +13,11 @@ export const Navbar = () => {
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl">
       <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 flex items-center justify-between shadow-[0_0_20px_rgba(255,179,71,0.2)]">
-        <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-amber-500 to-gold-500 bg-clip-text text-transparent">
-          VZ
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/assets/brand-image.png" alt="VZ Logo" className="w-10 h-10 object-contain" />
+          <span className="text-xl font-bold bg-gradient-to-r from-amber-500 to-gold-500 bg-clip-text text-transparent hidden sm:inline">
+            Veridian Zenith
+          </span>
         </Link>
 
         {/* Desktop Nav */}

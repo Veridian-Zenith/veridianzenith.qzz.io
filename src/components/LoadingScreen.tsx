@@ -78,17 +78,15 @@ export const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => 
         <motion.div
           animate={{
             scale: [1, 1.1, 1],
-            rotate: [0, 90, 180, 270, 360],
           }}
           transition={{
-            duration: 4,
+            duration: 2,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
           }}
-          className="w-24 h-24 border-2 border-amber-500/20 rounded-xl flex items-center justify-center relative"
+          className="w-32 h-32 flex items-center justify-center relative"
         >
-          <div className="absolute inset-0 border-2 border-amber-500 rounded-xl blur-sm opacity-50 animate-pulse" />
-          <span className="text-4xl font-bold text-amber-500 drop-shadow-[0_0_10px_#FFB347]">VZ</span>
+          <img src="/assets/brand-image.png" alt="Loading Logo" className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(255,179,71,0.4)]" />
         </motion.div>
 
         {/* Floating dots around logo */}
