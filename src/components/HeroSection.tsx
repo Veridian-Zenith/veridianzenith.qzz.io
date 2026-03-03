@@ -37,10 +37,13 @@ export const HeroSection = () => {
 
       <div className="relative z-10 max-w-4xl">
         <motion.h1
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="text-6xl sm:text-8xl font-bold mb-6 bg-gradient-to-b from-amber-400 via-red-500 to-gold-500 bg-clip-text text-transparent drop-shadow-2xl"
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{
+            duration: 1.2,
+            ease: [0.16, 1, 0.3, 1]
+          }}
+          className="text-6xl sm:text-8xl font-black mb-6 bg-gradient-to-b from-amber-400 via-red-500 to-gold-500 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(255,179,71,0.6)] filter brightness-110 tracking-tighter"
         >
           Veridian Zenith
         </motion.h1>
@@ -49,7 +52,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-xl sm:text-2xl text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed"
+          className="text-xl sm:text-2xl text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed drop-shadow-lg"
         >
           Forging digital realms where mystical aesthetics meet cutting-edge performance.
         </motion.p>
@@ -62,7 +65,6 @@ export const HeroSection = () => {
         >
           Step into the Nordic void.
         </motion.p>
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -73,10 +75,11 @@ export const HeroSection = () => {
             Explore Artifacts
           </InteractiveButton>
           <InteractiveButton variant="red" onClick={() => navigate('/contact')}>
-            Summon Us
+            <span className="text-white">Summon</span> <span className="text-red-500 font-extrabold ml-1 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8) transition-all">The Architect</span>
           </InteractiveButton>
         </motion.div>
       </div>
     </section>
   );
 };
+

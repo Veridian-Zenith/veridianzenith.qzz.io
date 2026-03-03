@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Rosemary';
+  src: url('/fonts/Rosemary.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @theme {
   --color-amber: #FFB347;
   --color-red: #D72638;
@@ -8,6 +15,8 @@
   --font-rosemary: Rosemary, system-ui, sans-serif;
 
   --animate-float-slow: float-slow 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-glitch-intense: glitch-intense 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
 
   @keyframes float-slow {
 
@@ -18,6 +27,47 @@
 
     50% {
       transform: translateY(-20px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes glitch-intense {
+    0% {
+      transform: translate(0);
+      clip-path: inset(44% 0 1% 0);
+    }
+
+    20% {
+      transform: translate(-5px, 5px);
+      clip-path: inset(10% 0 80% 0);
+    }
+
+    40% {
+      transform: translate(5px, -5px);
+      clip-path: inset(60% 0 5% 0);
+    }
+
+    60% {
+      transform: translate(-5px, 0);
+      clip-path: inset(20% 0 40% 0);
+    }
+
+    80% {
+      transform: translate(5px, 5px);
+      clip-path: inset(80% 0 20% 0);
+    }
+
+    100% {
+      transform: translate(0);
     }
   }
 }
@@ -42,6 +92,12 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
+  background-color: #000000 !important;
+}
+
+#root {
+  background-color: #000000 !important;
+  min-height: 100vh;
 }
 
 /* Custom scrollbar */
@@ -61,3 +117,24 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #D72638;
 }
+
+.scanline {
+  width: 100%;
+  height: 2px;
+  background: rgba(215, 38, 56, 0.1);
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  animation: scanline 4s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    top: -2%;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+

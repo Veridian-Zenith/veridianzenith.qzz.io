@@ -1,61 +1,63 @@
 //! License: Open Software License 3.0 (OSL-3.0)
 //! Copyright (c) 2025 Dae Euhwa
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useMemo } from "react";
+import { motion } from "framer-motion";
 
-export const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => void }) => {
+type Props = {
+  onLoadingComplete: () => void;
+};
+
+export const LoadingScreen = ({ onLoadingComplete }: Props) => {
   const [progress, setProgress] = useState(0);
   const [latency, setLatency] = useState<number | null>(null);
-  const [status, setStatus] = useState('Synchronizing Runes...');
+  const [status, setStatus] = useState("Synchronizing Runes...");
+  const [diagMode, setDiagMode] = useState(0);
 
+  /* ---------------------------------- */
+  /* Latency Measurement                */
+  /* ---------------------------------- */
   useEffect(() => {
-    // Measure latency
     const start = performance.now();
-    fetch(window.location.origin + '/favicon.ico', { mode: 'no-cors' })
-      .then(() => {
-        setLatency(Math.round(performance.now() - start));
-      })
-      .catch(() => {
-        // Fallback if fetch fails
-        setLatency(Math.round(Math.random() * 50 + 20));
-      });
 
-    // Simulate progress based on actual resource loading
+    fetch(window.location.origin + "/favicon.ico", { mode: "no-cors" })
+      .then(() => setLatency(Math.round(performance.now() - start)))
+      .catch(() => setLatency(Math.round(Math.random() * 50 + 20)));
+  }, []);
+
+  /* ---------------------------------- */
+  /* Progress Simulation                */
+  /* ---------------------------------- */
+  useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
+        if (prev >= 100) return 100;
 
-        // Dynamic status updates
-        if (prev > 20 && prev < 40) setStatus('Gathering Aether...');
-        if (prev > 40 && prev < 70) setStatus('Forging Digital Realm...');
-        if (prev > 70 && prev < 90) setStatus('Stabilizing Void...');
-        if (prev > 90) setStatus('Aperture Opening...');
+        const next = Math.min(prev + Math.random() * 12 + 3, 100);
 
-        return prev + Math.random() * 15;
+        if (next > 20 && next <= 40) setStatus("Gathering Aether...");
+        else if (next > 40 && next <= 70) setStatus("Forging Digital Realm...");
+        else if (next > 70 && next <= 90) setStatus("Stabilizing Void...");
+        else if (next > 90) setStatus("Aperture Opening...");
+
+        return next;
       });
     }, 200);
 
-    // Ensure we wait for window load event as well
-    const handleLoad = () => {
-      setProgress(100);
-    };
+    const handleLoad = () => setProgress(100);
 
-    if (document.readyState === 'complete') {
-      handleLoad();
-    } else {
-      window.addEventListener('load', handleLoad);
-    }
+    if (document.readyState === "complete") handleLoad();
+    else window.addEventListener("load", handleLoad);
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener('load', handleLoad);
+      window.removeEventListener("load", handleLoad);
     };
   }, []);
 
+  /* ---------------------------------- */
+  /* Completion Trigger                 */
+  /* ---------------------------------- */
   useEffect(() => {
     if (progress >= 100) {
       const timer = setTimeout(() => {
@@ -65,37 +67,58 @@ export const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => 
     }
   }, [progress, onLoadingComplete]);
 
+  /* ---------------------------------- */
+  /* Stable Decorative Data             */
+  /* ---------------------------------- */
+  const diagnosticHex = useMemo(
+    () =>
+      Array.from({ length: 5 }).map(
+        () =>
+          `0x${Math.random()
+            .toString(16)
+            .substring(2, 10)
+            .toUpperCase()} FETCH_RUNE_SUCCESS`
+      ),
+    []
+  );
+
+  const cycleDiagMode = () => {
+    setDiagMode((prev) => (prev + 1) % 3);
+  };
+
+  const roundedProgress = Math.min(100, Math.round(progress));
+
   return (
     <motion.div
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,179,71,0.05)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,179,71,0.03)_0%,transparent_70%)]" />
 
-      {/* Central Rune/Logo Animation */}
+      {/* Logo Animation */}
       <div className="relative mb-12">
         <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-          }}
+          animate={{ scale: [1, 1.1, 1] }}
           transition={{
             duration: 2,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="w-32 h-32 flex items-center justify-center relative"
+          className="w-32 h-32 flex items-center justify-center"
         >
-          <img src="/assets/brand-image.png" alt="Loading Logo" className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(255,179,71,0.4)]" />
+          <img
+            src="/assets/brand-image.png"
+            alt="Loading Logo"
+            className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(255,179,71,0.4)]"
+          />
         </motion.div>
 
-        {/* Floating dots around logo */}
-        {[...Array(4)].map((_, i) => (
+        {/* Orbiting Dots */}
+        {Array.from({ length: 4 }).map((_, i) => (
           <motion.div
             key={i}
-            animate={{
-              rotate: 360,
-            }}
+            animate={{ rotate: 360 }}
             transition={{
               duration: 10 + i * 2,
               repeat: Infinity,
@@ -104,8 +127,12 @@ export const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => 
             className="absolute inset-0"
           >
             <div
-              className="absolute w-1.5 h-1.5 bg-gold-500 rounded-full blur-[1px]"
-              style={{ top: '-10px', left: '50%', transform: 'translateX(-50%)' }}
+              className="absolute w-1.5 h-1.5 bg-yellow-500 rounded-full blur-[1px]"
+              style={{
+                top: "-10px",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}
             />
           </motion.div>
         ))}
@@ -114,7 +141,7 @@ export const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => 
       {/* Progress Text */}
       <div className="text-center">
         <div className="text-amber-500 font-bold text-3xl mb-2 tracking-[0.2em]">
-          {Math.min(100, Math.round(progress))}%
+          {roundedProgress}%
         </div>
         <div className="text-gray-500 text-[10px] uppercase tracking-[0.3em] h-4">
           {status}
@@ -122,35 +149,76 @@ export const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => 
       </div>
 
       {/* Progress Bar */}
-      <div className="w-64 h-1 bg-white/5 rounded-full mt-8 overflow-hidden relative">
+      <div className="w-64 h-1 bg-white/5 rounded-full mt-8 overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-amber-500 via-red-500 to-gold-500 shadow-[0_0_10px_#FFB347]"
+          className="h-full bg-gradient-to-r from-amber-500 via-red-500 to-yellow-500 shadow-[0_0_10px_#FFB347]"
           initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
+          animate={{ width: `${roundedProgress}%` }}
         />
       </div>
 
-      {/* Latency / System Diagnostics - Bottom Right */}
-      <div className="absolute bottom-10 right-10 text-right font-mono text-[9px] text-gray-600 uppercase tracking-widest leading-relaxed">
+      {/* Diagnostics Panel */}
+      <div
+        onClick={cycleDiagMode}
+        className="absolute bottom-10 right-10 text-right font-mono text-[9px] text-gray-600 uppercase tracking-widest leading-relaxed cursor-pointer hover:text-amber-500/50 transition-colors select-none group"
+      >
         <div className="flex items-center justify-end gap-2">
-          <span>Void Latency:</span>
-          <span className={latency && latency < 100 ? 'text-green-500/50' : 'text-amber-500/50'}>
-            {latency ? `${latency}ms` : 'Calculating...'}
+          <span>
+            {diagMode === 0
+              ? "Void Latency:"
+              : diagMode === 1
+              ? "Aether Flux:"
+              : "Signal Noise:"}
+          </span>
+          <span
+            className={
+              latency && latency < 100
+                ? "text-green-500/50"
+                : "text-amber-500/50"
+            }
+          >
+            {diagMode === 0
+              ? latency
+                ? `${latency}ms`
+                : "Calculating..."
+              : diagMode === 1
+              ? `${Math.floor(Math.random() * 1000)} lux`
+              : `-${Math.floor(Math.random() * 90)} dBm`}
           </span>
         </div>
-        <div>Engine: React 19 / Vite 7</div>
+
+        <div>Engine: React / Vite</div>
         <div>Uptime: {Math.floor(performance.now() / 1000)}s</div>
+
         <div className="flex items-center justify-end gap-2 mt-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-green-500/50 animate-pulse" />
-          <span>Zenith Connection Stable</span>
+          <div
+            className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+              diagMode === 0
+                ? "bg-green-500/50"
+                : diagMode === 1
+                ? "bg-amber-500/50"
+                : "bg-red-500/50"
+            }`}
+          />
+          <span>
+            {diagMode === 0
+              ? "Zenith Connection Stable"
+              : diagMode === 1
+              ? "Flux Integrity Nominal"
+              : "Void Interference Detected"}
+          </span>
+        </div>
+
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity text-[7px] text-amber-500/30 mt-1">
+          Click to toggle diagnostics
         </div>
       </div>
 
-      {/* Decoration */}
+      {/* Decorative Debug Feed */}
       <div className="absolute top-10 left-10 opacity-10">
         <div className="text-[8px] font-mono text-gray-500 flex flex-col gap-1">
-          {[...Array(5)].map((_, i) => (
-            <div key={i}>0x{Math.random().toString(16).substr(2, 8).toUpperCase()} FETCH_RUNE_SUCCESS</div>
+          {diagnosticHex.map((line, i) => (
+            <div key={i}>{line}</div>
           ))}
         </div>
       </div>
