@@ -2,15 +2,21 @@
 //! Copyright (c) 2025 Dae Euhwa
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight, Languages } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const Navbar = () => {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [logoHoverTime, setLogoHoverTime] = useState(0);
   const [isLogoPulsing, setIsLogoPulsing] = useState(false);
   const navigate = useNavigate();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
 
   useEffect(() => {
     let timer: number;
@@ -69,23 +75,40 @@ export const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
-          {['Home', 'About', 'Projects'].map((item) => (
+          {[
+            { name: t('nav.home'), path: '/' },
+            { name: t('nav.about'), path: '/about' },
+            { name: t('nav.projects'), path: '/projects' },
+          ].map((item) => (
             <Link
-              key={item}
-              to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+              key={item.path}
+              to={item.path}
               className="px-4 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-all relative group/link"
             >
-              {item}
+              {item.name}
               <motion.div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-amber-500 group-hover/link:w-1/2 transition-all" />
             </Link>
           ))}
+          <div className="relative group/lang">
+            <button className="p-2 rounded-full hover:bg-white/5 transition-colors">
+              <Languages size={20} className="text-gray-400 group-hover/lang:text-white" />
+            </button>
+            <div className="absolute top-full right-0 pt-3 -mt-1 opacity-0 group-hover/lang:opacity-100 transition-opacity pointer-events-none group-hover/lang:pointer-events-auto">
+              <div className="bg-black/80 backdrop-blur-2xl border border-white/10 rounded-xl p-2 w-32">
+                <button onClick={() => changeLanguage('en')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300 hover:text-amber-500 transition-colors">English</button>
+                <button onClick={() => changeLanguage('de')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300 hover:text-amber-500 transition-colors">German</button>
+                <button onClick={() => changeLanguage('ko')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300 hover:text-amber-500 transition-colors">Korean</button>
+                <button onClick={() => changeLanguage('ru')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300 hover:text-amber-500 transition-colors">Russian</button>
+              </div>
+            </div>
+          </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => { navigate('/contact'); setIsOpen(false); }}
-            className="ml-4 bg-amber-600/10 hover:bg-amber-500 text-amber-500 hover:text-black font-black border border-amber-500/40 px-6 py-2 rounded-full transition-all cursor-pointer flex items-center gap-2"
+            className="ml-2 bg-amber-600/10 hover:bg-amber-500 text-amber-500 hover:text-black font-black border border-amber-500/40 px-6 py-2 rounded-full transition-all cursor-pointer flex items-center gap-2"
           >
-            Summon <ChevronRight size={16} />
+            {t('hero.summon')} <ChevronRight size={16} />
           </motion.button>
         </div>
 
@@ -104,15 +127,21 @@ export const Navbar = () => {
             exit={{ opacity: 0, y: -20 }}
             className="absolute top-20 left-0 right-0 bg-black/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 flex flex-col gap-6 items-center md:hidden"
           >
-            <Link to="/" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">Home</Link>
-            <Link to="/about" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">About</Link>
-            <Link to="/projects" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">Projects</Link>
+            <Link to="/" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.home')}</Link>
+            <Link to="/about" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.about')}</Link>
+            <Link to="/projects" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.projects')}</Link>
             <button
               onClick={() => { navigate('/contact'); setIsOpen(false); }}
               className="w-full bg-amber-600 py-4 rounded-full text-xl font-bold"
             >
-              Contact
+              {t('nav.contact')}
             </button>
+            <div className="flex gap-4 mt-4">
+              <button onClick={() => changeLanguage('en')} className="px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300">EN</button>
+              <button onClick={() => changeLanguage('de')} className="px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300">DE</button>
+              <button onClick={() => changeLanguage('ko')} className="px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300">KO</button>
+              <button onClick={() => changeLanguage('ru')} className="px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300">RU</button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

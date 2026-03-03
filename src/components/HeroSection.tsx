@@ -4,9 +4,11 @@
 import { motion } from 'framer-motion';
 import { InteractiveButton } from './Common';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const HeroSection = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
@@ -45,7 +47,7 @@ export const HeroSection = () => {
           }}
           className="text-6xl sm:text-8xl font-black mb-6 bg-gradient-to-b from-amber-400 via-red-500 to-gold-500 bg-clip-text text-transparent filter brightness-110 tracking-tighter"
         >
-          Veridian Zenith
+          {t('hero.title')}
         </motion.h1>
 
         <motion.p
@@ -54,7 +56,7 @@ export const HeroSection = () => {
           transition={{ delay: 0.5, duration: 1 }}
           className="text-xl sm:text-2xl text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed drop-shadow-lg"
         >
-          Forging digital realms where mystical aesthetics meet cutting-edge performance.
+          {t('hero.subtitle')}
         </motion.p>
 
         <motion.p
@@ -63,7 +65,7 @@ export const HeroSection = () => {
           transition={{ delay: 0.8 }}
           className="text-gray-500 italic mb-10 text-sm sm:text-base"
         >
-          Step into the Nordic void.
+          {t('hero.void')}
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -72,10 +74,10 @@ export const HeroSection = () => {
           className="flex flex-col sm:flex-row gap-6 justify-center"
         >
           <InteractiveButton onClick={() => navigate('/projects')}>
-            Explore Artifacts
+            {t('hero.explore')}
           </InteractiveButton>
           <InteractiveButton variant="red" onClick={() => navigate('/contact')}>
-            <span className="text-white">Summon</span> <span className="text-red-500 font-extrabold ml-1 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8) transition-all">The Architect</span>
+            <span className="text-white">{t('hero.summon')}</span> <span className="text-red-500 font-extrabold ml-1 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8) transition-all">{t('hero.architect')}</span>
           </InteractiveButton>
         </motion.div>
       </div>
