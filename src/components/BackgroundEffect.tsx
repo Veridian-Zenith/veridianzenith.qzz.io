@@ -2,6 +2,7 @@
 //! Copyright (c) 2025 Dae Euhwa
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const RUNES = [
   "ᚦ", "ᚧ", "ᚨ", "ᚱ", "ᚷ", "ᚹ", "ᚺ", "ᚾ", "ᛁ", "ᛃ",
@@ -9,12 +10,19 @@ const RUNES = [
 ];
 
 export const BackgroundEffect = () => {
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll();
   const yRange = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const ySpring = useSpring(yRange, { stiffness: 50, damping: 20 });
 
   // Pre-generate positions for consistency
-  const massiveRunes = [...Array(6)].map((_, i) => ({
+  // Adjusted counts based on device
+  const massiveRunesCount = isMobile ? 4 : 15;
+  const tinyRunesCount = isMobile ? 15 : 60;
+  const gridRunesCount = isMobile ? 30 : 200;
+  const gridCols = isMobile ? 6 : 10;
+
+  const massiveRunes = [...Array(massiveRunesCount)].map((_, i) => ({
     left: `${(i * 17) % 100}%`,
     top: `${(i * 23) % 100}%`,
     size: `${10 + Math.random() * 15}rem`,
@@ -23,7 +31,7 @@ export const BackgroundEffect = () => {
     rune: RUNES[i % RUNES.length],
   }));
 
-  const tinyRunes = [...Array(15)].map(() => ({
+  const tinyRunes = [...Array(tinyRunesCount)].map(() => ({
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
     size: `${Math.random() * 0.8 + 0.5}rem`,
@@ -46,14 +54,14 @@ export const BackgroundEffect = () => {
         {massiveRunes.map((r, i) => (
           <motion.div
             key={`massive-${i}`}
-            className="absolute text-amber-500/40 font-serif select-none pointer-events-none transform-gpu"
+            className={`absolute text-amber-500/40 font-serif select-none pointer-events-none transform-gpu ${!isMobile ? "filter blur-[0.5px]" : ""}`}
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
               x: [0, r.direction * 50, 0],
               rotate: [0, 360, 0],
               opacity: [0.1, 0.2, 0.1]
             }}
-            transition={{ duration: r.speed, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: r.speed, repeat: Infinity, ease: isMobile ? "linear" : "easeInOut" }}
           >
             {r.rune}
           </motion.div>
@@ -61,14 +69,25 @@ export const BackgroundEffect = () => {
       </motion.div>
 
       {/* 3. Surface Layer: Microscopic Grid Runes */}
-      <div className="absolute inset-0 opacity-[0.1] pointer-events-none grid grid-cols-6 gap-24 p-10 rotate-12 scale-150">
-        {[...Array(40)].map((_, i) => (
-          <span
-            key={i}
-            className="text-2xl font-serif text-amber-500 block text-center opacity-20"
-          >
-            {RUNES[i % RUNES.length]}
-          </span>
+      <div className={`absolute inset-0 opacity-[0.1] pointer-events-none grid gap-${isMobile ? '24' : '16'} p-10 rotate-12 scale-150`} style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}>
+        {[...Array(gridRunesCount)].map((_, i) => (
+          isMobile ? (
+            <span
+              key={i}
+              className="text-2xl font-serif text-amber-500 block text-center opacity-20"
+            >
+              {RUNES[i % RUNES.length]}
+            </span>
+          ) : (
+            <motion.span
+              key={i}
+              className="text-2xl font-serif text-amber-500 block text-center"
+              animate={{ opacity: [0.2, 0.7, 0.2] }}
+              transition={{ duration: 4, delay: i * 0.02, repeat: Infinity, ease: "easeInOut" }}
+            >
+              {RUNES[i % RUNES.length]}
+            </motion.span>
+          )
         ))}
       </div>
 
@@ -77,7 +96,7 @@ export const BackgroundEffect = () => {
         {tinyRunes.map((r, i) => (
           <motion.div
             key={`tiny-${i}`}
-            className="absolute text-amber-400 select-none font-serif transform-gpu"
+            className={`absolute text-amber-400 select-none font-serif transform-gpu ${!isMobile ? "drop-shadow-[0_0_10px_rgba(255,179,71,0.6)]" : ""}`}
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
               y: [0, -50, 0],
@@ -86,7 +105,7 @@ export const BackgroundEffect = () => {
             transition={{
               duration: r.speed,
               repeat: Infinity,
-              ease: "linear",
+              ease: isMobile ? "linear" : "easeInOut",
               delay: Math.random() * 5
             }}
           >
