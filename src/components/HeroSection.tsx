@@ -1,114 +1,82 @@
-import React from 'react';
+//! License: Open Software License 3.0 (OSL-3.0)
+//! Copyright (c) 2025 Dae Euhwa
 
-interface HeroSectionProps {
-  className?: string;
-}
+import { motion } from 'framer-motion';
+import { InteractiveButton } from './Common';
+import { useNavigate } from 'react-router-dom';
 
-const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
-  const heroActions = [
-    {
-      text: 'View Projects',
-      url: '/projects',
-      className: 'btn btn-primary',
-      icon: true,
-    },
-    {
-      text: 'Learn More',
-      url: '/about',
-      className: 'btn btn-secondary',
-    },
-  ];
-
-  const heroStats = [
-    { value: '∞', label: 'Learning' },
-    { value: '∞', label: 'Building' },
-    { value: '∞', label: 'Sharing' },
-  ];
+export const HeroSection = () => {
+  const navigate = useNavigate();
 
   return (
-    <section className={`hero ${className}`}>
-      <div className="hero-container">
-        <div className="hero-content">
-          {/* Badge */}
-          <div className="hero-badge">
-            Independent Development
-          </div>
+    <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+      {/* Background Particles */}
+      <div className="absolute inset-0 z-0">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-amber-500 rounded-full"
+            initial={{
+              x: Math.random() * 100 + '%',
+              y: Math.random() * 100 + '%',
+              opacity: Math.random() * 0.5 + 0.2
+            }}
+            animate={{
+              y: [null, '-20%', '100%'],
+              opacity: [0, 1, 0]
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              ease: "linear",
+              delay: Math.random() * 10
+            }}
+          />
+        ))}
+      </div>
 
-          {/* Title */}
-          <h1 className="hero-title">
-            Veridian Zenith
-          </h1>
+      <div className="relative z-10 max-w-4xl">
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-6xl sm:text-8xl font-bold mb-6 bg-gradient-to-b from-amber-400 via-red-500 to-gold-500 bg-clip-text text-transparent drop-shadow-2xl"
+        >
+          Veridian Zenith
+        </motion.h1>
 
-          {/* Tagline */}
-          <p className="hero-tagline">
-            Independent Software Development
-          </p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="text-xl sm:text-2xl text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed"
+        >
+          Forging digital realms where mystical aesthetics meet cutting-edge performance.
+        </motion.p>
 
-          {/* Description */}
-          <p className="hero-description">
-            We create practical tools and innovative software to solve real-world problems. Our open-source projects focus on quality, usability, and making technology accessible to everyone.
-          </p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="text-gray-500 italic mb-10 text-sm sm:text-base"
+        >
+          Step into the Nordic void.
+        </motion.p>
 
-          {/* Hero Actions */}
-          <div className="hero-actions">
-            {heroActions.map((action, index) => (
-              <a
-                key={index}
-                href={action.url}
-                className={action.className}
-              >
-                {action.icon && (
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                )}
-                {action.text}
-              </a>
-            ))}
-          </div>
-
-          {/* Hero Stats */}
-          <div className="hero-stats" style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: 'var(--space-12)',
-            marginTop: 'var(--space-8)',
-            flexWrap: 'wrap'
-          }}>
-            {heroStats.map((stat, index) => (
-              <div key={index} style={{
-                textAlign: 'center',
-                padding: 'var(--space-4)',
-                minWidth: '120px'
-              }}>
-                <div style={{
-                  fontSize: '2.5rem',
-                  fontWeight: 'bold',
-                  color: 'var(--amber-500)',
-                  marginBottom: 'var(--space-2)',
-                  fontFamily: 'var(--font-mystical)'
-                }}>
-                  {stat.value}
-                </div>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--neutral-100)',
-                  fontWeight: '500'
-                }}>
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Hero Rune */}
-          <div className="hero-rune">
-            <span className="rune" style={{ fontSize: '2.5rem' }}>ᛝ</span>
-          </div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="flex flex-col sm:flex-row gap-6 justify-center"
+        >
+          <InteractiveButton onClick={() => navigate('/projects')}>
+            Explore Artifacts
+          </InteractiveButton>
+          <InteractiveButton variant="red" onClick={() => navigate('/contact')}>
+            Summon Us
+          </InteractiveButton>
+        </motion.div>
       </div>
     </section>
   );
 };
-
-export default HeroSection;

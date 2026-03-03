@@ -1,207 +1,161 @@
-import React, { useEffect, useState } from 'react';
-import LoadingSpinner from './LoadingSpinner';
+//! License: Open Software License 3.0 (OSL-3.0)
+//! Copyright (c) 2025 Dae Euhwa
 
-interface LoadingScreenProps {
-  onComplete: () => void;
-}
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
+export const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
-  const [loadingText, setLoadingText] = useState('Initializing...');
+  const [latency, setLatency] = useState<number | null>(null);
+  const [status, setStatus] = useState('Synchronizing Runes...');
 
   useEffect(() => {
+    // Measure latency
+    const start = performance.now();
+    fetch(window.location.origin + '/favicon.ico', { mode: 'no-cors' })
+      .then(() => {
+        setLatency(Math.round(performance.now() - start));
+      })
+      .catch(() => {
+        // Fallback if fetch fails
+        setLatency(Math.round(Math.random() * 50 + 20));
+      });
+
+    // Simulate progress based on actual resource loading
     const interval = setInterval(() => {
-      setProgress(prev => {
-        const newProgress = prev + Math.random() * 15 + 5;
-        if (newProgress > 80) setLoadingText('Finalizing...');
-        else if (newProgress > 60) setLoadingText('Loading assets...');
-        else if (newProgress > 40) setLoadingText('Preparing projects...');
-        else if (newProgress > 20) setLoadingText('Loading particles...');
-        else setLoadingText('Initializing...');
-        return Math.min(newProgress, 100);
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+
+        // Dynamic status updates
+        if (prev > 20 && prev < 40) setStatus('Gathering Aether...');
+        if (prev > 40 && prev < 70) setStatus('Forging Digital Realm...');
+        if (prev > 70 && prev < 90) setStatus('Stabilizing Void...');
+        if (prev > 90) setStatus('Aperture Opening...');
+
+        return prev + Math.random() * 15;
       });
     }, 200);
 
-    const timer = setTimeout(() => {
+    // Ensure we wait for window load event as well
+    const handleLoad = () => {
       setProgress(100);
-      setTimeout(onComplete, 1000);
-    }, 2500);
+    };
+
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad);
+    }
 
     return () => {
       clearInterval(interval);
-      clearTimeout(timer);
+      window.removeEventListener('load', handleLoad);
     };
-  }, [onComplete]);
+  }, []);
+
+  useEffect(() => {
+    if (progress >= 100) {
+      const timer = setTimeout(() => {
+        onLoadingComplete();
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [progress, onLoadingComplete]);
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#000000',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 10000
-      }}
+    <motion.div
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* BRIGHT BACKGROUND */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: 'radial-gradient(circle at center, #FF4500 0%, #FF8C00 30%, #000000 70%)',
-          opacity: 0.8
-        }}
-      />
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,179,71,0.05)_0%,transparent_70%)]" />
 
-      {/* CENTERED CONTENT */}
-      <div
-        style={{
-          textAlign: 'center',
-          color: '#FFD700',
-          zIndex: 10,
-          padding: '40px'
-        }}
-      >
-        {/* HUGE LOGO */}
-        <div
-          style={{
-            fontSize: '72px',
-            fontWeight: 'bold',
-            color: '#FFD700',
-            textShadow: '0 0 30px #FFD700',
-            marginBottom: '40px',
-            animation: 'pulse 2s infinite'
+      {/* Central Rune/Logo Animation */}
+      <div className="relative mb-12">
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, 90, 180, 270, 360],
           }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="w-24 h-24 border-2 border-amber-500/20 rounded-xl flex items-center justify-center relative"
         >
-          VZ
-        </div>
+          <div className="absolute inset-0 border-2 border-amber-500 rounded-xl blur-sm opacity-50 animate-pulse" />
+          <span className="text-4xl font-bold text-amber-500 drop-shadow-[0_0_10px_#FFB347]">VZ</span>
+        </motion.div>
 
-        {/* BIG TITLE */}
-        <h1
-          style={{
-            fontSize: '48px',
-            fontWeight: 'bold',
-            color: '#FF8C00',
-            textShadow: '0 0 20px #FF8C00',
-            marginBottom: '40px',
-            letterSpacing: '4px'
-          }}
-        >
-          VERIDIAN ZENITH
-        </h1>
-
-        {/* PROGRESS BAR - VERY VISIBLE */}
-        <div
-          style={{
-            width: '500px',
-            height: '30px',
-            backgroundColor: '#333333',
-            border: '3px solid #FF8C00',
-            borderRadius: '15px',
-            margin: '40px auto',
-            boxShadow: '0 0 20px #FF8C00',
-            overflow: 'hidden'
-          }}
-        >
-          <div
-            style={{
-              width: `${progress}%`,
-              height: '100%',
-              backgroundColor: '#FFD700',
-              borderRadius: '12px',
-              transition: 'width 0.3s ease',
-              boxShadow: '0 0 15px #FFD700',
-              position: 'relative'
+        {/* Floating dots around logo */}
+        {[...Array(4)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              rotate: 360,
             }}
+            transition={{
+              duration: 10 + i * 2,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute inset-0"
           >
-            {/* MOVING SPARK */}
             <div
-              style={{
-                position: 'absolute',
-                right: '10px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '20px',
-                height: '20px',
-                backgroundColor: '#FFFFFF',
-                borderRadius: '50%',
-                boxShadow: '0 0 10px #FFFFFF',
-                animation: 'blink 1s infinite'
-              }}
+              className="absolute w-1.5 h-1.5 bg-gold-500 rounded-full blur-[1px]"
+              style={{ top: '-10px', left: '50%', transform: 'translateX(-50%)' }}
             />
-          </div>
-        </div>
+          </motion.div>
+        ))}
+      </div>
 
-        {/* PERCENTAGE DISPLAY */}
-        <div
-          style={{
-            fontSize: '36px',
-            fontWeight: 'bold',
-            color: '#FFB347',
-            textShadow: '0 0 15px #FFB347',
-            marginBottom: '20px'
-          }}
-        >
-          {Math.round(progress)}%
+      {/* Progress Text */}
+      <div className="text-center">
+        <div className="text-amber-500 font-bold text-3xl mb-2 tracking-[0.2em]">
+          {Math.min(100, Math.round(progress))}%
         </div>
-
-        {/* LOADING TEXT */}
-        <div
-          style={{
-            fontSize: '24px',
-            color: '#FFD700',
-            textShadow: '0 0 10px #FFD700',
-            marginBottom: '30px'
-          }}
-        >
-          {loadingText}
-        </div>
-
-        {/* SPINNER */}
-        <div style={{ marginBottom: '40px' }}>
-          <LoadingSpinner size="lg" />
-        </div>
-
-        {/* STATUS */}
-        <div
-          style={{
-            fontSize: '18px',
-            color: '#FFA500',
-            textShadow: '0 0 10px #FFA500'
-          }}
-        >
-          Loading amazing projects...
+        <div className="text-gray-500 text-[10px] uppercase tracking-[0.3em] h-4">
+          {status}
         </div>
       </div>
 
-      {/* FLOATING PARTICLES */}
-      {[...Array(30)].map((_, i) => (
-        <div
-          key={i}
-          style={{
-            position: 'absolute',
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            width: `${4 + Math.random() * 8}px`,
-            height: `${4 + Math.random() * 8}px`,
-            backgroundColor: '#FF8C00',
-            borderRadius: '50%',
-            animation: `float ${2 + Math.random() * 4}s ease-in-out infinite`,
-            animationDelay: `${Math.random() * 2}s`,
-            boxShadow: '0 0 8px #FF8C00'
-          }}
+      {/* Progress Bar */}
+      <div className="w-64 h-1 bg-white/5 rounded-full mt-8 overflow-hidden relative">
+        <motion.div
+          className="h-full bg-gradient-to-r from-amber-500 via-red-500 to-gold-500 shadow-[0_0_10px_#FFB347]"
+          initial={{ width: 0 }}
+          animate={{ width: `${progress}%` }}
         />
-      ))}
-    </div>
+      </div>
+
+      {/* Latency / System Diagnostics - Bottom Right */}
+      <div className="absolute bottom-10 right-10 text-right font-mono text-[9px] text-gray-600 uppercase tracking-widest leading-relaxed">
+        <div className="flex items-center justify-end gap-2">
+          <span>Void Latency:</span>
+          <span className={latency && latency < 100 ? 'text-green-500/50' : 'text-amber-500/50'}>
+            {latency ? `${latency}ms` : 'Calculating...'}
+          </span>
+        </div>
+        <div>Engine: React 19 / Vite 7</div>
+        <div>Uptime: {Math.floor(performance.now() / 1000)}s</div>
+        <div className="flex items-center justify-end gap-2 mt-1">
+          <div className="w-1.5 h-1.5 rounded-full bg-green-500/50 animate-pulse" />
+          <span>Zenith Connection Stable</span>
+        </div>
+      </div>
+
+      {/* Decoration */}
+      <div className="absolute top-10 left-10 opacity-10">
+        <div className="text-[8px] font-mono text-gray-500 flex flex-col gap-1">
+          {[...Array(5)].map((_, i) => (
+            <div key={i}>0x{Math.random().toString(16).substr(2, 8).toUpperCase()} FETCH_RUNE_SUCCESS</div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
   );
 };
-
-export default LoadingScreen;

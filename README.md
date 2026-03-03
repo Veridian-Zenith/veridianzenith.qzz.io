@@ -1,30 +1,48 @@
-## ⚖️ Legal Disclaimer
+# Veridian Zenith — Official Portal
 
-**Veridian Zenith** is a digital label and project organization operated by **Jeremy Matlock**, also known as **Dae Euhwa**.
-All works published under this name are the intellectual property of Jeremy Matlock unless otherwise stated.
+A high-end, mystical Nordic-inspired digital realm showcasing the artifacts and technologies forged by Veridian Zenith. Built with React 19, TypeScript, Tailwind CSS v4, and Framer Motion.
 
----
+## 🌌 Core Vision
 
-## 🖥️ Website Access
+- **Mystical Nordic Aesthetic**: Dark-only color scheme with Amber, Red, and Gold glows.
+- **System-First Design**: Focused on performance, minimalism, and technical precision.
+- **Arcane Artifacts**: A curated showcase of core projects including AxiomOS, Voix, and Meshiji.
+- **Community Driven**: Integrated voting system to influence the focus of future development.
 
-Visit the main site here:
-🔗 [veridianzenith.qzz.io](https://veridianzenith.qzz.io/)
+## 🛠 Tech Stack
 
----
+- **Framework**: React 19 + Vite 7
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Animation**: Framer Motion
+- **Icons**: Lucide React
+- **Routing**: React Router v7
 
-## ⚠️ Troubleshooting & Contact
+## 🚀 Getting Started
 
-* If the website is unresponsive, it may be:
+```bash
+# Clone the repository
+git clone https://github.com/Veridian-Zenith/veridianzenith.qzz.io.git
+cd veridianzenith.qzz.io
 
-  * Temporarily offline due to maintenance.
-  * Experiencing server issues.
-  
-* For direct support, contact:
-  📧 **[Dae Euhwa](mailto:daedaevibin@veridianzenith.qzz.io)**
+# Install dependencies
+npm install
 
+# Start the forge (development server)
+npm run dev
 
-© 2025 Veridian Zenith
+# Etch the final runes (production build)
+npm run build
+```
 
-Code in this repository is licensed under the Open Software License v3.0 (OSL v3).  
-All visual designs, UI layouts, and assets are copyrighted by Veridian Zenith.  
-Use, modification, or redistribution of code or design assets is subject to compliance with these terms.
+## 📂 Project Structure
+
+- `src/components`: Reusable UI elements (AnimatedCard, Navbar, etc.)
+- `src/pages`: Main application views (Home, About, Projects, Contact)
+- `src/assets`: Static assets and brand imagery
+- `dist`: Production-ready artifacts
+
+## 📜 License
+
+This project is licensed under the OSL-3.0 (Open Software License 3.0). See the [LICENSE](LICENSE) file for details.
+
