@@ -18,7 +18,7 @@ const STATIC_PROJECTS = [
   {
     id: 'voix',
     name: "Voix",
-    description: "A secure privilege management tool (sudo/doas alternative) featuring PAM authentication, Lua-based configuration, and a focus on minimal attack surface.",
+    description: "A secure privilege management tool (sudo/doas alternative) featuring PAM authentication, and a focus on minimal attack surface.",
     html_url: "https://github.com/Veridian-Zenith/Voix",
     topics: ["system", "security", "c++", "linux"],
     language: "C++",
