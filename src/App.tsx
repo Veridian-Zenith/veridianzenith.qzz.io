@@ -50,14 +50,14 @@ function App() {
               <Route path="/brand" element={<BrandDisplayPage />} />
             </Routes>
 
-            <footer className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-auto px-6 py-2 bg-black/60 backdrop-blur-md border border-white/5 rounded-full text-[10px] uppercase tracking-[0.2em] text-gray-500 shadow-xl flex items-center gap-4">
-              <Link to="/brand" className="text-amber-500/80 hover:text-amber-500 transition-colors font-bold group">
+            <footer className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90vw] max-w-max px-4 sm:px-6 py-2 bg-black/60 backdrop-blur-md border border-white/5 rounded-full text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-gray-500 shadow-xl flex items-center justify-center gap-2 sm:gap-4 overflow-x-auto no-scrollbar">
+              <Link to="/brand" className="text-amber-500/80 hover:text-amber-500 transition-colors font-bold group whitespace-nowrap">
                 Sigil
               </Link>
-              <span className="w-[1px] h-3 bg-white/10"></span>
+              <span className="w-[1px] h-3 bg-white/10 shrink-0"></span>
               <button
                 onClick={triggerGlitch}
-                className="text-red-500 font-bold hover:scale-110 transition-transform cursor-pointer relative overflow-hidden px-2 group"
+                className="text-red-500 font-bold hover:scale-110 transition-transform cursor-pointer relative overflow-hidden px-2 group whitespace-nowrap"
               >
                 <span className="relative z-10">© {new Date().getFullYear()} Veridian Zenith</span>
                 <AnimatePresence>
@@ -76,12 +76,12 @@ function App() {
                 />
               </button>
               <span className="w-[1px] h-3 bg-white/10"></span>
-              <a href="https://opensource.org/licenses/OSL-3.0" target="_blank" rel="noopener noreferrer" className="text-amber-500/80 hover:text-amber-500 transition-colors font-bold">
+              <a href="https://opensource.org/licenses/OSL-3.0" target="_blank" rel="noopener noreferrer" className="text-amber-500/80 hover:text-amber-500 transition-colors font-bold whitespace-nowrap">
                 OSL-3.0
               </a>
-              <span className="w-[1px] h-3 bg-white/10"></span>
-              <a href="https://stuff.mit.edu/doc/counter-howto.html" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-80 transition-opacity">
-                <img src="https://stuff.mit.edu/cgi/counter/veridiandotzenithdotqzzdotio" alt="counter" className="h-6 invert opacity-70" style={{ imageRendering: 'pixelated' }} loading="lazy" decoding="async" />
+              <span className="w-[1px] h-3 bg-white/10 shrink-0"></span>
+              <a href="https://stuff.mit.edu/doc/counter-howto.html" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-80 transition-opacity shrink-0">
+                <img src="https://stuff.mit.edu/cgi/counter/veridiandotzenithdotqzzdotio" alt="counter" className="h-4 sm:h-6 invert opacity-70" style={{ imageRendering: 'pixelated' }} loading="lazy" decoding="async" />
               </a>
             </footer>
           </div>
