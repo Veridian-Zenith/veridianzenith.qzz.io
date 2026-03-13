@@ -45,7 +45,8 @@ export const BackgroundEffect = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #d72638 0%, #ffb347 50%, #ffd700 100%)"
+          background: "linear-gradient(135deg, rgba(215, 38, 56, 0.4) 0%, rgba(255, 179, 71, 0.4) 50%, rgba(255, 215, 0, 0.4) 100%)",
+          opacity: 0.3
         }}
       />
 
@@ -54,12 +55,12 @@ export const BackgroundEffect = () => {
         {massiveRunes.map((r, i) => (
           <motion.div
             key={`massive-${i}`}
-            className={`absolute text-amber-500/40 font-serif select-none pointer-events-none transform-gpu ${!isMobile ? "filter blur-[0.5px]" : ""}`}
+            className={`absolute text-amber-500/20 font-serif select-none pointer-events-none transform-gpu ${!isMobile ? "filter blur-[0.5px]" : ""}`}
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
-              x: [0, r.direction * 50, 0],
-              rotate: [0, 360, 0],
-              opacity: [0.1, 0.2, 0.1]
+              x: isMobile ? 0 : [0, r.direction * 50, 0],
+              rotate: isMobile ? 0 : [0, 360, 0],
+              opacity: isMobile ? 0.1 : [0.05, 0.15, 0.05]
             }}
             transition={{ duration: r.speed, repeat: Infinity, ease: isMobile ? "linear" : "easeInOut" }}
           >
@@ -69,7 +70,7 @@ export const BackgroundEffect = () => {
       </motion.div>
 
       {/* 3. Surface Layer: Microscopic Grid Runes */}
-      <div className={`absolute inset-0 opacity-[0.1] pointer-events-none grid gap-${isMobile ? '24' : '16'} p-10 rotate-12 scale-150`} style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}>
+      <div className={`absolute inset-0 opacity-[0.05] pointer-events-none grid gap-${isMobile ? '24' : '16'} p-10 rotate-12 scale-150`} style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}>
         {[...Array(gridRunesCount)].map((_, i) => (
           isMobile ? (
             <span
@@ -93,10 +94,10 @@ export const BackgroundEffect = () => {
 
       {/* 4. Top Layer: Tiny Floating Runes */}
       <div className="absolute inset-0">
-        {tinyRunes.map((r, i) => (
+        {!isMobile && tinyRunes.map((r, i) => (
           <motion.div
             key={`tiny-${i}`}
-            className={`absolute text-amber-400 select-none font-serif transform-gpu ${!isMobile ? "drop-shadow-[0_0_10px_rgba(255,179,71,0.6)]" : ""}`}
+            className="absolute text-amber-400/60 select-none font-serif transform-gpu drop-shadow-[0_0_10px_rgba(255,179,71,0.4)]"
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
               y: [0, -50, 0],
@@ -105,7 +106,7 @@ export const BackgroundEffect = () => {
             transition={{
               duration: r.speed,
               repeat: Infinity,
-              ease: isMobile ? "linear" : "easeInOut",
+              ease: "easeInOut",
               delay: Math.random() * 5
             }}
           >
@@ -115,7 +116,7 @@ export const BackgroundEffect = () => {
       </div>
 
       {/* 5. Depth Overlay: subtle dim only */}
-      <div className="absolute inset-0 bg-black/10" />
+      <div className="absolute inset-0 bg-black/60 pointer-events-none" />
     </div>
   );
 };

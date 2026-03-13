@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Stats - Veridian Zenith</title>
+  <style>
+    @font-face {
+      font-family: 'Rosemary';
+      src: url('/fonts/Rosemary.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --color-amber: #FFB347;
+      --color-red: #D72638;
+      --color-gold: #FFD700;
+      --bg-dark: #000000;
+      --bg-card: #0a0a0a;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Rosemary', system-ui, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin-top: 4rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--color-amber);
+      text-shadow: 0 0 15px rgba(255, 179, 71, 0.4);
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255, 179, 71, 0.2);
+      transition: box-shadow 0.3s ease;
+    }
+
+    table:hover {
+      box-shadow: 0 0 30px rgba(255, 179, 71, 0.3);
+    }
+
+    th,
+    td {
+      padding: 1.25rem 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.02);
+      color: var(--color-amber);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.85rem;
+    }
+
+    td {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr {
+      transition: all 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+      transform: scale(1.01);
+    }
+
+    td:first-child {
+      color: var(--text-main);
+      font-weight: bold;
+      letter-spacing: -0.025em;
+    }
+
+    .lang-tag {
+      background-color: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>The Forge Statistics</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>name </th>
+          <th>description </th>
+          <th>language </th>
+          <th style="text-align: right;"> stars</th>
+          <th style="text-align: right;"> forks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>veridianzenith.qzz.io </td>
+          <td>Website files </td>
+          <td>TypeScript</td>
+          <td style="text-align: right;"> 0</td>
+          <td style="text-align: right;"> 0</td>
+        </tr>
+        <tr>
+          <td>bluejay-A15QPR2-kernel</td>
+          <td>Kernel files + Google DTS for device porting and/or ROM creation.</td>
+          <td>C </td>
+          <td style="text-align: right;"> 0</td>
+          <td style="text-align: right;"> 0</td>
+        </tr>
+        <tr>
+          <td>Voix </td>
+          <td>Modern C++ Sudo/Doas alternative built primarily using clang </td>
+          <td>C++ </td>
+          <td style="text-align: right;"> 3</td>
+          <td style="text-align: right;"> 0</td>
+        </tr>
+        <tr>
+          <td>peguni_draem-la </td>
+          <td>A game made out of sheer boredom by Dae. </td>
+          <td>Lua </td>
+          <td style="text-align: right;"> 0</td>
+          <td style="text-align: right;"> 0</td>
+        </tr>
+        <tr>
+          <td>meshiji </td>
+          <td>file explorer. </td>
+          <td>Dart </td>
+          <td style="text-align: right;"> 1</td>
+          <td style="text-align: right;"> 0</td>
+        </tr>
+        <tr>
+          <td>AxiomOS </td>
+          <td>uhhh..... yes. </td>
+          <td>C++ </td>
+          <td style="text-align: right;"> 0</td>
+          <td style="text-align: right;"> 0</td>
+        </tr>
+        <tr>
+          <td>Misc </td>
+          <td> </td>
+          <td>Zig </td>
+          <td style="text-align: right;"> 0</td>
+          <td style="text-align: right;"> 0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const rows = document.querySelectorAll("tbody tr");
+      rows.forEach((row, index) => {
+        const langCell = row.cells[2];
+        if (langCell) {
+          const lang = langCell.innerText.trim();
+          let colorClass = 'border-color: rgba(156, 163, 175, 0.5); color: #9ca3af;';
+          if (lang === 'TypeScript') colorClass = 'border-color: rgba(255, 179, 71, 0.5); color: #FFB347; text-shadow: 0 0 10px rgba(255, 179, 71, 0.2);';
+          else if (lang === 'C') colorClass = 'border-color: rgba(168, 85, 247, 0.5); color: #a855f7; text-shadow: 0 0 10px rgba(168, 85, 247, 0.2);';
+          else if (lang === 'C++') colorClass = 'border-color: rgba(215, 38, 56, 0.5); color: #D72638; text-shadow: 0 0 10px rgba(215, 38, 56, 0.2);';
+          else if (lang === 'Lua') colorClass = 'border-color: rgba(255, 215, 0, 0.5); color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);';
+          else if (lang === 'Dart') colorClass = 'border-color: rgba(59, 130, 246, 0.5); color: #3b82f6; text-shadow: 0 0 10px rgba(59, 130, 246, 0.2);';
+          else if (lang === 'Zig') colorClass = 'border-color: rgba(255, 179, 71, 0.5); color: #FFB347; text-shadow: 0 0 10px rgba(255, 179, 71, 0.2);';
+
+          langCell.innerHTML = `<span class="lang-tag" style="${colorClass}">${lang}</span>`;
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

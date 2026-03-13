@@ -5,16 +5,18 @@ import { motion } from 'framer-motion';
 import { InteractiveButton } from './Common';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 export const HeroSection = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const isMobile = useIsMobile();
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
       {/* Background Particles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {[...Array(8)].map((_, i) => (
+        {!isMobile && [...Array(8)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-amber-500 rounded-full"

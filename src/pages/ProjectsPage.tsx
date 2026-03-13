@@ -6,6 +6,7 @@ import { AnimatedCard, cn } from '../components/Common';
 import { ExternalLink, Terminal, Shield, Cpu, PawPrint, Folder, Box, ThumbsUp, Package } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const STATIC_PROJECTS = [
   {
@@ -73,6 +74,7 @@ const topicColors: Record<string, string> = {
 
 export const ProjectsPage = () => {
   const { t } = useTranslation();
+  const isMobile = useIsMobile();
   const [votedId, setVotedId] = useState<string | null>(null);
   const [showVoteForm, setShowVoteForm] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '' });
@@ -132,7 +134,7 @@ export const ProjectsPage = () => {
                   <div className="flex items-center gap-3">
                     <motion.div
                       className="p-2 bg-white/5 rounded-lg text-amber-500 shadow-[inset_0_0_10px_rgba(255,179,71,0.1)]"
-                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      whileHover={isMobile ? {} : { rotate: 360, scale: 1.1 }}
                     >
                       <repo.icon size={24} />
                     </motion.div>
@@ -149,7 +151,7 @@ export const ProjectsPage = () => {
                   {repo.topics.map(topic => (
                     <motion.span
                       key={topic}
-                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileHover={isMobile ? {} : { scale: 1.1, y: -2 }}
                       className={cn(
                         "text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full border bg-black/40 font-bold transition-all",
                         topicColors[topic] || 'border-gray-500/50 text-gray-400'

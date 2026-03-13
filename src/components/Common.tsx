@@ -4,6 +4,7 @@
 import { motion, type HTMLMotionProps } from 'framer-motion';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -23,6 +24,7 @@ const glowColors = {
 };
 
 export const AnimatedCard = ({ children, className, glowColor = 'amber', delay = 0 }: AnimatedCardProps) => {
+  const isMobile = useIsMobile();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -34,7 +36,7 @@ export const AnimatedCard = ({ children, className, glowColor = 'amber', delay =
         type: "spring",
         stiffness: 100
       }}
-      whileHover={{
+      whileHover={isMobile ? {} : {
         y: -10,
         scale: 1.02,
         transition: { duration: 0.3 }
@@ -56,6 +58,7 @@ interface InteractiveButtonProps extends HTMLMotionProps<"button"> {
 }
 
 export const InteractiveButton = ({ children, variant = 'amber', className, ...props }: InteractiveButtonProps) => {
+  const isMobile = useIsMobile();
   const bgColors = {
     amber: 'bg-amber-700/80 hover:bg-amber-600 shadow-[0_0_15px_rgba(255,179,71,0.3)] hover:shadow-[0_0_25px_rgba(255,179,71,0.5)]',
     red: 'bg-red-700/80 hover:bg-red-600 shadow-[0_0_15px_rgba(215,38,56,0.3)] hover:shadow-[0_0_25px_rgba(215,38,56,0.5)]',
@@ -64,7 +67,7 @@ export const InteractiveButton = ({ children, variant = 'amber', className, ...p
 
   return (
     <motion.button
-      whileHover={{
+      whileHover={isMobile ? {} : {
         scale: 1.05,
         y: -2,
       }}
