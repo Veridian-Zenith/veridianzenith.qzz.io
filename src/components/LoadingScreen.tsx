@@ -20,7 +20,7 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
   useEffect(() => {
     const start = performance.now();
 
-    fetch(window.location.origin + "/favicon.ico", { mode: "no-cors" })
+    fetch(window.location.origin + "/assets/favicon.ico", { mode: "no-cors" })
       .then(() => setLatency(Math.round(performance.now() - start)))
       .catch(() => setLatency(Math.round(Math.random() * 50 + 20)));
   }, []);
@@ -132,6 +132,7 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
                 top: "-10px",
                 left: "50%",
                 transform: "translateX(-50%)",
+                transformOrigin: "center center"
               }}
             />
           </motion.div>
@@ -167,8 +168,8 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
             {diagMode === 0
               ? "Void Latency:"
               : diagMode === 1
-              ? "Aether Flux:"
-              : "Signal Noise:"}
+                ? "Aether Flux:"
+                : "Signal Noise:"}
           </span>
           <span
             className={
@@ -182,8 +183,8 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
                 ? `${latency}ms`
                 : "Calculating..."
               : diagMode === 1
-              ? `${Math.floor(Math.random() * 1000)} lux`
-              : `-${Math.floor(Math.random() * 90)} dBm`}
+                ? `${Math.floor(Math.random() * 1000)} lux`
+                : `-${Math.floor(Math.random() * 90)} dBm`}
           </span>
         </div>
 
@@ -192,20 +193,19 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
 
         <div className="flex items-center justify-end gap-2 mt-1">
           <div
-            className={`w-1.5 h-1.5 rounded-full animate-pulse ${
-              diagMode === 0
+            className={`w-1.5 h-1.5 rounded-full animate-pulse ${diagMode === 0
                 ? "bg-green-500/50"
                 : diagMode === 1
-                ? "bg-amber-500/50"
-                : "bg-red-500/50"
-            }`}
+                  ? "bg-amber-500/50"
+                  : "bg-red-500/50"
+              }`}
           />
           <span>
             {diagMode === 0
               ? "Zenith Connection Stable"
               : diagMode === 1
-              ? "Flux Integrity Nominal"
-              : "Void Interference Detected"}
+                ? "Flux Integrity Nominal"
+                : "Void Interference Detected"}
           </span>
         </div>
 
