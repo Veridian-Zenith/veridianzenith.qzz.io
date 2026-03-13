@@ -290,7 +290,9 @@ i18n
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false
-    }
+    },
+    // Hide locize promotion in console
+    showSupportNotice: false
   });
 
 export default i18n;
