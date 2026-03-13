@@ -26,31 +26,30 @@
 
     body {
       margin: 0;
-      padding: 2rem;
+      padding: 1rem;
       font-family: 'Rosemary', system-ui, sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-main);
       display: flex;
       justify-content: center;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .container {
       max-width: 1000px;
       width: 100%;
-      margin-top: 4rem;
+      margin-top: 2rem;
       animation: fadeIn 1s ease-out;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    @media (min-width: 640px) {
+      body {
+        padding: 2rem;
       }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .container {
+        margin-top: 4rem;
       }
     }
 
@@ -58,31 +57,72 @@
       text-align: center;
       color: var(--color-amber);
       text-shadow: 0 0 15px rgba(255, 179, 71, 0.4);
-      font-size: 3rem;
-      margin-bottom: 2rem;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 1rem;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 0 15px rgba(255, 179, 71, 0.2);
+      transition: box-shadow 0.3s ease;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (min-width: 640px) {
+      .table-wrapper {
+        border-radius: 1.5rem;
+      }
+    }
+
+    .table-wrapper:hover {
+      box-shadow: 0 0 30px rgba(255, 179, 71, 0.3);
     }
 
     table {
       width: 100%;
+      min-width: 600px;
       border-collapse: separate;
       border-spacing: 0;
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 1.5rem;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(255, 179, 71, 0.2);
-      transition: box-shadow 0.3s ease;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     table:hover {
-      box-shadow: 0 0 30px rgba(255, 179, 71, 0.3);
+      box-shadow: none;
     }
 
     th,
     td {
-      padding: 1.25rem 1.5rem;
+      padding: 1rem;
       text-align: left;
       border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    /* description column */
+    td:nth-child(2) {
+      white-space: normal;
+      min-width: 200px;
+    }
+
+    @media (min-width: 640px) {
+
+      th,
+      td {
+        padding: 1.25rem 1.5rem;
+      }
     }
 
     th {
@@ -135,68 +175,70 @@
 <body>
   <div class="container">
     <h1>The Forge Statistics</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>name </th>
-          <th>description </th>
-          <th>language </th>
-          <th style="text-align: right;"> stars</th>
-          <th style="text-align: right;"> forks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>veridianzenith.qzz.io </td>
-          <td>Website files </td>
-          <td>TypeScript</td>
-          <td style="text-align: right;"> 0</td>
-          <td style="text-align: right;"> 0</td>
-        </tr>
-        <tr>
-          <td>bluejay-A15QPR2-kernel</td>
-          <td>Kernel files + Google DTS for device porting and/or ROM creation.</td>
-          <td>C </td>
-          <td style="text-align: right;"> 0</td>
-          <td style="text-align: right;"> 0</td>
-        </tr>
-        <tr>
-          <td>Voix </td>
-          <td>Modern C++ Sudo/Doas alternative built primarily using clang </td>
-          <td>C++ </td>
-          <td style="text-align: right;"> 3</td>
-          <td style="text-align: right;"> 0</td>
-        </tr>
-        <tr>
-          <td>peguni_draem-la </td>
-          <td>A game made out of sheer boredom by Dae. </td>
-          <td>Lua </td>
-          <td style="text-align: right;"> 0</td>
-          <td style="text-align: right;"> 0</td>
-        </tr>
-        <tr>
-          <td>meshiji </td>
-          <td>file explorer. </td>
-          <td>Dart </td>
-          <td style="text-align: right;"> 1</td>
-          <td style="text-align: right;"> 0</td>
-        </tr>
-        <tr>
-          <td>AxiomOS </td>
-          <td>uhhh..... yes. </td>
-          <td>C++ </td>
-          <td style="text-align: right;"> 0</td>
-          <td style="text-align: right;"> 0</td>
-        </tr>
-        <tr>
-          <td>Misc </td>
-          <td> </td>
-          <td>Zig </td>
-          <td style="text-align: right;"> 0</td>
-          <td style="text-align: right;"> 0</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>name </th>
+            <th>description </th>
+            <th>language </th>
+            <th style="text-align: right;"> stars</th>
+            <th style="text-align: right;"> forks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>veridianzenith.qzz.io </td>
+            <td>Website files </td>
+            <td>TypeScript</td>
+            <td style="text-align: right;"> 0</td>
+            <td style="text-align: right;"> 0</td>
+          </tr>
+          <tr>
+            <td>bluejay-A15QPR2-kernel</td>
+            <td>Kernel files + Google DTS for device porting and/or ROM creation.</td>
+            <td>C </td>
+            <td style="text-align: right;"> 0</td>
+            <td style="text-align: right;"> 0</td>
+          </tr>
+          <tr>
+            <td>Voix </td>
+            <td>Modern C++ Sudo/Doas alternative built primarily using clang </td>
+            <td>C++ </td>
+            <td style="text-align: right;"> 3</td>
+            <td style="text-align: right;"> 0</td>
+          </tr>
+          <tr>
+            <td>peguni_draem-la </td>
+            <td>A game made out of sheer boredom by Dae. </td>
+            <td>Lua </td>
+            <td style="text-align: right;"> 0</td>
+            <td style="text-align: right;"> 0</td>
+          </tr>
+          <tr>
+            <td>meshiji </td>
+            <td>file explorer. </td>
+            <td>Dart </td>
+            <td style="text-align: right;"> 1</td>
+            <td style="text-align: right;"> 0</td>
+          </tr>
+          <tr>
+            <td>AxiomOS </td>
+            <td>uhhh..... yes. </td>
+            <td>C++ </td>
+            <td style="text-align: right;"> 0</td>
+            <td style="text-align: right;"> 0</td>
+          </tr>
+          <tr>
+            <td>Misc </td>
+            <td> </td>
+            <td>Zig </td>
+            <td style="text-align: right;"> 0</td>
+            <td style="text-align: right;"> 0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", () => {

@@ -79,6 +79,10 @@ function App() {
               <a href="https://opensource.org/licenses/OSL-3.0" target="_blank" rel="noopener noreferrer" className="text-amber-500/80 hover:text-amber-500 transition-colors font-bold">
                 OSL-3.0
               </a>
+              <span className="w-[1px] h-3 bg-white/10"></span>
+              <a href="https://stuff.mit.edu/doc/counter-howto.html" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-80 transition-opacity">
+                <img src="https://stuff.mit.edu/cgi/counter/veridiandotzenithdotqzzdotio" alt="counter" className="h-6 invert opacity-70" style={{ imageRendering: 'pixelated' }} loading="lazy" decoding="async" />
+              </a>
             </footer>
           </div>
         )}
