@@ -81,7 +81,9 @@ function App() {
               </a>
               <span className="w-[1px] h-3 bg-white/10 hidden sm:block shrink-0"></span>
               <a href="https://stuff.mit.edu/doc/counter-howto.html" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-80 transition-opacity shrink-0">
-                <img src="https://stuff.mit.edu/cgi/counter/veridiandotzenithdotqzzdotio" alt="counter" className="h-5 sm:h-6 invert opacity-70" style={{ imageRendering: 'pixelated' }} loading="lazy" decoding="async" />
+                <div className="relative mix-blend-screen overflow-hidden rounded opacity-70">
+                  <img src="https://stuff.mit.edu/cgi/counter/veridiandotzenithdotqzzdotio" alt="counter" className="h-5 sm:h-6 invert relative z-10 block" style={{ imageRendering: 'pixelated', filter: 'invert(1) contrast(200%) grayscale(100%)' }} loading="lazy" decoding="async" />
+                </div>
               </a>
             </footer>
           </div>
