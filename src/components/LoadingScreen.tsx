@@ -1,7 +1,8 @@
 //! License: Open Software License 3.0 (OSL-3.0)
 //! Copyright (c) 2026 Dae Euhwa
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
+
 import { motion } from "framer-motion";
 
 type Props = {
@@ -67,20 +68,32 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
     }
   }, [progress, onLoadingComplete]);
 
+  const [diagValues, setDiagValues] = useState({ lux: 0, dbm: 0, uptime: 0 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDiagValues({
+        lux: Math.floor(Math.random() * 1000),
+        dbm: Math.floor(Math.random() * 90),
+        uptime: Math.floor(performance.now() / 1000)
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   /* ---------------------------------- */
   /* Stable Decorative Data             */
   /* ---------------------------------- */
-  const diagnosticHex = useMemo(
-    () =>
-      Array.from({ length: 5 }).map(
-        () =>
-          `0x${Math.random()
-            .toString(16)
-            .substring(2, 10)
-            .toUpperCase()} FETCH_RUNE_SUCCESS`
-      ),
-    []
+  const [diagnosticHex] = useState<string[]>(() =>
+    Array.from({ length: 5 }).map(
+      () =>
+        `0x${Math.random()
+          .toString(16)
+          .substring(2, 10)
+          .toUpperCase()} FETCH_RUNE_SUCCESS`
+    )
   );
+
 
   const cycleDiagMode = () => {
     setDiagMode((prev) => (prev + 1) % 3);
@@ -183,13 +196,14 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
                 ? `${latency}ms`
                 : "Calculating..."
               : diagMode === 1
-                ? `${Math.floor(Math.random() * 1000)} lux`
-                : `-${Math.floor(Math.random() * 90)} dBm`}
+                ? `${diagValues.lux} lux`
+                : `-${diagValues.dbm} dBm`}
           </span>
         </div>
 
         <div>Engine: React / Vite</div>
-        <div>Uptime: {Math.floor(performance.now() / 1000)}s</div>
+        <div>Uptime: {diagValues.uptime}s</div>
+
 
         <div className="flex items-center justify-end gap-2 mt-1">
           <div

@@ -2,8 +2,10 @@
 //! Copyright (c) 2026 Dae Euhwa
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatedCard, cn } from '../components/Common';
-import { ExternalLink, Terminal, Shield, Cpu, PawPrint, Folder, Box, ThumbsUp, Package } from 'lucide-react';
+import { AnimatedCard } from '../components/Common';
+import { cn } from '../utils/cn';
+import { ExternalLink, Terminal, Shield, Cpu, PawPrint, Folder, Box, ThumbsUp } from 'lucide-react';
+
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '../hooks/useIsMobile';
@@ -12,7 +14,6 @@ const STATIC_PROJECTS = [
   {
     id: 'axiomos',
     name: "AxiomOS",
-
     description: "projects.axiomos.description",
     html_url: "https://github.com/Veridian-Zenith/AxiomOS",
     topics: ["system", "zig", "osdev", "kernel"],
@@ -22,10 +23,8 @@ const STATIC_PROJECTS = [
   {
     id: 'voix',
     name: "Voix",
-
     description: "projects.voix.description",
     html_url: "https://github.com/Veridian-Zenith/Voix",
-    aur_url: "https://aur.archlinux.org/packages/voix",
     topics: ["system", "security", "c++", "linux"],
     language: "C++",
     icon: Shield
@@ -33,10 +32,8 @@ const STATIC_PROJECTS = [
   {
     id: 'meshiji',
     name: "Meshiji",
-
     description: "projects.meshiji.description",
     html_url: "https://github.com/Veridian-Zenith/meshiji",
-    aur_url: "https://aur.archlinux.org/packages/meshiji",
     topics: ["app", "flutter", "dart", "ui", "linux"],
     language: "Dart",
     icon: Folder
@@ -44,10 +41,8 @@ const STATIC_PROJECTS = [
   {
     id: 'peguni',
     name: "Peguni Draem'la",
-
     description: "projects.peguni.description",
     html_url: "https://github.com/Veridian-Zenith/peguni_draem-la",
-    aur_url: "https://aur.archlinux.org/packages/peguni_draem-la-git",
     topics: ["game", "lua", "conlang"],
     language: "Lua",
     icon: PawPrint
@@ -55,7 +50,6 @@ const STATIC_PROJECTS = [
   {
     id: 'misc',
     name: "Misc",
-
     description: "projects.misc.description",
     html_url: "https://github.com/Veridian-Zenith/Misc",
     topics: ["collection", "zigsysmon", "benchmarks", "tools"],
@@ -103,11 +97,9 @@ export const ProjectsPage = () => {
       >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-amber-500/10 blur-[100px] pointer-events-none" />
         <h1 className="text-5xl sm:text-7xl font-bold text-amber-500 mb-6 drop-shadow-[0_0_15px_rgba(255,179,71,0.4)]">
-
           {t('projects.title')}
         </h1>
         <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-
           {t('projects.subtitle')}
         </p>
       </motion.div>
@@ -143,7 +135,6 @@ export const ProjectsPage = () => {
                 </div>
 
                 <p className="text-gray-400 mb-6 line-clamp-3 flex-grow text-sm leading-relaxed">
-
                   {t(repo.description)}
                 </p>
 
@@ -163,7 +154,7 @@ export const ProjectsPage = () => {
                 </div>
 
                 <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
-                  <div className='flex items-center gap-4'>
+                  <div className="flex items-center gap-4">
                     <a
                       href={repo.html_url}
                       target="_blank"
@@ -172,19 +163,8 @@ export const ProjectsPage = () => {
                       onMouseLeave={() => setHoveredRuneId(null)}
                       className="group flex items-center gap-2 text-amber-500 hover:text-red-500 transition-colors font-semibold text-sm"
                     >
-
                       {t('projects.inspect')} <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </a>
-                    {repo.aur_url && (
-                      <a
-                        href={repo.aur_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-2 text-cyan-500 hover:text-cyan-400 transition-colors font-semibold text-sm"
-                      >
-                        <Package size={14} /> <span>AUR</span>
-                      </a>
-                    )}
                   </div>
 
                   <button
@@ -192,7 +172,6 @@ export const ProjectsPage = () => {
                     className="flex items-center gap-2 text-gray-500 hover:text-gold-500 transition-all text-sm group"
                   >
                     <ThumbsUp size={16} className="group-hover:scale-125 transition-transform" />
-
                     <span>{t('projects.influence')}</span>
                   </button>
                 </div>
@@ -203,7 +182,6 @@ export const ProjectsPage = () => {
 
         <div className="border border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center p-8 text-center bg-white/5 opacity-40 min-h-[250px]">
           <Terminal size={32} className="text-gray-500 mb-4" />
-
           <p className="text-gray-400 italic">{t('projects.future')}</p>
         </div>
       </div>
@@ -218,14 +196,11 @@ export const ProjectsPage = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-black border border-amber-500/30 p-8 rounded-3xl max-w-md w-full shadow-[0_0_50px_rgba(255,179,71,0.2)]"
             >
-
-
               <h2 className="text-2xl font-bold text-amber-500 mb-2">{t('projects.vote.title')}</h2>
               <p className="text-gray-400 mb-6 text-sm">{t('projects.vote.subtitle')} {STATIC_PROJECTS.find(p => p.id === votedId)?.name}.</p>
 
               <form onSubmit={submitVote} className="space-y-4">
                 <div>
-
                   <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1 ml-1">{t('projects.vote.name')}</label>
                   <input
                     required
@@ -233,12 +208,10 @@ export const ProjectsPage = () => {
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors"
-
                     placeholder={t('projects.vote.name_placeholder')}
                   />
                 </div>
                 <div>
-
                   <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1 ml-1">{t('projects.vote.email')}</label>
                   <input
                     required
@@ -246,7 +219,6 @@ export const ProjectsPage = () => {
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors"
-
                     placeholder={t('projects.vote.email_placeholder')}
                   />
                 </div>
@@ -256,14 +228,12 @@ export const ProjectsPage = () => {
                     onClick={() => setShowVoteForm(false)}
                     className="flex-1 px-6 py-3 border border-white/10 rounded-xl text-gray-400 hover:bg-white/5 transition-colors"
                   >
-
                     {t('projects.vote.discard')}
                   </button>
                   <button
                     type="submit"
                     className="flex-1 px-6 py-3 bg-amber-600 hover:bg-amber-500 text-black font-bold rounded-xl shadow-[0_0_15px_rgba(255,179,71,0.3)] transition-all"
                   >
-
                     {t('projects.vote.cast')}
                   </button>
                 </div>
@@ -275,4 +245,3 @@ export const ProjectsPage = () => {
     </div>
   );
 };
-

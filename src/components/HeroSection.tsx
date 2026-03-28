@@ -6,38 +6,51 @@ import { InteractiveButton } from './Common';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '../hooks/useIsMobile';
+import { useState } from 'react';
+
 
 export const HeroSection = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const isMobile = useIsMobile();
 
+  const [particles] = useState(() => Array.from({ length: 8 }).map((_, i) => ({
+    id: i,
+    x: Math.random() * 100 + '%',
+    y: Math.random() * 100 + '%',
+    opacity: Math.random() * 0.5 + 0.2,
+    duration: Math.random() * 10 + 10,
+    delay: Math.random() * 10
+  })));
+
+
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
       {/* Background Particles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {!isMobile && [...Array(8)].map((_, i) => (
+        {!isMobile && particles.map((p) => (
           <motion.div
-            key={i}
+            key={p.id}
             className="absolute w-2 h-2 bg-amber-500 rounded-full"
             initial={{
-              x: Math.random() * 100 + '%',
-              y: Math.random() * 100 + '%',
-              opacity: Math.random() * 0.5 + 0.2
+              x: p.x,
+              y: p.y,
+              opacity: p.opacity
             }}
             animate={{
               y: [null, '-20%', '100%'],
               opacity: [0, 1, 0]
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: p.duration,
               repeat: Infinity,
               ease: "linear",
-              delay: Math.random() * 10
+              delay: p.delay
             }}
           />
         ))}
       </div>
+
 
       <div className="relative z-10 max-w-4xl">
         <motion.h1

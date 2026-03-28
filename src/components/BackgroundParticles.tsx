@@ -2,6 +2,7 @@
 //! Copyright (c) 2026 Dae Euhwa
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useState } from "react";
 
 const RUNES = [
   "ᚦ","ᚧ","ᚨ","ᚱ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ",
@@ -14,22 +15,25 @@ export const BackgroundEffect = () => {
   const ySpring = useSpring(yRange, { stiffness: 50, damping: 20 });
 
   // Pre-generate positions and speeds for runes to avoid jitter
-  const massiveRunes = [...Array(18)].map((_, i) => ({
+  const [massiveRunes] = useState(() => [...Array(18)].map((_, i) => ({
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
     size: `${10 + Math.random() * 15}rem`,
     speed: 30 + Math.random() * 20,
     direction: i % 2 === 0 ? 1 : -1,
     rune: RUNES[i % RUNES.length],
-  }));
+  })));
 
-  const tinyRunes = [...Array(50)].map((_, i) => ({
+  const [tinyRunes] = useState(() => [...Array(50)].map((_, i) => ({
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
     size: `${Math.random() * 0.8 + 0.5}rem`,
     speed: 6 + Math.random() * 6,
+    delay: Math.random() * 5,
     rune: RUNES[i % RUNES.length],
-  }));
+  })));
+
+
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
@@ -86,8 +90,9 @@ export const BackgroundEffect = () => {
               duration: r.speed,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: Math.random() * 5,
+              delay: r.delay,
             }}
+
           >
             {r.rune}
           </motion.div>

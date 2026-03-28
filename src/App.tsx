@@ -8,10 +8,13 @@ import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ContactPage } from './pages/ContactPage';
+import { AurPage } from './pages/AurPage';
 import { BrandDisplayPage } from './pages/BrandDisplayPage';
+
 import { LoadingScreen } from './components/LoadingScreen';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from './components/Common';
+import { cn } from './utils/cn';
+
 
 import { BackgroundEffect } from './components/BackgroundEffect';
 
@@ -46,15 +49,14 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/aur" element={<AurPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/brand" element={<BrandDisplayPage />} />
             </Routes>
 
+
             <footer className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92vw] sm:w-auto max-w-3xl px-5 sm:px-6 py-3 sm:py-2 bg-black/80 sm:bg-black/60 backdrop-blur-md border border-white/10 sm:border-white/5 rounded-2xl sm:rounded-full text-[11px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-gray-500 shadow-xl flex flex-wrap sm:flex-nowrap items-center justify-center gap-x-4 gap-y-3">
-              <Link to="/brand" className="text-amber-500/80 hover:text-amber-500 transition-colors font-bold group whitespace-nowrap">
-                Sigil
-              </Link>
-              <span className="w-[1px] h-3 bg-white/10 hidden sm:block shrink-0"></span>
+
               <button
                 onClick={triggerGlitch}
                 className="text-red-500 font-bold hover:scale-110 transition-transform cursor-pointer relative overflow-hidden px-2 group whitespace-nowrap"

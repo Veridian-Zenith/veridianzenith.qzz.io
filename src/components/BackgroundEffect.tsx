@@ -3,40 +3,56 @@
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useIsMobile } from "../hooks/useIsMobile";
+import { useState } from "react";
+
 
 const RUNES = [
   "ᚦ", "ᚧ", "ᚨ", "ᚱ", "ᚷ", "ᚹ", "ᚺ", "ᚾ", "ᛁ", "ᛃ",
   "ᛈ", "ᛇ", "ᛉ", "ᛊ", "ᛏ", "ᛒ", "ᛖ", "ᛗ", "ᛚ", "ᛝ", "ᛟ", "ᛞ"
 ];
 
+type Rune = {
+  left: string;
+  top: string;
+  size: string;
+  speed: number;
+  direction?: number;
+  rune: string;
+  delay?: number;
+};
+
+
 export const BackgroundEffect = () => {
+
   const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll();
   const yRange = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const ySpring = useSpring(yRange, { stiffness: 50, damping: 20 });
 
-  // Pre-generate positions for consistency
-  // Adjusted counts based on device
-  const massiveRunesCount = isMobile ? 4 : 15;
-  const tinyRunesCount = isMobile ? 15 : 60;
-  const gridRunesCount = isMobile ? 30 : 200;
-  const gridCols = isMobile ? 6 : 10;
-
-  const massiveRunes = [...Array(massiveRunesCount)].map((_, i) => ({
+  // Pre-generate positions for consistency using lazy useState to satisfy purity rules
+  const [massiveRunes] = useState(() => [...Array(15)].map((_, i) => ({
     left: `${(i * 17) % 100}%`,
     top: `${(i * 23) % 100}%`,
     size: `${10 + Math.random() * 15}rem`,
     speed: 35 + i * 5,
     direction: i % 2 === 0 ? 1 : -1,
     rune: RUNES[i % RUNES.length],
-  }));
+  })));
 
-  const tinyRunes = [...Array(tinyRunesCount)].map(() => ({
+  const [tinyRunes] = useState(() => [...Array(60)].map((_, i) => ({
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
     size: `${Math.random() * 0.8 + 0.5}rem`,
     speed: 6 + Math.random() * 6,
-  }));
+    delay: Math.random() * 5,
+    rune: RUNES[i % RUNES.length],
+  })));
+
+  const gridRunesCount = isMobile ? 30 : 200;
+  const gridCols = isMobile ? 6 : 10;
+
+
+
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-black">
@@ -52,16 +68,19 @@ export const BackgroundEffect = () => {
 
       {/* 2. Middle Layer: Massive Runes (parallax drift) */}
       <motion.div style={{ y: ySpring }} className="absolute inset-0">
-        {massiveRunes.map((r, i) => (
+        {massiveRunes.map((r: Rune, i: number) => (
+
+
           <motion.div
             key={`massive-${i}`}
             className={`absolute text-amber-500/20 font-serif select-none pointer-events-none transform-gpu ${!isMobile ? "filter blur-[0.5px]" : ""}`}
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
-              x: isMobile ? 0 : [0, r.direction * 50, 0],
+              x: isMobile ? 0 : [0, (r.direction ?? 1) * 50, 0],
               rotate: isMobile ? 0 : [0, 360, 0],
               opacity: isMobile ? 0.1 : [0.05, 0.15, 0.05]
             }}
+
             transition={{ duration: r.speed, repeat: Infinity, ease: isMobile ? "linear" : "easeInOut" }}
           >
             {r.rune}
@@ -94,7 +113,9 @@ export const BackgroundEffect = () => {
 
       {/* 4. Top Layer: Tiny Floating Runes */}
       <div className="absolute inset-0">
-        {!isMobile && tinyRunes.map((r, i) => (
+        {!isMobile && tinyRunes.map((r: Rune, i: number) => (
+
+
           <motion.div
             key={`tiny-${i}`}
             className="absolute text-amber-400/60 select-none font-serif transform-gpu drop-shadow-[0_0_10px_rgba(255,179,71,0.4)]"
@@ -106,13 +127,14 @@ export const BackgroundEffect = () => {
             transition={{
               duration: r.speed,
               repeat: Infinity,
-              ease: "easeInOut",
-              delay: Math.random() * 5
+              ease: isMobile ? "linear" : "easeInOut",
+              delay: r.delay
             }}
           >
-            {RUNES[i % RUNES.length]}
+            {r.rune}
           </motion.div>
         ))}
+
       </div>
 
       {/* 5. Depth Overlay: subtle dim only */}

@@ -2,13 +2,10 @@
 //! Copyright (c) 2026 Dae Euhwa
 
 import { motion, type HTMLMotionProps } from 'framer-motion';
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../utils/cn';
 import { useIsMobile } from '../hooks/useIsMobile';
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+
 
 interface AnimatedCardProps {
   children: React.ReactNode;

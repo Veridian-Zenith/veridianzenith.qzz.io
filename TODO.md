@@ -27,8 +27,12 @@
 - [x] Fixed-screen landing experience (Zero scroll Home Page)
 - [x] Production-ready build system (TSC checked)
 
-## ⏳ Polish & Future Runes
+## ✅ Polish & Future Runes
+- [x] Project Migration to Bun (Package Manager & Build)
+- [x] React 19 Purity & Effect Stability (Lint Resolved)
+- [ ] AUR Repository Showcase (Implementation In Progress)
 - [ ] Rosemary Font Integration (Full font-face support)
 - [ ] Accessibility Audit (ARIA labels for voting modal)
 - [ ] SEO & Structured Data for project pages
 - [ ] Horizontal Swipe for project cards on mobile
+

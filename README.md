@@ -26,14 +26,15 @@ git clone https://github.com/Veridian-Zenith/veridianzenith.qzz.io.git
 cd veridianzenith.qzz.io
 
 # Install dependencies
-npm install
+bun install
 
 # Start the forge (development server)
-npm run dev
+bun run dev
 
 # Etch the final runes (production build)
-npm run build
+bun run build
 ```
+
 
 ## 📂 Project Structure
 

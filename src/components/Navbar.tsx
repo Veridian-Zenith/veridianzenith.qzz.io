@@ -19,22 +19,25 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    let timer: number;
+    let timeout: ReturnType<typeof setTimeout>;
+
     if (logoHoverTime > 0) {
-      timer = window.setInterval(() => {
-        setLogoHoverTime(prev => {
-          if (prev >= 3000) {
-            setIsLogoPulsing(true);
-            return 3000;
-          }
-          return prev + 100;
-        });
-      }, 100);
+      timeout = setTimeout(() => {
+        setIsLogoPulsing(true);
+      }, 3000);
     } else {
-      setIsLogoPulsing(false);
+      // Use setTimeout to avoid synchronous trigger inside effect
+      setTimeout(() => {
+        setIsLogoPulsing((prev) => (prev ? false : prev));
+      }, 0);
     }
-    return () => clearInterval(timer);
+
+
+
+
+    return () => clearTimeout(timeout);
   }, [logoHoverTime]);
+
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl">
@@ -73,13 +76,14 @@ export const Navbar = () => {
           </span>
         </Link>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
           {[
             { name: t('nav.home'), path: '/' },
             { name: t('nav.about'), path: '/about' },
             { name: t('nav.projects'), path: '/projects' },
           ].map((item) => (
+
+
             <Link
               key={item.path}
               to={item.path}
@@ -130,7 +134,9 @@ export const Navbar = () => {
             <Link to="/" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.home')}</Link>
             <Link to="/about" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.about')}</Link>
             <Link to="/projects" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.projects')}</Link>
+
             <button
+
               onClick={() => { navigate('/contact'); setIsOpen(false); }}
               className="w-full bg-amber-600 py-4 rounded-full text-xl font-bold"
             >
