@@ -2,7 +2,9 @@
 //! Copyright (c) 2026 Dae Euhwa
 
 import { motion } from 'framer-motion';
-import { AnimatedCard, cn } from './Common';
+import { AnimatedCard } from './Common';
+import { cn } from '../utils/cn';
+
 import { ExternalLink, Terminal, Shield, Cpu, PawPrint, Folder, Box } from 'lucide-react';
 
 const STATIC_PROJECTS = [
