@@ -35,7 +35,6 @@ bun run dev
 bun run build
 ```
 
-
 ## 📂 Project Structure
 
 - `src/components`: Reusable UI elements (AnimatedCard, Navbar, etc.)
@@ -46,4 +45,3 @@ bun run build
 ## 📜 License
 
 This project is licensed under the OSL-3.0 (Open Software License 3.0). See the [LICENSE](LICENSE) file for details.
-
