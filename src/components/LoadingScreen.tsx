@@ -104,10 +104,10 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
   return (
     <motion.div
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[200] bg-primary-themeable flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,179,71,0.03)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--vz-glow-color)_0%,transparent_70%)] opacity-20" />
 
       {/* Logo Animation */}
       <div className="relative mb-12">
@@ -123,7 +123,7 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
           <img
             src="/assets/brand-image.png"
             alt="Loading Logo"
-            className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(255,179,71,0.4)]"
+            className="w-full h-full object-contain drop-shadow-[0_0_20px_var(--vz-glow-color)]"
           />
         </motion.div>
 
@@ -140,7 +140,7 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
             className="absolute inset-0"
           >
             <div
-              className="absolute w-1.5 h-1.5 bg-yellow-500 rounded-full blur-[1px]"
+              className="absolute w-1.5 h-1.5 bg-primary-themeable rounded-full blur-[1px]"
               style={{
                 top: "-10px",
                 left: "50%",
@@ -154,18 +154,18 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
 
       {/* Progress Text */}
       <div className="text-center">
-        <div className="text-amber-500 font-bold text-3xl mb-2 tracking-[0.2em]">
+        <div className="text-primary-themeable font-bold text-3xl mb-2 tracking-[0.2em]">
           {roundedProgress}%
         </div>
-        <div className="text-gray-500 text-[10px] uppercase tracking-[0.3em] h-4">
+        <div className="text-secondary-themeable/60 text-[10px] uppercase tracking-[0.3em] h-4">
           {status}
         </div>
       </div>
 
       {/* Progress Bar */}
-      <div className="w-64 h-1 bg-white/5 rounded-full mt-8 overflow-hidden">
+      <div className="w-64 h-1 bg-secondary-themeable rounded-full mt-8 overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-amber-500 via-red-500 to-yellow-500 shadow-[0_0_10px_#FFB347]"
+          className="h-full bg-gradient-to-r from-primary-themeable via-themeable to-primary-themeable shadow-primary-themeable"
           initial={{ width: 0 }}
           animate={{ width: `${roundedProgress}%` }}
         />
@@ -174,7 +174,7 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
       {/* Diagnostics Panel */}
       <div
         onClick={cycleDiagMode}
-        className="absolute bottom-10 right-10 text-right font-mono text-[9px] text-gray-600 uppercase tracking-widest leading-relaxed cursor-pointer hover:text-amber-500/50 transition-colors select-none group"
+        className="absolute bottom-10 right-10 text-right font-mono text-[9px] text-secondary-themeable/40 uppercase tracking-widest leading-relaxed cursor-pointer hover:text-primary-themeable/50 transition-colors select-none group"
       >
         <div className="flex items-center justify-end gap-2">
           <span>
@@ -188,7 +188,7 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
             className={
               latency && latency < 100
                 ? "text-green-500/50"
-                : "text-amber-500/50"
+                : "text-primary-themeable/50"
             }
           >
             {diagMode === 0
@@ -210,7 +210,7 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
             className={`w-1.5 h-1.5 rounded-full animate-pulse ${diagMode === 0
                 ? "bg-green-500/50"
                 : diagMode === 1
-                  ? "bg-amber-500/50"
+                  ? "bg-primary-themeable/50"
                   : "bg-red-500/50"
               }`}
           />
@@ -223,14 +223,14 @@ export const LoadingScreen = ({ onLoadingComplete }: Props) => {
           </span>
         </div>
 
-        <div className="opacity-0 group-hover:opacity-100 transition-opacity text-[7px] text-amber-500/30 mt-1">
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity text-[7px] text-primary-themeable/30 mt-1">
           Click to toggle diagnostics
         </div>
       </div>
 
       {/* Decorative Debug Feed */}
       <div className="absolute top-10 left-10 opacity-10">
-        <div className="text-[8px] font-mono text-gray-500 flex flex-col gap-1">
+        <div className="text-[8px] font-mono text-secondary-themeable/40 flex flex-col gap-1">
           {diagnosticHex.map((line, i) => (
             <div key={i}>{line}</div>
           ))}

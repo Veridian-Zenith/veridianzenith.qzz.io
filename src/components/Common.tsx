@@ -14,13 +14,7 @@ interface AnimatedCardProps {
   delay?: number;
 }
 
-const glowColors = {
-  amber: 'shadow-[0_0_15px_#FFB347] hover:shadow-[0_0_30px_#FFB347]',
-  red: 'shadow-[0_0_15px_#D72638] hover:shadow-[0_0_30px_#D72638]',
-  gold: 'shadow-[0_0_15px_#FFD700] hover:shadow-[0_0_30px_#FFD700]',
-};
-
-export const AnimatedCard = ({ children, className, glowColor = 'amber', delay = 0 }: AnimatedCardProps) => {
+export const AnimatedCard = ({ children, className, delay = 0 }: AnimatedCardProps) => {
   const isMobile = useIsMobile();
   return (
     <motion.div
@@ -39,8 +33,8 @@ export const AnimatedCard = ({ children, className, glowColor = 'amber', delay =
         transition: { duration: 0.3 }
       }}
       className={cn(
-        "bg-[#0a0a0a] rounded-3xl border border-white/5 p-8 transition-all duration-300",
-        glowColors[glowColor],
+        "bg-[var(--vz-card-bg)] rounded-3xl border border-[var(--vz-card-border)] p-8 transition-all duration-300 backdrop-blur-sm",
+        "shadow-[0_0_15px_var(--vz-shadow-color)] hover:shadow-[0_0_35px_var(--vz-shadow-color)]",
         className
       )}
     >
@@ -57,9 +51,9 @@ interface InteractiveButtonProps extends HTMLMotionProps<"button"> {
 export const InteractiveButton = ({ children, variant = 'amber', className, ...props }: InteractiveButtonProps) => {
   const isMobile = useIsMobile();
   const bgColors = {
-    amber: 'bg-amber-700/80 hover:bg-amber-600 shadow-[0_0_15px_rgba(255,179,71,0.3)] hover:shadow-[0_0_25px_rgba(255,179,71,0.5)]',
-    red: 'bg-red-700/80 hover:bg-red-600 shadow-[0_0_15px_rgba(215,38,56,0.3)] hover:shadow-[0_0_25px_rgba(215,38,56,0.5)]',
-    gold: 'bg-gold-600/80 hover:bg-gold-500 shadow-[0_0_15px_rgba(255,215,0,0.3)] hover:shadow-[0_0_25px_rgba(255,215,0,0.5)]',
+    amber: 'bg-primary-themeable/80 hover:bg-primary-themeable shadow-primary-themeable',
+    red: 'bg-primary-themeable/80 hover:bg-primary-themeable shadow-primary-themeable',
+    gold: 'bg-primary-themeable/80 hover:bg-primary-themeable shadow-primary-themeable',
   };
 
   return (
@@ -70,13 +64,13 @@ export const InteractiveButton = ({ children, variant = 'amber', className, ...p
       }}
       whileTap={{ scale: 0.95 }}
       className={cn(
-        "relative overflow-hidden rounded-2xl px-8 py-4 font-bold text-white transition-all duration-300 cursor-pointer group",
+        "relative overflow-hidden rounded-2xl px-8 py-4 font-bold text-white transition-all duration-300 cursor-pointer group border border-muted-themeable hover:border-primary-themeable",
         bgColors[variant],
         className
       )}
       {...props}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-themeable/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
       <span className="relative z-10">{children}</span>
     </motion.button>
   );

@@ -53,12 +53,25 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --vz-background-color: #000000;
-  --vz-background-color-transparent: rgba(0, 0, 0, 0.8);
-  --vz-border-color: rgba(255, 255, 255, 0.1);
+  /* Default (Veridian/Amber) Theme Variables */
+  --vz-bg-primary: #050200;
+  --vz-bg-secondary: #0f0a05;
+  --vz-accent-vibrant: #FFB347;
+  --vz-accent-muted: rgba(255, 179, 71, 0.4);
+  --vz-glow-color: rgba(255, 179, 71, 0.6);
+  --vz-gradient-1: #FFB347;
+  --vz-gradient-2: #D72638;
+  --vz-gradient-3: #FFB347;
+
+  /* Legacy/Compatibility Variables - can be phased out */
+  --vz-background-color: var(--vz-bg-primary);
+  --vz-background-color-transparent: rgba(5, 2, 0, 0.85);
+  --vz-border-color: rgba(255, 179, 71, 0.2);
   --vz-text-color-secondary: #d1d5db;
-  --vz-shadow-color: rgba(255, 179, 71, 0.5);
+  --vz-shadow-color: var(--vz-glow-color);
   --vz-gradient-via-color: #D72638;
+  --vz-card-bg: var(--vz-bg-secondary);
+  --vz-card-border: var(--vz-border-color);
 }
 
 body {
@@ -66,11 +79,11 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
-  background-color: #000000 !important;
+  background-color: var(--vz-bg-primary) !important;
 }
 
 #root {
-  background-color: #000000 !important;
+  background-color: var(--vz-bg-primary) !important;
   min-height: 100vh;
 }
 
@@ -80,11 +93,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: var(--vz-bg-primary);
 }
 
-.scanline {
-  display: none;
+::-webkit-scrollbar-thumb {
+  background: var(--vz-accent-vibrant);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vz-gradient-2);
 }
 
 .no-scrollbar {
@@ -105,129 +123,137 @@ body {
   display: none;
 }
 
-@keyframes scanline {
-  0% { top: -2%; }
-  100% { top: 100%; }
-}
-
-/* Base Atmosphere Utilities */
-.text-amber { color: #FFB347; }
-.text-amber\/50 { color: rgba(255, 179, 71, 0.5); }
-.text-amber\/80 { color: rgba(255, 179, 71, 0.8); }
-.bg-amber { background-color: #FFB347; }
-.bg-amber\/10 { background-color: rgba(255, 179, 71, 0.1); }
-.bg-amber\/20 { background-color: rgba(255, 179, 71, 0.2); }
-.border-amber { border-color: #FFB347; }
-.border-amber\/20 { border-color: rgba(255, 179, 71, 0.2); }
-.border-amber\/30 { border-color: rgba(255, 179, 71, 0.3); }
-.border-amber\/50 { border-color: rgba(255, 179, 71, 0.5); }
-
-/* Scrollbar uses theme-specific colors */
-::-webkit-scrollbar-thumb {
-  background: #FFB347;
-  border-radius: 4px;
-  transition: background 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #D72638;
-  transition: background 0.3s ease;
-}
-
 /* Atmosphere Overrides */
 
-/* Gradient Text Support across all atmospheres */
-html[class*="atmosphere-"] .text-transparent {
-  background-clip: text !important;
-  -webkit-background-clip: text !important;
-  background-color: transparent !important;
-}
-
-/* Midnight Void Atmosphere */
-html.atmosphere-midnight-void ::-webkit-scrollbar-thumb { background: #6366f1 !important; }
-html.atmosphere-midnight-void ::-webkit-scrollbar-thumb:hover { background: #a855f7 !important; }
+/* Midnight Void Atmosphere (Purple/Indigo) */
 html.atmosphere-midnight-void {
-  --tw-text-opacity: 1;
-  --tw-bg-opacity: 1;
-  --tw-border-opacity: 1;
+  --vz-bg-primary: #020008;
+  --vz-bg-secondary: #08061a;
+  --vz-accent-vibrant: #818cf8;
+  --vz-accent-muted: rgba(129, 140, 248, 0.4);
+  --vz-glow-color: rgba(139, 92, 246, 0.6);
+  --vz-gradient-1: #6366f1;
+  --vz-gradient-2: #8b5cf6;
+  --vz-gradient-3: #6366f1;
+
+  --vz-background-color: var(--vz-bg-primary);
+  --vz-background-color-transparent: rgba(2, 0, 8, 0.85);
+  --vz-border-color: rgba(139, 92, 246, 0.2);
+  --vz-text-color-secondary: #a78bfa;
+  --vz-shadow-color: var(--vz-glow-color);
+  --vz-gradient-via-color: #8b5cf6;
+  --vz-card-bg: var(--vz-bg-secondary);
+  --vz-card-border: rgba(99, 102, 241, 0.4);
 }
-html.atmosphere-midnight-void .text-amber,
-html.atmosphere-midnight-void .text-amber-500,
-html.atmosphere-midnight-void .text-amber-400 { color: #6366f1 !important; }
-html.atmosphere-midnight-void .text-amber\/50 { color: rgba(99, 102, 241, 0.5) !important; }
-html.atmosphere-midnight-void .text-amber\/80 { color: rgba(99, 102, 241, 0.8) !important; }
-html.atmosphere-midnight-void .bg-amber,
-html.atmosphere-midnight-void .bg-amber-500 { background-color: #6366f1 !important; }
-html.atmosphere-midnight-void .bg-amber\/10 { background-color: rgba(99, 102, 241, 0.1) !important; }
-html.atmosphere-midnight-void .bg-amber\/20 { background-color: rgba(99, 102, 241, 0.2) !important; }
-html.atmosphere-midnight-void .border-amber,
-html.atmosphere-midnight-void .border-amber-500 { border-color: #6366f1 !important; }
-html.atmosphere-midnight-void .border-amber\/20 { border-color: rgba(99, 102, 241, 0.2) !important; }
-html.atmosphere-midnight-void .border-amber\/30 { border-color: rgba(99, 102, 241, 0.3) !important; }
-html.atmosphere-midnight-void .border-amber\/50 { border-color: rgba(99, 102, 241, 0.5) !important; }
-html.atmosphere-midnight-void .hover\:text-amber:hover { color: #6366f1 !important; }
-html.atmosphere-midnight-void .hover\:border-amber:hover { border-color: #6366f1 !important; }
-html.atmosphere-midnight-void .hover\:bg-amber:hover { background-color: rgba(99, 102, 241, 0.2) !important; }
-html.atmosphere-midnight-void .group:hover .group-hover\:text-amber { color: #6366f1 !important; }
-html.atmosphere-midnight-void .group:hover .group-hover\:border-amber { border-color: #6366f1 !important; }
-html.atmosphere-midnight-void .from-amber-400 { --tw-gradient-from: #6366f1 !important; }
-html.atmosphere-midnight-void .via-gold-500 { --tw-gradient-via: #8b5cf6 !important; }
-html.atmosphere-midnight-void .to-amber-400 { --tw-gradient-to: #6366f1 !important; }
 
-/* Blood Moon Atmosphere */
-html.atmosphere-blood-moon ::-webkit-scrollbar-thumb { background: #ef4444 !important; }
-html.atmosphere-blood-moon ::-webkit-scrollbar-thumb:hover { background: #dc2626 !important; }
-html.atmosphere-blood-moon .text-amber,
-html.atmosphere-blood-moon .text-amber-500,
-html.atmosphere-blood-moon .text-amber-400 { color: #ef4444 !important; }
-html.atmosphere-blood-moon .text-amber\/50 { color: rgba(239, 68, 68, 0.5) !important; }
-html.atmosphere-blood-moon .text-amber\/80 { color: rgba(239, 68, 68, 0.8) !important; }
-html.atmosphere-blood-moon .bg-amber,
-html.atmosphere-blood-moon .bg-amber-500 { background-color: #ef4444 !important; }
-html.atmosphere-blood-moon .bg-amber\/10 { background-color: rgba(239, 68, 68, 0.1) !important; }
-html.atmosphere-blood-moon .bg-amber\/20 { background-color: rgba(239, 68, 68, 0.2) !important; }
-html.atmosphere-blood-moon .border-amber,
-html.atmosphere-blood-moon .border-amber-500 { border-color: #ef4444 !important; }
-html.atmosphere-blood-moon .border-amber\/20 { border-color: rgba(239, 68, 68, 0.2) !important; }
-html.atmosphere-blood-moon .border-amber\/30 { border-color: rgba(239, 68, 68, 0.3) !important; }
-html.atmosphere-blood-moon .border-amber\/50 { border-color: rgba(239, 68, 68, 0.5) !important; }
-html.atmosphere-blood-moon .hover\:text-amber:hover { color: #ef4444 !important; }
-html.atmosphere-blood-moon .hover\:border-amber:hover { border-color: #ef4444 !important; }
-html.atmosphere-blood-moon .hover\:bg-amber:hover { background-color: rgba(239, 68, 68, 0.2) !important; }
-html.atmosphere-blood-moon .group:hover .group-hover\:text-amber { color: #ef4444 !important; }
-html.atmosphere-blood-moon .group:hover .group-hover\:border-amber { border-color: #ef4444 !important; }
-html.atmosphere-blood-moon .from-amber-400 { --tw-gradient-from: #ef4444 !important; }
-html.atmosphere-blood-moon .via-gold-500 { --tw-gradient-via: #dc2626 !important; }
-html.atmosphere-blood-moon .to-amber-400 { --tw-gradient-to: #ef4444 !important; }
+/* Blood Moon Atmosphere (Deep Red) */
+html.atmosphere-blood-moon {
+  --vz-bg-primary: #080000;
+  --vz-bg-secondary: #1a0505;
+  --vz-accent-vibrant: #ef4444;
+  --vz-accent-muted: rgba(239, 68, 68, 0.4);
+  --vz-glow-color: rgba(220, 38, 38, 0.6);
+  --vz-gradient-1: #ef4444;
+  --vz-gradient-2: #dc2626;
+  --vz-gradient-3: #ef4444;
 
+  --vz-background-color: var(--vz-bg-primary);
+  --vz-background-color-transparent: rgba(8, 0, 0, 0.85);
+  --vz-border-color: rgba(220, 38, 38, 0.2);
+  --vz-text-color-secondary: #f87171;
+  --vz-shadow-color: var(--vz-glow-color);
+  --vz-gradient-via-color: #dc2626;
+  --vz-card-bg: var(--vz-bg-secondary);
+  --vz-card-border: rgba(239, 68, 68, 0.4);
+}
+
+/* Golden Zenith Atmosphere (Gold/Brown) */
 html.atmosphere-golden-zenith {
-  --vz-background-color: #0c0a00;
-  --vz-background-color-transparent: rgba(12, 10, 0, 0.85);
+  --vz-bg-primary: #0a0800;
+  --vz-bg-secondary: #1a1505;
+  --vz-accent-vibrant: #FFD700;
+  --vz-accent-muted: rgba(255, 215, 0, 0.4);
+  --vz-glow-color: rgba(255, 215, 0, 0.6);
+  --vz-gradient-1: #FFD700;
+  --vz-gradient-2: #e6c895;
+  --vz-gradient-3: #FFD700;
+
+  --vz-background-color: var(--vz-bg-primary);
+  --vz-background-color-transparent: rgba(10, 8, 0, 0.85);
   --vz-border-color: rgba(255, 215, 0, 0.3);
   --vz-text-color-secondary: #e6c895;
-  --vz-shadow-color: rgba(255, 215, 0, 0.4);
+  --vz-shadow-color: var(--vz-glow-color);
   --vz-gradient-via-color: #FFD700;
+  --vz-card-bg: var(--vz-bg-secondary);
+  --vz-card-border: rgba(255, 215, 0, 0.4);
 }
 
-html.atmosphere-golden-zenith ::-webkit-scrollbar-thumb:hover {
-  background: #FFD700 !important;
+/* Global Theme Utilities */
+
+.bg-primary-themeable {
+  background-color: var(--vz-bg-primary);
+}
+
+.bg-secondary-themeable {
+  background-color: var(--vz-bg-secondary);
+}
+
+.text-primary-themeable {
+  color: var(--vz-accent-vibrant);
+}
+
+.text-secondary-themeable {
+  color: var(--vz-text-color-secondary);
+}
+
+.border-primary-themeable {
+  border-color: var(--vz-accent-vibrant);
+}
+
+.border-muted-themeable {
+  border-color: var(--vz-accent-muted);
+}
+
+.shadow-glow-themeable {
+  box-shadow: 0 0 20px var(--vz-glow-color);
+}
+
+.gradient-themeable {
+  background: linear-gradient(135deg, var(--vz-gradient-1), var(--vz-gradient-2), var(--vz-gradient-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .navbar-custom {
   background-color: var(--vz-background-color-transparent);
   border-bottom: 1px solid var(--vz-border-color);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
 }
+
 .logo-custom {
-  filter: drop-shadow(0 0 12px var(--vz-shadow-color));
+  filter: drop-shadow(0 0 12px var(--vz-glow-color));
 }
-.via-themeable {
-  --tw-gradient-via: var(--vz-gradient-via-color) !important;
-}
+
 .terminal-custom-shadow {
-   box-shadow: 0 0 60px var(--vz-shadow-color);
+   box-shadow: 0 0 60px var(--vz-glow-color);
    border: 1px solid var(--vz-border-color);
 }
-.text-secondary-themeable {
-   color: var(--vz-text-color-secondary);
+
+/* Map existing amber classes to theme colors for convenience */
+.text-amber { color: var(--vz-accent-vibrant) !important; }
+.bg-amber { background-color: var(--vz-accent-vibrant) !important; }
+.border-amber { border-color: var(--vz-accent-vibrant) !important; }
+
+/* Handle Tailwind's opacity classes by overriding them with CSS variables if possible,
+   or just mapping them to themed versions. */
+[class*="text-amber/"], [class*="bg-amber/"], [class*="border-amber/"] {
+  /* This is a bit tricky with pure CSS and Tailwind classes, but we can target specific ones used */
 }
+
+/* Explicitly override some common ones */
+.text-amber\/50 { color: var(--vz-accent-muted) !important; }
+.bg-white\/5 { background-color: var(--vz-bg-secondary) !important; }
+.bg-white\/10 { background-color: var(--vz-bg-secondary) !important; opacity: 0.8; }
+.border-white\/10 { border-color: var(--vz-accent-muted) !important; }
+

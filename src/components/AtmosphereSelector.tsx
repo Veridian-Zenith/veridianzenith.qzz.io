@@ -1,11 +1,15 @@
 import { useAtmosphere, atmospheres } from '../hooks/useAtmosphere';
+import { useIsMobile } from '../hooks/useIsMobile';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cloud } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function AtmosphereSelector() {
   const { atmosphere, switchAtmosphere } = useAtmosphere();
+  const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="relative">
@@ -14,11 +18,11 @@ export function AtmosphereSelector() {
           e.stopPropagation();
           setIsOpen(!isOpen);
         }}
-        className="flex items-center gap-2 px-3 py-1 rounded border border-amber/30 hover:border-amber hover:bg-amber/10 transition-all text-sm relative z-50"
-        title="Switch atmosphere"
+        className="flex items-center gap-2 px-4 py-2 sm:px-3 sm:py-1 rounded-full sm:rounded border border-primary-themeable/30 hover:border-primary-themeable hover:bg-primary-themeable/10 transition-all text-sm relative z-50 bg-secondary-themeable/20"
+        title={t('atmosphere.title')}
       >
-        <Cloud size={16} className="text-amber" />
-        <span className="hidden sm:inline text-amber">Atmosphere</span>
+        <Cloud size={16} className="text-primary-themeable" />
+        <span className="sm:inline text-primary-themeable font-bold sm:font-normal">{t('atmosphere.title')}</span>
       </button>
 
       <AnimatePresence>
@@ -29,11 +33,11 @@ export function AtmosphereSelector() {
               onClick={() => setIsOpen(false)}
             />
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: isMobile ? 10 : -10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: isMobile ? 10 : -10 }}
               transition={{ duration: 0.15 }}
-              className="absolute right-0 mt-2 w-56 bg-black/95 border border-amber/20 rounded shadow-lg z-50 pointer-events-auto"
+              className={`absolute right-1/2 translate-x-1/2 sm:translate-x-0 sm:right-0 ${isMobile ? 'bottom-full mb-2' : 'mt-2'} w-72 sm:w-64 bg-secondary-themeable border border-muted-themeable rounded-2xl sm:rounded shadow-2xl z-50 pointer-events-auto backdrop-blur-xl overflow-hidden`}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="p-2 space-y-1">
@@ -45,15 +49,26 @@ export function AtmosphereSelector() {
                       setIsOpen(false);
                     }}
                     className={`
-                      w-full text-left px-3 py-2 rounded text-sm transition-all
+                      w-full text-left px-3 py-2 rounded text-sm transition-all group
                       ${atmosphere === atm.id
-                        ? 'bg-amber/20 text-amber border border-amber/50'
-                        : 'text-gray-300 hover:bg-amber/10 hover:text-amber border border-transparent'
+                        ? 'bg-primary-themeable/20 text-primary-themeable border border-primary-themeable/50 shadow-glow-themeable'
+                        : 'text-secondary-themeable hover:bg-primary-themeable/10 hover:text-primary-themeable border border-transparent'
                       }
                     `}
                   >
-                    <div className="font-medium">{atm.name}</div>
-                    <div className="text-xs text-gray-500">{atm.description}</div>
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="w-3 h-3 rounded-full flex-shrink-0 transition-transform group-hover:scale-125"
+                        style={{
+                          backgroundColor: atm.color,
+                          boxShadow: `0 0 10px ${atm.color}`
+                        }}
+                      />
+                      <div>
+                        <div className="font-medium">{t(`atmosphere.${atm.id}.name`)}</div>
+                        <div className="text-[10px] uppercase tracking-wider opacity-60 mt-0.5">{t(`atmosphere.${atm.id}.description`)}</div>
+                      </div>
+                    </div>
                   </button>
                 ))}
               </div>

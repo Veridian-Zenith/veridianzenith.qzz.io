@@ -41,13 +41,13 @@ export const Navbar = () => {
 
 
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl">
+    <nav className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-[90%] max-w-5xl">
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
         whileHover={{ scale: 1.01 }}
-        className="navbar-custom backdrop-blur-2xl rounded-full px-6 py-2 flex items-center justify-between shadow-[0_10px_40px_rgba(0,0,0,0.5)] hover:border-amber-500/40 transition-all group"
+        className="navbar-custom backdrop-blur-2xl rounded-full px-4 sm:px-6 py-1.5 sm:py-2 flex items-center justify-between shadow-[0_10px_40px_rgba(0,0,0,0.5)] hover:border-[var(--vz-accent-vibrant)]/40 transition-all group"
       >
         <Link
           to="/"
@@ -59,20 +59,20 @@ export const Navbar = () => {
             <motion.img
               src="/assets/brand-image.png"
               alt="VZ Logo"
-              className="w-10 h-10 object-contain filter"
+              className="w-8 h-8 sm:w-10 sm:h-10 object-contain filter"
               whileHover={{
                 scale: 1.2,
                 rotate: 360,
-                filter: "brightness(1.3) drop-shadow(0 0 20px #FFB347)"
+                filter: "brightness(1.3) drop-shadow(0 0 20px var(--vz-shadow-color))"
               }}
               transition={{ type: "spring", stiffness: 200, damping: 12 }}
               animate={isLogoPulsing ? {
                 scale: [1, 1.3, 1],
-                filter: ["brightness(1)", "brightness(2) drop-shadow(0 0 15px #FFB347)", "brightness(1)"],
+                filter: ["brightness(1)", `brightness(2) drop-shadow(0 0 15px var(--vz-shadow-color))`, "brightness(1)"],
               } : {}}
             />
           </motion.div>
-          <span className="text-xl font-black bg-gradient-to-r from-amber-400 via-gold-500 to-amber-400 bg-clip-text text-amber-500 hidden lg:inline drop-shadow-[0_0_10px_rgba(255,179,71,0.3)] filter brightness-110 tracking-tight whitespace-nowrap">
+          <span className="text-xl font-black bg-gradient-to-r from-[var(--vz-accent-vibrant)] via-[var(--vz-gradient-2)] to-[var(--vz-accent-vibrant)] bg-clip-text text-transparent hidden lg:inline drop-shadow-[0_0_10px_var(--vz-shadow-color)] filter brightness-110 tracking-tight whitespace-nowrap">
             Veridian Zenith
           </span>
         </Link>
@@ -89,23 +89,23 @@ export const Navbar = () => {
             <Link
               key={item.path}
               to={item.path}
-              className="px-4 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-all relative group/link"
+              className="px-4 py-2 rounded-full text-sm font-bold text-secondary-themeable hover:text-primary-themeable hover:bg-primary-themeable/10 transition-all relative group/link"
             >
               {item.name}
-              <motion.div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-amber-500 group-hover/link:w-1/2 transition-all" />
+              <motion.div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-primary-themeable group-hover/link:w-1/2 transition-all" />
             </Link>
           ))}
           <AtmosphereSelector />
           <div className="relative group/lang">
-            <button className="p-2 rounded-full hover:bg-white/5 transition-colors">
-              <Languages size={20} className="text-gray-400 group-hover/lang:text-white" />
+            <button className="p-2 rounded-full hover:bg-primary-themeable/10 transition-colors">
+              <Languages size={20} className="text-secondary-themeable group-hover/lang:text-primary-themeable" />
             </button>
             <div className="absolute top-full right-0 pt-3 -mt-1 opacity-0 group-hover/lang:opacity-100 transition-opacity pointer-events-none group-hover/lang:pointer-events-auto">
-              <div className="bg-black/80 backdrop-blur-2xl border border-white/10 rounded-xl p-2 w-32">
-                <button onClick={() => changeLanguage('en')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300 hover:text-amber-500 transition-colors">English</button>
-                <button onClick={() => changeLanguage('de')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300 hover:text-amber-500 transition-colors">German</button>
-                <button onClick={() => changeLanguage('ko')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300 hover:text-amber-500 transition-colors">Korean</button>
-                <button onClick={() => changeLanguage('ru')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300 hover:text-amber-500 transition-colors">Russian</button>
+              <div className="bg-secondary-themeable backdrop-blur-2xl border border-muted-themeable rounded-xl p-2 w-32 shadow-2xl">
+                <button onClick={() => changeLanguage('en')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable transition-colors">English</button>
+                <button onClick={() => changeLanguage('de')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable transition-colors">German</button>
+                <button onClick={() => changeLanguage('ko')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable transition-colors">Korean</button>
+                <button onClick={() => changeLanguage('ru')} className="w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable transition-colors">Russian</button>
               </div>
             </div>
           </div>
@@ -113,14 +113,14 @@ export const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => { navigate('/contact'); setIsOpen(false); }}
-            className="ml-2 bg-amber-600/10 hover:bg-amber-500 text-amber-500 hover:text-black font-black border border-amber-500/40 px-6 py-2 rounded-full transition-all cursor-pointer flex items-center gap-2"
+            className="ml-2 bg-[var(--vz-accent-vibrant)]/10 hover:bg-[var(--vz-accent-vibrant)] text-[var(--vz-accent-vibrant)] hover:text-black font-black border border-[var(--vz-accent-vibrant)]/40 px-6 py-2 rounded-full transition-all cursor-pointer flex items-center gap-2 shadow-glow-themeable hover:shadow-glow-themeable"
           >
             {t('hero.summon')} <ChevronRight size={16} />
           </motion.button>
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden text-amber-500" onClick={() => setIsOpen(!isOpen)}>
+        <button className="md:hidden text-[var(--vz-accent-vibrant)]" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </motion.div>
@@ -129,27 +129,49 @@ export const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-20 left-0 right-0 bg-black/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 flex flex-col gap-6 items-center md:hidden"
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            className="absolute top-20 left-0 right-0 bg-[var(--vz-bg-secondary)]/95 backdrop-blur-2xl border border-[var(--vz-accent-vibrant)]/20 rounded-2xl p-6 flex flex-col gap-5 items-center md:hidden shadow-2xl mx-2 overflow-hidden"
           >
-            <Link to="/" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.home')}</Link>
-            <Link to="/about" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.about')}</Link>
-            <Link to="/projects" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.projects')}</Link>
-            <Link to="/aur" onClick={() => setIsOpen(false)} className="text-2xl text-gray-300 hover:text-amber-500">{t('nav.aur')}</Link>
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--vz-accent-vibrant)]/10 to-transparent pointer-events-none" />
+
+            {[
+              { name: t('nav.home'), path: '/' },
+              { name: t('nav.about'), path: '/about' },
+              { name: t('nav.projects'), path: '/projects' },
+              { name: t('nav.aur'), path: '/aur' },
+            ].map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setIsOpen(false)}
+                className="text-xl font-bold text-secondary-themeable hover:text-primary-themeable transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
+
+            <div className="w-full h-px bg-[var(--vz-accent-vibrant)]/10" />
+
+            <div className="flex flex-col items-center gap-3 w-full">
+              <span className="text-[10px] font-black uppercase tracking-widest text-[var(--vz-accent-vibrant)]/60">Atmosphere</span>
+              <AtmosphereSelector />
+            </div>
+
+            <div className="w-full h-px bg-[var(--vz-accent-vibrant)]/10" />
 
             <button
               onClick={() => { navigate('/contact'); setIsOpen(false); }}
-              className="w-full bg-amber-600 py-4 rounded-full text-xl font-bold"
+              className="w-full bg-[var(--vz-accent-vibrant)] py-3 rounded-full text-lg font-black text-black shadow-glow-themeable"
             >
               {t('nav.contact')}
             </button>
-            <div className="flex gap-4 mt-4">
-              <button onClick={() => changeLanguage('en')} className="px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300">EN</button>
-              <button onClick={() => changeLanguage('de')} className="px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300">DE</button>
-              <button onClick={() => changeLanguage('ko')} className="px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300">KO</button>
-              <button onClick={() => changeLanguage('ru')} className="px-3 py-1.5 text-sm rounded-md hover:bg-white/5 text-gray-300">RU</button>
+            <div className="flex gap-4 mt-2">
+              <button onClick={() => changeLanguage('en')} className="px-2 py-1 text-xs rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable font-bold">EN</button>
+              <button onClick={() => changeLanguage('de')} className="px-2 py-1 text-xs rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable font-bold">DE</button>
+              <button onClick={() => changeLanguage('ko')} className="px-2 py-1 text-xs rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable font-bold">KO</button>
+              <button onClick={() => changeLanguage('ru')} className="px-2 py-1 text-xs rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable font-bold">RU</button>
             </div>
           </motion.div>
         )}
@@ -157,3 +179,4 @@ export const Navbar = () => {
     </nav>
   );
 };
+

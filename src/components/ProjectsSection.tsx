@@ -71,7 +71,7 @@ export const ProjectsSection = () => {
       <motion.h2
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        className="text-4xl sm:text-6xl font-bold text-center mb-16 text-amber-500 drop-shadow-[0_0_10px_rgba(255,179,71,0.5)]"
+        className="text-4xl sm:text-6xl font-bold text-center mb-16 text-primary-themeable drop-shadow-[0_0_10px_var(--vz-shadow-color)]"
       >
         Arcane Artifacts
       </motion.h2>
@@ -83,18 +83,17 @@ export const ProjectsSection = () => {
           <div key={repo.id} className={cn(isMobile && "min-w-[85vw] snap-center")}>
             <AnimatedCard
               delay={index * 0.1}
-              glowColor={index % 3 === 0 ? 'amber' : index % 3 === 1 ? 'red' : 'gold'}
             >
             <div className="flex flex-col h-full">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-white/5 rounded-lg text-amber-500">
+                  <div className="p-2 bg-primary-themeable/10 rounded-lg text-primary-themeable border border-primary-themeable/20">
                     <repo.icon size={24} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-100">{repo.name}</h3>
+                  <h3 className="text-xl font-bold text-primary-themeable">{repo.name}</h3>
                 </div>
               </div>
-              <p className="text-gray-400 mb-6 line-clamp-3 flex-grow text-sm leading-relaxed">
+              <p className="text-secondary-themeable mb-6 line-clamp-3 flex-grow text-sm leading-relaxed">
                 {repo.description}
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
@@ -102,14 +101,14 @@ export const ProjectsSection = () => {
                   <span
                     key={topic}
                     className={cn(
-                      "text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-black/40 font-bold",
-                      topicColors[topic] || 'border-gray-500/50 text-gray-400'
+                      "text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-secondary-themeable/40 font-bold",
+                      topicColors[topic] || 'border-muted-themeable text-secondary-themeable'
                     )}
                   >
                     {topic}
                   </span>
                 ))}
-                <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-gold-500/50 text-gold-500 bg-black/40 font-bold">
+                <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-primary-themeable/50 text-primary-themeable bg-secondary-themeable/40 font-bold">
                   {repo.language}
                 </span>
               </div>
@@ -117,7 +116,7 @@ export const ProjectsSection = () => {
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 text-amber-500 hover:text-red-500 transition-colors mt-auto font-semibold text-sm"
+                className="group flex items-center gap-2 text-primary-themeable hover:brightness-125 transition-all mt-auto font-semibold text-sm"
               >
                 Inspect Rune
                 <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -129,19 +128,19 @@ export const ProjectsSection = () => {
 
         {/* Placeholder for future growth */}
         <div className={cn(
-          "border border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center p-8 text-center bg-white/5 opacity-50",
+          "border border-dashed border-muted-themeable rounded-2xl flex flex-col items-center justify-center p-8 text-center bg-secondary-themeable opacity-50",
           isMobile && "min-w-[85vw] snap-center"
         )}>
-          <Terminal size={32} className="text-gray-500 mb-4" />
-          <p className="text-gray-400 italic">More artifacts currently being forged in the void...</p>
+          <Terminal size={32} className="text-secondary-themeable/40 mb-4" />
+          <p className="text-secondary-themeable/60 italic">More artifacts currently being forged in the void...</p>
         </div>
       </div>
       {isMobile && (
         <div className="flex justify-center gap-2 mt-4">
           {STATIC_PROJECTS.map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/20" />
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-muted-themeable" />
           ))}
-          <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+          <div className="w-1.5 h-1.5 rounded-full bg-muted-themeable" />
         </div>
       )}
     </section>

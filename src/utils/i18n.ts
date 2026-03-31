@@ -64,6 +64,15 @@ const resources = {
       "contact.community.title": "Zenith Commons",
       "contact.community.description": "Step into the collective void. Join our community for real-time discourse and project updates.",
       "contact.community.join": "ENTER THE DISCORD",
+      "atmosphere.title": "Atmosphere",
+      "atmosphere.default.name": "Veridian Origin",
+      "atmosphere.default.description": "The amber root of the Zenith",
+      "atmosphere.midnight-void.name": "Obsidian Void",
+      "atmosphere.midnight-void.description": "Deep indigo and spectral violet",
+      "atmosphere.blood-moon.name": "Crimson Eclipse",
+      "atmosphere.blood-moon.description": "Fierce reds and lunar shadows",
+      "atmosphere.golden-zenith.name": "Golden Zenith",
+      "atmosphere.golden-zenith.description": "Pure gold and celestial amber",
     }
   },
   ru: {
@@ -126,6 +135,15 @@ const resources = {
       "contact.community.title": "Община Зенита",
       "contact.community.description": "Шагните в коллективную пустоту. Присоединяйтесь к нашему сообществу для обсуждений в реальном времени и получения обновлений по проектам.",
       "contact.community.join": "ВОЙТИ В DISCORD",
+      "atmosphere.title": "Атмосфера",
+      "atmosphere.default.name": "Veridian Origin",
+      "atmosphere.default.description": "Янтарный корень Зенита",
+      "atmosphere.midnight-void.name": "Obsidian Void",
+      "atmosphere.midnight-void.description": "Глубокий индиго и призрачный фиолетовый",
+      "atmosphere.blood-moon.name": "Crimson Eclipse",
+      "atmosphere.blood-moon.description": "Ярко-красный и лунные тени",
+      "atmosphere.golden-zenith.name": "Golden Zenith",
+      "atmosphere.golden-zenith.description": "Чистое золото и небесный янтарь",
     }
   },
   de: {
@@ -188,6 +206,15 @@ const resources = {
       "contact.community.title": "Zenith-Gemeinschaft",
       "contact.community.description": "Treten Sie in die kollektive Leere ein. Treten Sie unserer Gemeinschaft für Echtzeit-Diskussionen und Projekt-Updates bei.",
       "contact.community.join": "DISCORD BEITRETEN",
+      "atmosphere.title": "Atmosphäre",
+      "atmosphere.default.name": "Veridian Origin",
+      "atmosphere.default.description": "Die bernsteinrote Wurzel des Zenits",
+      "atmosphere.midnight-void.name": "Obsidian Void",
+      "atmosphere.midnight-void.description": "Tiefes Indigo und spektrales Violett",
+      "atmosphere.blood-moon.name": "Crimson Eclipse",
+      "atmosphere.blood-moon.description": "Feuriges Rot und Mondschatten",
+      "atmosphere.golden-zenith.name": "Golden Zenith",
+      "atmosphere.golden-zenith.description": "Reines Gold und himmlischer Bernstein",
     }
   },
   ko: {
@@ -250,6 +277,15 @@ const resources = {
       "contact.community.title": "제니스 커먼즈",
       "contact.community.description": "집단적 공허 속으로 들어가십시오. 실시간 담론 및 프로젝트 업데이트를 위해 커뮤니티에 가입하십시오.",
       "contact.community.join": "디스코드 입장",
+      "atmosphere.title": "분위기",
+      "atmosphere.default.name": "Veridian Origin",
+      "atmosphere.default.description": "제니스의 호박색 뿌리",
+      "atmosphere.midnight-void.name": "Obsidian Void",
+      "atmosphere.midnight-void.description": "깊은 인디고와 스펙트럼 보라색",
+      "atmosphere.blood-moon.name": "Crimson Eclipse",
+      "atmosphere.blood-moon.description": "강렬한 빨간색과 달의 그림자",
+      "atmosphere.golden-zenith.name": "Golden Zenith",
+      "atmosphere.golden-zenith.description": "순금과 천상의 호박색",
     }
   }
 };

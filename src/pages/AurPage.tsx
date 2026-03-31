@@ -40,10 +40,10 @@ export const AurPage = () => {
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-20"
       >
-        <h1 className="text-5xl sm:text-7xl font-black mb-6 bg-gradient-to-r from-amber-400 via-red-500 to-gold-500 bg-clip-text text-transparent filter brightness-110 tracking-tight">
+        <h1 className="text-5xl sm:text-7xl font-black mb-6 gradient-themeable filter brightness-110 tracking-tight">
           {t('aur.title')}
         </h1>
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl text-secondary-themeable max-w-2xl mx-auto leading-relaxed">
           {t('aur.subtitle')}
         </p>
       </motion.div>
@@ -53,12 +53,14 @@ export const AurPage = () => {
           <AnimatedCard key={pkg.id} delay={i * 0.1}>
             <div className="flex flex-col h-full">
               <div className="mb-6">
-                {pkg.icon}
+                <div className="p-3 bg-primary-themeable/10 rounded-2xl w-fit border border-muted-themeable text-primary-themeable">
+                  {pkg.icon}
+                </div>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-amber-500 transition-colors">
+              <h3 className="text-2xl font-bold mb-4 text-primary-themeable group-hover:brightness-125 transition-all">
                 {pkg.title}
               </h3>
-              <p className="text-gray-400 mb-6 leading-relaxed text-sm flex-grow">
+              <p className="text-secondary-themeable mb-6 leading-relaxed text-sm flex-grow">
                 {pkg.description}
               </p>
 
@@ -66,7 +68,7 @@ export const AurPage = () => {
                 href={pkg.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-amber-500 font-bold hover:text-amber-400 transition-colors group/link mt-auto"
+                className="flex items-center gap-2 text-primary-themeable font-bold hover:brightness-125 transition-all group/link mt-auto"
               >
                 {t('projects.inspect')} <ExternalLink size={16} className="group-hover/link:translate-x-1 transition-transform" />
               </a>
@@ -81,48 +83,48 @@ export const AurPage = () => {
         viewport={{ once: true }}
         className="max-w-3xl mx-auto"
       >
-        <div className="bg-black/40 backdrop-blur-xl border border-white/5 rounded-3xl p-8 sm:p-12">
+        <div className="bg-secondary-themeable/40 backdrop-blur-xl border border-muted-themeable rounded-3xl p-8 sm:p-12">
           <div className="flex items-center gap-4 mb-8">
-            <Terminal className="text-amber-500" size={24} />
-            <h2 className="text-2xl font-bold text-white uppercase tracking-widest">
+            <Terminal className="text-primary-themeable" size={24} />
+            <h2 className="text-2xl font-bold text-primary-themeable uppercase tracking-widest">
               {t('aur.install.title')}
             </h2>
           </div>
 
           {/* Installing paru section */}
-          <div className="mb-10 bg-white/5 rounded-2xl p-6 border border-white/10">
-            <h3 className="text-sm font-bold text-amber-500 uppercase tracking-[0.2em] mb-4">First: Install paru (AUR Helper)</h3>
-            <div className="bg-black/40 rounded-xl p-5 font-mono text-xs sm:text-sm text-gray-300 space-y-2 border border-white/5">
-              <div className="flex gap-3"><span className="text-amber-500 select-none">$</span><span>sudo pacman -S --needed base-devel</span></div>
-              <div className="flex gap-3"><span className="text-amber-500 select-none">$</span><span>git clone https://aur.archlinux.org/paru.git</span></div>
-              <div className="flex gap-3"><span className="text-amber-500 select-none">$</span><span>cd paru</span></div>
-              <div className="flex gap-3"><span className="text-amber-500 select-none">$</span><span>makepkg -si</span></div>
+          <div className="mb-10 bg-secondary-themeable rounded-2xl p-6 border border-muted-themeable">
+            <h3 className="text-sm font-bold text-primary-themeable uppercase tracking-[0.2em] mb-4">First: Install paru (AUR Helper)</h3>
+            <div className="bg-primary-themeable/5 rounded-xl p-5 font-mono text-xs sm:text-sm text-secondary-themeable space-y-2 border border-muted-themeable/20">
+              <div className="flex gap-3"><span className="text-primary-themeable select-none">$</span><span>sudo pacman -S --needed base-devel</span></div>
+              <div className="flex gap-3"><span className="text-primary-themeable select-none">$</span><span>git clone https://aur.archlinux.org/paru.git</span></div>
+              <div className="flex gap-3"><span className="text-primary-themeable select-none">$</span><span>cd paru</span></div>
+              <div className="flex gap-3"><span className="text-primary-themeable select-none">$</span><span>makepkg -si</span></div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-black/60 rounded-2xl p-6 font-mono text-sm border border-white/5 relative group overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="bg-secondary-themeable/60 rounded-2xl p-6 font-mono text-sm border border-muted-themeable relative group overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-themeable/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative z-10">
-                <div className="text-gray-500 mb-2"># Install with paru (Recommended)</div>
+                <div className="text-secondary-themeable/40 mb-2"># Install with paru (Recommended)</div>
                 <div className="flex items-center gap-3">
-                  <span className="text-amber-500 select-none">$</span>
-                  <span className="text-gray-300">paru -S meshiji voix peguni_draem-la</span>
+                  <span className="text-primary-themeable select-none">$</span>
+                  <span className="text-secondary-themeable">paru -S meshiji voix peguni_draem-la</span>
                 </div>
               </div>
             </div>
-            <div className="bg-black/60 rounded-2xl p-6 font-mono text-sm border border-white/5 relative group overflow-hidden opacity-70 hover:opacity-100 transition-opacity">
-              <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="bg-secondary-themeable/60 rounded-2xl p-6 font-mono text-sm border border-muted-themeable relative group overflow-hidden opacity-70 hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-themeable/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative z-10">
-                <div className="text-gray-500 mb-2"># Alternative: Install with yay</div>
+                <div className="text-secondary-themeable/40 mb-2"># Alternative: Install with yay</div>
                 <div className="flex items-center gap-3">
-                  <span className="text-red-500 select-none">$</span>
-                  <span className="text-gray-300">yay -S meshiji voix peguni_draem-la</span>
+                  <span className="text-primary-themeable select-none">$</span>
+                  <span className="text-secondary-themeable">yay -S meshiji voix peguni_draem-la</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="mt-8 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-gray-500">
+          <div className="mt-8 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-secondary-themeable/40">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               {t('aur.maintainer')}: Veridian Zenith

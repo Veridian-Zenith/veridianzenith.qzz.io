@@ -6,13 +6,14 @@ interface AtmosphereInfo {
   id: Atmosphere;
   name: string;
   description: string;
+  color: string;
 }
 
 export const atmospheres: AtmosphereInfo[] = [
-  { id: 'default', name: 'Default Zenith', description: 'The original aesthetic' },
-  { id: 'midnight-void', name: 'Midnight Void', description: 'Deep indigo and purple' },
-  { id: 'blood-moon', name: 'Blood Moon', description: 'Crimson and burgundy' },
-  { id: 'golden-zenith', name: 'Golden Zenith', description: 'Amber and gold' },
+  { id: 'default', name: 'Veridian Origin', description: 'The amber root of the Zenith', color: '#FFB347' },
+  { id: 'midnight-void', name: 'Obsidian Void', description: 'Deep indigo and spectral violet', color: '#818cf8' },
+  { id: 'blood-moon', name: 'Crimson Eclipse', description: 'Fierce reds and lunar shadows', color: '#ef4444' },
+  { id: 'golden-zenith', name: 'Golden Zenith', description: 'Pure gold and celestial amber', color: '#FFD700' },
 ];
 
 const ATMOSPHERE_STORAGE_KEY = 'veridian-atmosphere';

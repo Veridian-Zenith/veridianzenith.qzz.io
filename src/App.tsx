@@ -47,7 +47,7 @@ function AppContent() {
 
   return (
     <div className={cn(
-      "min-h-screen bg-[#000000] text-gray-100 selection:bg-amber-500/30 font-rosemary transition-all duration-75 relative overflow-x-hidden",
+      "min-h-screen bg-[var(--vz-bg-primary)] text-secondary-themeable selection:bg-[var(--vz-accent-vibrant)]/30 font-rosemary transition-all duration-75 relative overflow-x-hidden",
       glitch && "will-change-transform animate-glitch-intense"
     )}>
       <AnimatePresence mode="wait">
@@ -74,11 +74,11 @@ function AppContent() {
           <TerminalEmulator isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
 
 
-          <footer className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92vw] sm:w-auto max-w-3xl px-5 sm:px-6 py-3 sm:py-2 bg-black/80 sm:bg-black/60 backdrop-blur-md border border-white/10 sm:border-white/5 rounded-2xl sm:rounded-full text-[11px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-gray-500 shadow-xl flex flex-wrap sm:flex-nowrap items-center justify-center gap-x-4 gap-y-3">
+          <footer className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92vw] sm:w-auto max-w-3xl px-4 sm:px-6 py-2 sm:py-2 bg-[var(--vz-bg-secondary)]/80 sm:bg-[var(--vz-bg-secondary)]/60 backdrop-blur-md border border-muted-themeable rounded-xl sm:rounded-full text-[9px] sm:text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.2em] text-secondary-themeable/50 shadow-xl flex flex-wrap sm:flex-nowrap items-center justify-center gap-x-3 gap-y-2">
 
             <button
               onClick={triggerGlitch}
-              className="text-red-500 font-bold hover:scale-110 transition-transform cursor-pointer relative overflow-hidden px-2 group whitespace-nowrap"
+              className="text-[var(--vz-accent-vibrant)] font-bold hover:scale-110 transition-transform cursor-pointer relative overflow-hidden px-1 group whitespace-nowrap"
             >
               <span className="relative z-10">© {new Date().getFullYear()} Veridian Zenith</span>
               <AnimatePresence>
@@ -88,32 +88,32 @@ function AppContent() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1.2 }}
                     exit={{ opacity: 0 }}
-                    className="absolute inset-0 bg-red-500/40 blur-md mix-blend-screen pointer-events-none"
+                    className="absolute inset-0 bg-[var(--vz-accent-vibrant)]/40 blur-md mix-blend-screen pointer-events-none"
                   />
                 )}
               </AnimatePresence>
               <motion.div
-                className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/10 transition-colors duration-300"
+                className="absolute inset-0 bg-[var(--vz-accent-vibrant)]/0 group-hover:bg-[var(--vz-accent-vibrant)]/10 transition-colors duration-300"
               />
             </button>
-            <span className="w-[1px] h-3 bg-white/10 hidden sm:block"></span>
-            <a href="https://opensource.org/licenses/OSL-3.0" target="_blank" rel="noopener noreferrer" className="text-amber-500/80 hover:text-amber-500 transition-colors font-bold whitespace-nowrap">
+            <span className="w-[1px] h-3 bg-muted-themeable hidden sm:block"></span>
+            <a href="https://opensource.org/licenses/OSL-3.0" target="_blank" rel="noopener noreferrer" className="text-[var(--vz-accent-vibrant)]/80 hover:text-[var(--vz-accent-vibrant)] transition-colors font-bold whitespace-nowrap px-1">
               OSL-3.0
             </a>
-            <span className="w-[1px] h-3 bg-white/10 hidden sm:block shrink-0"></span>
+            <span className="w-[1px] h-3 bg-muted-themeable hidden sm:block shrink-0"></span>
             <a href="https://stuff.mit.edu/doc/counter-howto.html" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-80 transition-opacity shrink-0">
               <div className="relative mix-blend-screen overflow-hidden rounded opacity-70">
-                <img src="https://stuff.mit.edu/cgi/counter/veridiandotzenithdotqzzdotio" alt="counter" className="h-5 sm:h-6 invert relative z-10 block" style={{ imageRendering: 'pixelated', filter: 'invert(1) contrast(200%) grayscale(100%)' }} loading="lazy" decoding="async" />
+                <img src="https://stuff.mit.edu/cgi/counter/veridiandotzenithdotqzzdotio" alt="counter" className="h-4 sm:h-6 invert relative z-10 block" style={{ imageRendering: 'pixelated', filter: 'invert(1) contrast(200%) grayscale(100%)' }} loading="lazy" decoding="async" />
               </div>
             </a>
-            <span className="w-[1px] h-3 bg-white/10 hidden sm:block shrink-0"></span>
+            <span className="w-[1px] h-3 bg-muted-themeable hidden sm:block shrink-0"></span>
             <button
               onClick={() => navigate('/brand')}
-              className="flex items-center gap-2 px-3 py-1 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 rounded-lg transition-all group/sigil cursor-pointer"
+              className="flex items-center gap-1.5 px-2 py-0.5 sm:px-3 sm:py-1 bg-[var(--vz-accent-vibrant)]/10 hover:bg-[var(--vz-accent-vibrant)]/20 border border-[var(--vz-accent-vibrant)]/20 rounded-lg transition-all group/sigil cursor-pointer"
               title="View Brand Assets"
             >
-              <img src="/assets/brand-image.png" alt="Sigil" className="w-4 h-4 object-contain filter drop-shadow-[0_0_5px_#FFB347] group-hover/sigil:scale-110 transition-transform" />
-              <span className="text-amber-500 font-bold group-hover/sigil:text-amber-400 transition-colors">SIGIL</span>
+              <img src="/assets/brand-image.png" alt="Sigil" className="w-3 h-3 sm:w-4 sm:h-4 object-contain filter drop-shadow-[0_0_5px_var(--vz-glow-color)] group-hover/sigil:scale-110 transition-transform" />
+              <span className="text-[var(--vz-accent-vibrant)] font-bold group-hover/sigil:text-[var(--vz-accent-vibrant)]/80 transition-colors">SIGIL</span>
             </button>
           </footer>
         </div>

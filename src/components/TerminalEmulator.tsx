@@ -137,16 +137,16 @@ export const TerminalEmulator: React.FC<TerminalEmulatorProps> = ({ isOpen, onCl
           onClick={onClose}
         >
           <motion.div
-            className="w-full max-w-2xl bg-black border border-amber-500/30 rounded-xl overflow-hidden terminal-custom-shadow"
+            className="w-full max-w-2xl bg-secondary-themeable border border-muted-themeable rounded-xl overflow-hidden terminal-custom-shadow backdrop-blur-2xl"
             onClick={e => e.stopPropagation()}
           >
             {/* Terminal Header */}
-            <div className="bg-white/5 px-4 py-2 flex items-center justify-between border-b border-white/10">
+            <div className="bg-primary-themeable/10 px-4 py-2 flex items-center justify-between border-b border-muted-themeable/20">
               <div className="flex items-center gap-2">
-                <TerminalIcon size={14} className="text-amber-500" />
-                <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Zenith Terminal</span>
+                <TerminalIcon size={14} className="text-primary-themeable" />
+                <span className="text-[10px] uppercase tracking-widest text-primary-themeable/70 font-bold">Zenith Terminal</span>
               </div>
-              <button onClick={onClose} className="text-gray-500 hover:text-white transition-colors">
+              <button onClick={onClose} className="text-secondary-themeable hover:text-primary-themeable transition-colors">
                 <X size={16} />
               </button>
             </div>
@@ -155,7 +155,7 @@ export const TerminalEmulator: React.FC<TerminalEmulatorProps> = ({ isOpen, onCl
             <div className="p-4 h-80 flex flex-col">
               <div ref={historyRef} className="flex-grow overflow-y-auto font-mono text-sm text-secondary-themeable space-y-1 mb-4 scrollbar-hide">
                 {history.map((line, i) => (
-                  <div key={i} className={line.startsWith('>') ? 'text-amber-500' : ''}>
+                  <div key={i} className={line.startsWith('>') ? 'text-primary-themeable' : ''}>
                     {line}
                   </div>
                 ))}
@@ -165,15 +165,15 @@ export const TerminalEmulator: React.FC<TerminalEmulatorProps> = ({ isOpen, onCl
                   e.preventDefault();
                   handleCommand(input);
                 }}
-                className="flex items-center gap-2 border-t border-white/5 pt-4"
+                className="flex items-center gap-2 border-t border-muted-themeable/10 pt-4"
               >
-                <ChevronRight size={16} className="text-amber-500 animate-pulse" />
+                <ChevronRight size={16} className="text-primary-themeable animate-pulse" />
                 <input
                   ref={inputRef}
                   type="text"
                   value={input}
                   onChange={e => setInput(e.target.value)}
-                  className="flex-grow bg-transparent border-none outline-none font-mono text-sm text-white"
+                  className="flex-grow bg-transparent border-none outline-none font-mono text-sm text-primary-themeable"
                   placeholder="Invoke command..."
                 />
               </form>

@@ -28,14 +28,8 @@ export const BackgroundEffect = () => {
 
   // Get theme-based gradient
   const gradientStyle = useMemo(() => {
-    const gradients = {
-      default: "linear-gradient(135deg, rgba(215, 38, 56, 0.4) 0%, rgba(255, 179, 71, 0.4) 50%, rgba(255, 215, 0, 0.4) 100%)",
-      'midnight-void': "linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(99, 102, 241, 0.4) 50%, rgba(139, 92, 246, 0.4) 100%)",
-      'blood-moon': "linear-gradient(135deg, rgba(220, 38, 38, 0.4) 0%, rgba(239, 68, 68, 0.4) 50%, rgba(124, 45, 18, 0.4) 100%)",
-      'golden-zenith': "linear-gradient(135deg, rgba(245, 158, 11, 0.4) 0%, rgba(251, 191, 36, 0.4) 50%, rgba(217, 119, 6, 0.4) 100%)",
-    };
-    return gradients[atmosphere] || gradients.default;
-  }, [atmosphere]);
+    return "linear-gradient(135deg, var(--vz-gradient-1) 0%, var(--vz-gradient-2) 50%, var(--vz-gradient-3) 100%)";
+  }, []);
 
   const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll();
@@ -61,37 +55,40 @@ export const BackgroundEffect = () => {
     rune: RUNES[i % RUNES.length],
   })));
 
-  const gridRunesCount = isMobile ? 30 : 200;
-  const gridCols = isMobile ? 6 : 10;
+  // Performance optimizations for mobile
+  const activeMassiveRunes = isMobile ? massiveRunes.slice(0, 5) : massiveRunes;
+  const activeTinyRunes = isMobile ? tinyRunes.slice(0, 15) : tinyRunes;
+  const gridRunesCount = isMobile ? 24 : 200;
+  const gridCols = isMobile ? 4 : 10;
 
 
 
 
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-black">
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-[var(--vz-bg-primary)]">
 
       {/* 1. Base Layer: vibrant gradients */}
       <div
         className="absolute inset-0"
         style={{
-          background: gradientStyle,
-          opacity: 0.3
+          background: "linear-gradient(135deg, var(--vz-gradient-1) 0%, var(--vz-gradient-2) 50%, var(--vz-gradient-3) 100%)",
+          opacity: 0.15
         }}
       />
 
       {/* 2. Middle Layer: Massive Runes (parallax drift) */}
       <motion.div style={{ y: ySpring }} className="absolute inset-0">
-        {massiveRunes.map((r: Rune, i: number) => (
+        {activeMassiveRunes.map((r: Rune, i: number) => (
 
 
           <motion.div
             key={`massive-${i}`}
-            className={`absolute text-amber-500/20 font-serif select-none pointer-events-none transform-gpu ${!isMobile ? "filter blur-[0.5px]" : ""}`}
+            className={`absolute text-[var(--vz-accent-vibrant)]/20 font-serif select-none pointer-events-none transform-gpu ${!isMobile ? "filter blur-[0.5px]" : ""}`}
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
               x: isMobile ? 0 : [0, (r.direction ?? 1) * 50, 0],
               rotate: isMobile ? 0 : [0, 360, 0],
-              opacity: isMobile ? 0.1 : [0.05, 0.15, 0.05]
+              opacity: isMobile ? 0.08 : [0.05, 0.15, 0.05]
             }}
 
             transition={{ duration: r.speed, repeat: Infinity, ease: isMobile ? "linear" : "easeInOut" }}
@@ -107,14 +104,14 @@ export const BackgroundEffect = () => {
           isMobile ? (
             <span
               key={i}
-              className="text-2xl font-serif text-amber-500 block text-center opacity-20"
+              className="text-2xl font-serif text-[var(--vz-accent-vibrant)] block text-center opacity-20"
             >
               {RUNES[i % RUNES.length]}
             </span>
           ) : (
             <motion.span
               key={i}
-              className="text-2xl font-serif text-amber-500 block text-center"
+              className="text-2xl font-serif text-[var(--vz-accent-vibrant)] block text-center"
               animate={{ opacity: [0.2, 0.7, 0.2] }}
               transition={{ duration: 4, delay: i * 0.02, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -126,12 +123,10 @@ export const BackgroundEffect = () => {
 
       {/* 4. Top Layer: Tiny Floating Runes */}
       <div className="absolute inset-0">
-        {!isMobile && tinyRunes.map((r: Rune, i: number) => (
-
-
+        {activeTinyRunes.map((r: Rune, i: number) => (
           <motion.div
             key={`tiny-${i}`}
-            className="absolute text-amber-400/60 select-none font-serif transform-gpu drop-shadow-[0_0_10px_rgba(255,179,71,0.4)]"
+            className="absolute text-[var(--vz-accent-vibrant)]/60 select-none font-serif transform-gpu drop-shadow-[0_0_10px_var(--vz-shadow-color)]"
             style={{ fontSize: r.size, left: r.left, top: r.top }}
             animate={{
               y: [0, -50, 0],
@@ -151,7 +146,7 @@ export const BackgroundEffect = () => {
       </div>
 
       {/* 5. Depth Overlay: subtle dim only */}
-      <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-[var(--vz-bg-primary)]/60 pointer-events-none" />
     </div>
   );
 };

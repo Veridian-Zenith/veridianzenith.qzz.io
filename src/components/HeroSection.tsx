@@ -60,7 +60,7 @@ export const HeroSection = () => {
             duration: 1.2,
             ease: [0.16, 1, 0.3, 1]
           }}
-          className="text-6xl sm:text-8xl font-black mb-6 bg-gradient-to-b from-amber-400 via-red-500 via-themeable to-gold-500 bg-clip-text text-transparent filter brightness-110 tracking-tighter"
+          className="text-5xl sm:text-8xl font-black mb-4 sm:mb-6 gradient-themeable filter brightness-110 tracking-tighter leading-tight sm:leading-none"
         >
           {t('hero.title')}
         </motion.h1>
@@ -69,7 +69,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-xl sm:text-2xl text-secondary-themeable mb-6 max-w-2xl mx-auto leading-relaxed drop-shadow-lg"
+          className="text-base sm:text-2xl text-secondary-themeable mb-4 sm:mb-6 max-w-2xl mx-auto leading-relaxed drop-shadow-lg px-4"
         >
           {t('hero.subtitle')}
         </motion.p>
@@ -78,7 +78,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-gray-500 italic mb-10 text-sm sm:text-base"
+          className="text-secondary-themeable/60 italic mb-8 sm:mb-10 text-xs sm:text-base px-6"
         >
           {t('hero.void')}
         </motion.p>
@@ -86,13 +86,13 @@ export const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center"
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-8"
         >
           <InteractiveButton onClick={() => navigate('/projects')}>
             {t('hero.explore')}
           </InteractiveButton>
           <InteractiveButton variant="red" onClick={() => navigate('/contact')}>
-            <span className="text-white">{t('hero.summon')}</span> <span className="text-red-500 font-extrabold ml-1 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8) transition-all">{t('hero.architect')}</span>
+            <span>{t('hero.summon')}</span> <span className="text-primary-themeable font-extrabold ml-1 group-hover:drop-shadow-[0_0_8px_var(--vz-glow-color)] transition-all">{t('hero.architect')}</span>
           </InteractiveButton>
         </motion.div>
 
@@ -100,10 +100,10 @@ export const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="text-gray-600 text-[10px] uppercase tracking-[0.3em] mt-12 font-bold hover:text-amber-500/60 transition-colors cursor-help"
+          className="text-secondary-themeable/40 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-10 sm:mt-12 font-bold hover:text-primary-themeable/60 transition-colors cursor-help px-4"
           title="Unlock the Zenith Terminal to explore commands and easter eggs"
         >
-          💻 Press ` or Ctrl+Alt+T to invoke the terminal
+          💻 {isMobile ? 'Use the Navbar menu to open the terminal' : 'Press ` or Ctrl+Alt+T to invoke the terminal'}
         </motion.p>
       </div>
     </section>

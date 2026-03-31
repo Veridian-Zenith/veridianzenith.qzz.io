@@ -1,7 +1,7 @@
 //! License: Open Software License 3.0 (OSL-3.0)
 //! Copyright (c) 2026 Dae Euhwa
 
-import { useRef, useMemo } from "react";
+import { useRef } from "react";
 import {
   motion,
   useMotionValue,
@@ -13,17 +13,6 @@ import { useAtmosphere } from "../hooks/useAtmosphere";
 export const BrandDisplayPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { atmosphere } = useAtmosphere();
-
-  // Get theme colors based on atmosphere
-  const themeColors = useMemo(() => {
-    const colorMap = {
-      default: { shadow: "rgba(255,179,71", glow: "rgba(255,179,71" },
-      'midnight-void': { shadow: "rgba(99,102,241", glow: "rgba(99,102,241" },
-      'blood-moon': { shadow: "rgba(239,68,68", glow: "rgba(239,68,68" },
-      'golden-zenith': { shadow: "rgba(251,191,36", glow: "rgba(251,191,36" },
-    };
-    return colorMap[atmosphere] || colorMap.default;
-  }, [atmosphere]);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -71,12 +60,12 @@ export const BrandDisplayPage = () => {
         }}
       >
         {/* Layered Glows */}
-        <div className="absolute -inset-20 bg-amber-500/10 rounded-full blur-[100px] group-hover:bg-amber-500/20 transition-colors duration-700" />
-        <div className="absolute -inset-10 bg-red-500/5 rounded-full blur-[80px] group-hover:bg-red-500/15 transition-colors duration-1000 delay-100" />
+        <div className="absolute -inset-20 bg-[var(--vz-accent-vibrant)]/10 rounded-full blur-[100px] group-hover:bg-[var(--vz-accent-vibrant)]/20 transition-colors duration-700" />
+        <div className="absolute -inset-10 bg-[var(--vz-accent-vibrant)]/5 rounded-full blur-[80px] group-hover:bg-[var(--vz-accent-vibrant)]/15 transition-colors duration-1000 delay-100" />
 
         {/* Floating Ring */}
         <motion.div
-          className="absolute -inset-8 border border-amber-500/10 rounded-full"
+          className="absolute -inset-8 border border-[var(--vz-accent-vibrant)]/10 rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           style={{ translateZ: -50 }}
@@ -91,14 +80,14 @@ export const BrandDisplayPage = () => {
           <motion.img
             src="/assets/brand-image.png"
             alt="Veridian Zenith Core Logo"
-            className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-contain filter drop-shadow-[0_0_30px_rgba(255,179,71,0.2)] group-hover:drop-shadow-[0_0_60px_rgba(255,179,71,0.5)] transition-all duration-700"
+            className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-contain filter drop-shadow-[0_0_30px_var(--vz-glow-color)] group-hover:drop-shadow-[0_0_60px_var(--vz-glow-color)] transition-all duration-700"
             style={{ translateZ: 100 }}
             animate={{
               y: [0, -15, 0],
               filter: [
-                `drop-shadow(0 0 30px ${themeColors.shadow},0.2)) brightness(1)`,
-                `drop-shadow(0 0 50px ${themeColors.glow},0.4)) brightness(1.2)`,
-                `drop-shadow(0 0 30px ${themeColors.shadow},0.2)) brightness(1)`,
+                `drop-shadow(0 0 30px var(--vz-glow-color)) brightness(1)`,
+                `drop-shadow(0 0 50px var(--vz-glow-color)) brightness(1.2)`,
+                `drop-shadow(0 0 30px var(--vz-glow-color)) brightness(1)`,
               ],
             }}
             transition={{
