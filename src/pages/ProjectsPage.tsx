@@ -1,14 +1,22 @@
 //! License: Open Software License 3.0 (OSL-3.0)
 //! Copyright (c) 2026 Dae Euhwa
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { AnimatedCard } from '../components/Common';
 import { cn } from '../utils/cn';
-import { ExternalLink, Terminal, Shield, Cpu, PawPrint, Folder, Box, ThumbsUp } from 'lucide-react';
+import { ExternalLink, Terminal, Shield, Cpu, PawPrint, Folder, Box } from 'lucide-react';
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '../hooks/useIsMobile';
+
+const AUR_PROJECTS: Record<string, string> = {
+  axiomos: 'https://aur.archlinux.org/packages/axiomos-git',
+  voix: 'https://aur.archlinux.org/packages/voix-git',
+  meshiji: 'https://aur.archlinux.org/packages/meshiji',
+  peguni: 'https://aur.archlinux.org/packages/peguni-draem-la',
+  misc: 'https://aur.archlinux.org/packages/veridian-misc-tools',
+};
 
 const STATIC_PROJECTS = [
   {
@@ -16,8 +24,8 @@ const STATIC_PROJECTS = [
     name: "AxiomOS",
     description: "projects.axiomos.description",
     html_url: "https://github.com/Veridian-Zenith/AxiomOS",
-    topics: ["system", "zig", "osdev", "kernel"],
-    language: "Zig",
+    topics: ["system", "C++", "osdev", "kernel"],
+    language: "C++",
     icon: Cpu
   },
   {
@@ -69,24 +77,8 @@ const topicColors: Record<string, string> = {
 export const ProjectsPage = () => {
   const { t } = useTranslation();
   const isMobile = useIsMobile();
-  const [votedId, setVotedId] = useState<string | null>(null);
-  const [showVoteForm, setShowVoteForm] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '' });
   const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
   const [hoveredRuneId, setHoveredRuneId] = useState<string | null>(null);
-
-  const handleVoteClick = (id: string) => {
-    setVotedId(id);
-    setShowVoteForm(true);
-  };
-
-  const submitVote = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(`Vote submitted for ${votedId} by ${formData.name} (${formData.email})`);
-    alert(`Your essence has been recorded. Focus shifted towards ${votedId}.`);
-    setShowVoteForm(false);
-    setVotedId(null);
-  };
 
   return (
     <div className="pt-32 pb-24 px-8 max-w-7xl mx-auto">
@@ -104,13 +96,17 @@ export const ProjectsPage = () => {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className={cn(
+        "grid gap-8",
+        isMobile ? "flex overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide -mx-8 px-8" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+      )}>
         {STATIC_PROJECTS.map((repo, index) => {
           const isRuneHovered = hoveredRuneId === repo.id;
           const cardGlow = isRuneHovered ? (index % 3 === 0 ? 'amber' : index % 3 === 1 ? 'red' : 'gold') : 'amber';
           return (
             <div
               key={repo.id}
+              className={cn(isMobile && "min-w-[85vw] snap-center")}
               onMouseEnter={() => setHoveredProjectId(repo.id)}
               onMouseLeave={() => setHoveredProjectId(null)}
             >
@@ -165,15 +161,18 @@ export const ProjectsPage = () => {
                     >
                       {t('projects.inspect')} <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </a>
+                    {AUR_PROJECTS[repo.id] && (
+                      <a
+                        href={AUR_PROJECTS[repo.id]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors font-semibold text-sm border border-blue-500/30 px-3 py-1 rounded-lg bg-blue-500/5 hover:bg-blue-500/10"
+                      >
+                        <Box size={14} className="group-hover:scale-110 transition-transform" />
+                        <span>AUR</span>
+                      </a>
+                    )}
                   </div>
-
-                  <button
-                    onClick={() => handleVoteClick(repo.id)}
-                    className="flex items-center gap-2 text-gray-500 hover:text-gold-500 transition-all text-sm group"
-                  >
-                    <ThumbsUp size={16} className="group-hover:scale-125 transition-transform" />
-                    <span>{t('projects.influence')}</span>
-                  </button>
                 </div>
               </AnimatedCard>
             </div>
@@ -185,63 +184,6 @@ export const ProjectsPage = () => {
           <p className="text-gray-400 italic">{t('projects.future')}</p>
         </div>
       </div>
-
-      {/* Voting Modal */}
-      <AnimatePresence>
-        {showVoteForm && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-black border border-amber-500/30 p-8 rounded-3xl max-w-md w-full shadow-[0_0_50px_rgba(255,179,71,0.2)]"
-            >
-              <h2 className="text-2xl font-bold text-amber-500 mb-2">{t('projects.vote.title')}</h2>
-              <p className="text-gray-400 mb-6 text-sm">{t('projects.vote.subtitle')} {STATIC_PROJECTS.find(p => p.id === votedId)?.name}.</p>
-
-              <form onSubmit={submitVote} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1 ml-1">{t('projects.vote.name')}</label>
-                  <input
-                    required
-                    type="text"
-                    value={formData.name}
-                    onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors"
-                    placeholder={t('projects.vote.name_placeholder')}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1 ml-1">{t('projects.vote.email')}</label>
-                  <input
-                    required
-                    type="email"
-                    value={formData.email}
-                    onChange={e => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors"
-                    placeholder={t('projects.vote.email_placeholder')}
-                  />
-                </div>
-                <div className="flex gap-4 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setShowVoteForm(false)}
-                    className="flex-1 px-6 py-3 border border-white/10 rounded-xl text-gray-400 hover:bg-white/5 transition-colors"
-                  >
-                    {t('projects.vote.discard')}
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 px-6 py-3 bg-amber-600 hover:bg-amber-500 text-black font-bold rounded-xl shadow-[0_0_15px_rgba(255,179,71,0.3)] transition-all"
-                  >
-                    {t('projects.vote.cast')}
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };

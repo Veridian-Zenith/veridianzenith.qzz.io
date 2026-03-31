@@ -27,7 +27,8 @@
 
 ## 🛠 Features (Implemented)
 
-- [x] Community Voting System ("Influence Forge")
+- [x] Direct repository integration
+- [x] AUR link buttons on project cards
 - [x] Fixed-screen landing experience (Zero scroll Home Page)
 - [x] Production-ready build system (TSC checked)
 
@@ -35,8 +36,9 @@
 
 - [x] Project Migration to Bun (Package Manager & Build)
 - [x] React 19 Purity & Effect Stability (Lint Resolved)
-- [ ] AUR Repository Showcase (Implementation In Progress)
-- [ ] Rosemary Font Integration (Full font-face support)
-- [ ] Accessibility Audit (ARIA labels for voting modal)
-- [ ] SEO & Structured Data for project pages
-- [ ] Horizontal Swipe for project cards on mobile
+- [x] AUR Repository Showcase
+- [x] Rosemary Font Integration (Full font-face support)
+- [x] SEO & Structured Data (Meta tags & OpenGraph)
+- [x] Horizontal Swipe for project cards on mobile
+- [ ] Horizontal scroll indicators for mobile cards
+- [ ] Further accessibility improvements (A11y audit)

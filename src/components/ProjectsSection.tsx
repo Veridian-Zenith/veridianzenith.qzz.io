@@ -4,6 +4,7 @@
 import { motion } from 'framer-motion';
 import { AnimatedCard } from './Common';
 import { cn } from '../utils/cn';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 import { ExternalLink, Terminal, Shield, Cpu, PawPrint, Folder, Box } from 'lucide-react';
 
@@ -64,6 +65,7 @@ const topicColors: Record<string, string> = {
 };
 
 export const ProjectsSection = () => {
+  const isMobile = useIsMobile();
   return (
     <section id="projects" className="py-24 px-8 max-w-7xl mx-auto">
       <motion.h2
@@ -73,13 +75,16 @@ export const ProjectsSection = () => {
       >
         Arcane Artifacts
       </motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className={cn(
+        "grid gap-8",
+        isMobile ? "flex overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide -mx-8 px-8" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+      )}>
         {STATIC_PROJECTS.map((repo, index) => (
-          <AnimatedCard
-            key={repo.id}
-            delay={index * 0.1}
-            glowColor={index % 3 === 0 ? 'amber' : index % 3 === 1 ? 'red' : 'gold'}
-          >
+          <div key={repo.id} className={cn(isMobile && "min-w-[85vw] snap-center")}>
+            <AnimatedCard
+              delay={index * 0.1}
+              glowColor={index % 3 === 0 ? 'amber' : index % 3 === 1 ? 'red' : 'gold'}
+            >
             <div className="flex flex-col h-full">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-3">
@@ -119,6 +124,7 @@ export const ProjectsSection = () => {
               </a>
             </div>
           </AnimatedCard>
+          </div>
         ))}
 
         {/* Placeholder for future growth */}

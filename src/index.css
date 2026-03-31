@@ -5,6 +5,7 @@
   src: url('/fonts/Rosemary.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @theme {
@@ -127,6 +128,14 @@ body {
   scrollbar-width: none;
 }
 .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
