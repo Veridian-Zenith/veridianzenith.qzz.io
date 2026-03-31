@@ -231,6 +231,15 @@ html.atmosphere-golden-zenith {
   backdrop-filter: blur(12px);
 }
 
+@media (max-width: 640px) {
+  .navbar-custom,
+  [class*="backdrop-blur-"],
+  [class*="backdrop-filter"] {
+    backdrop-filter: none !important;
+    background-color: var(--vz-bg-secondary) !important;
+  }
+}
+
 .logo-custom {
   filter: drop-shadow(0 0 12px var(--vz-glow-color));
 }

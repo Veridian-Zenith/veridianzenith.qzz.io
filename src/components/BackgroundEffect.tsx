@@ -3,8 +3,7 @@
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useIsMobile } from "../hooks/useIsMobile";
-import { useAtmosphere } from "../hooks/useAtmosphere";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 
 
 const RUNES = [
@@ -24,13 +23,6 @@ type Rune = {
 
 
 export const BackgroundEffect = () => {
-  const { atmosphere } = useAtmosphere();
-
-  // Get theme-based gradient
-  const gradientStyle = useMemo(() => {
-    return "linear-gradient(135deg, var(--vz-gradient-1) 0%, var(--vz-gradient-2) 50%, var(--vz-gradient-3) 100%)";
-  }, []);
-
   const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll();
   const yRange = useTransform(scrollYProgress, [0, 1], [0, -200]);
@@ -56,10 +48,11 @@ export const BackgroundEffect = () => {
   })));
 
   // Performance optimizations for mobile
-  const activeMassiveRunes = isMobile ? massiveRunes.slice(0, 5) : massiveRunes;
-  const activeTinyRunes = isMobile ? tinyRunes.slice(0, 15) : tinyRunes;
-  const gridRunesCount = isMobile ? 24 : 200;
-  const gridCols = isMobile ? 4 : 10;
+  const activeMassiveRunes = isMobile ? massiveRunes.slice(0, 3) : massiveRunes;
+  const activeTinyRunes = isMobile ? [] : tinyRunes;
+  const showGrid = !isMobile;
+  const gridRunesCount = isMobile ? 0 : 200;
+  const gridCols = 10;
 
 
 
@@ -79,19 +72,16 @@ export const BackgroundEffect = () => {
       {/* 2. Middle Layer: Massive Runes (parallax drift) */}
       <motion.div style={{ y: ySpring }} className="absolute inset-0">
         {activeMassiveRunes.map((r: Rune, i: number) => (
-
-
           <motion.div
             key={`massive-${i}`}
-            className={`absolute text-[var(--vz-accent-vibrant)]/20 font-serif select-none pointer-events-none transform-gpu ${!isMobile ? "filter blur-[0.5px]" : ""}`}
-            style={{ fontSize: r.size, left: r.left, top: r.top }}
-            animate={{
-              x: isMobile ? 0 : [0, (r.direction ?? 1) * 50, 0],
-              rotate: isMobile ? 0 : [0, 360, 0],
-              opacity: isMobile ? 0.08 : [0.05, 0.15, 0.05]
+            className={`absolute text-[var(--vz-accent-vibrant)] font-serif select-none pointer-events-none transform-gpu ${!isMobile ? "filter blur-[0.5px] drop-shadow-[0_0_15px_var(--vz-accent-vibrant)]" : ""}`}
+            style={{ fontSize: r.size, left: r.left, top: r.top, opacity: isMobile ? 0.08 : 0.25 }}
+            animate={isMobile ? {} : {
+              x: [0, (r.direction ?? 1) * 50, 0],
+              rotate: [0, 360, 0],
+              opacity: [0.15, 0.35, 0.15]
             }}
-
-            transition={{ duration: r.speed, repeat: Infinity, ease: isMobile ? "linear" : "easeInOut" }}
+            transition={isMobile ? {} : { duration: r.speed, repeat: Infinity, ease: "easeInOut" }}
           >
             {r.rune}
           </motion.div>
@@ -99,16 +89,9 @@ export const BackgroundEffect = () => {
       </motion.div>
 
       {/* 3. Surface Layer: Microscopic Grid Runes */}
-      <div className={`absolute inset-0 opacity-[0.05] pointer-events-none grid gap-${isMobile ? '24' : '16'} p-10 rotate-12 scale-150`} style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}>
-        {[...Array(gridRunesCount)].map((_, i) => (
-          isMobile ? (
-            <span
-              key={i}
-              className="text-2xl font-serif text-[var(--vz-accent-vibrant)] block text-center opacity-20"
-            >
-              {RUNES[i % RUNES.length]}
-            </span>
-          ) : (
+      {showGrid && (
+        <div className={`absolute inset-0 opacity-[0.05] pointer-events-none grid gap-16 p-10 rotate-12 scale-150`} style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}>
+          {[...Array(gridRunesCount)].map((_, i) => (
             <motion.span
               key={i}
               className="text-2xl font-serif text-[var(--vz-accent-vibrant)] block text-center"
@@ -117,9 +100,9 @@ export const BackgroundEffect = () => {
             >
               {RUNES[i % RUNES.length]}
             </motion.span>
-          )
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* 4. Top Layer: Tiny Floating Runes */}
       <div className="absolute inset-0">

@@ -3,11 +3,38 @@
 
 import { motion } from 'framer-motion';
 import { AnimatedCard } from '../components/Common';
-import { Package, Terminal, Shield, Download, ExternalLink } from 'lucide-react';
+import { Package, Terminal, Shield, Download, ExternalLink, AlertTriangle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useIsMobile } from '../hooks/useIsMobile';
+import { Link } from 'react-router-dom';
 
 export const AurPage = () => {
   const { t } = useTranslation();
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-6">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center bg-secondary-themeable/20 backdrop-blur-xl border border-muted-themeable p-10 rounded-3xl max-w-sm"
+        >
+          <AlertTriangle className="mx-auto text-amber-500 mb-6" size={48} />
+          <h2 className="text-2xl font-bold mb-4 text-primary-themeable">Desktop Feature</h2>
+          <p className="text-secondary-themeable mb-8 leading-relaxed">
+            The AUR (Arch User Repository) management page is optimized for desktop view.
+          </p>
+          <Link
+            to="/"
+            className="inline-block bg-[var(--vz-accent-vibrant)] text-black font-black px-8 py-3 rounded-full shadow-glow-themeable"
+          >
+            Return Home
+          </Link>
+        </motion.div>
+      </div>
+    );
+  }
 
   const packages = [
     {
@@ -109,7 +136,7 @@ export const AurPage = () => {
                 <div className="text-secondary-themeable/40 mb-2"># Install with paru (Recommended)</div>
                 <div className="flex items-center gap-3">
                   <span className="text-primary-themeable select-none">$</span>
-                  <span className="text-secondary-themeable">paru -S meshiji voix peguni_draem-la</span>
+                  <span className="text-secondary-themeable">paru -S voix</span>
                 </div>
               </div>
             </div>
@@ -119,7 +146,7 @@ export const AurPage = () => {
                 <div className="text-secondary-themeable/40 mb-2"># Alternative: Install with yay</div>
                 <div className="flex items-center gap-3">
                   <span className="text-primary-themeable select-none">$</span>
-                  <span className="text-secondary-themeable">yay -S meshiji voix peguni_draem-la</span>
+                  <span className="text-secondary-themeable">yay -S voix</span>
                 </div>
               </div>
             </div>
@@ -127,7 +154,7 @@ export const AurPage = () => {
           <div className="mt-8 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-secondary-themeable/40">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              {t('aur.maintainer')}: Veridian Zenith
+              {t('aur.maintainer')}: Dae Euhwa
             </div>
             <div className="hidden sm:block">
               Architecture: x86_64

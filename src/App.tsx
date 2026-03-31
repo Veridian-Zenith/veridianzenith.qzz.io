@@ -25,12 +25,14 @@ function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [glitch, setGlitch] = useState(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const isMobile = window.innerWidth < 768;
   const navigate = useNavigate();
 
   // Initialize atmosphere on app load
   useAtmosphere();
 
   useEffect(() => {
+    if (isMobile) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey && e.altKey && e.key === 't') || e.key === '`') {
         setIsTerminalOpen(prev => !prev);
@@ -38,7 +40,7 @@ function AppContent() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [isMobile]);
 
   const triggerGlitch = () => {
     setGlitch(true);

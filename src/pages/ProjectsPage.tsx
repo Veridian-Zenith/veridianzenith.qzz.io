@@ -70,7 +70,6 @@ export const ProjectsPage = () => {
   const { t } = useTranslation();
   const isMobile = useIsMobile();
   const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
-  const [hoveredRuneId, setHoveredRuneId] = useState<string | null>(null);
 
   return (
     <div className="pt-32 pb-24 px-8 max-w-7xl mx-auto">
@@ -93,7 +92,6 @@ export const ProjectsPage = () => {
         isMobile ? "flex overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide -mx-8 px-8" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
       )}>
         {STATIC_PROJECTS.map((repo, index) => {
-          const isRuneHovered = hoveredRuneId === repo.id;
           return (
             <div
               key={repo.id}
@@ -145,8 +143,6 @@ export const ProjectsPage = () => {
                       href={repo.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onMouseEnter={() => setHoveredRuneId(repo.id)}
-                      onMouseLeave={() => setHoveredRuneId(null)}
                       className="group flex items-center gap-2 text-primary-themeable hover:brightness-125 transition-all font-semibold text-sm"
                     >
                       {t('projects.inspect')} <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

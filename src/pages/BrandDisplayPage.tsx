@@ -8,11 +8,9 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useAtmosphere } from "../hooks/useAtmosphere";
 
 export const BrandDisplayPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { atmosphere } = useAtmosphere();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);

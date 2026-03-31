@@ -72,7 +72,7 @@ export const Navbar = () => {
               } : {}}
             />
           </motion.div>
-          <span className="text-xl font-black bg-gradient-to-r from-[var(--vz-accent-vibrant)] via-[var(--vz-gradient-2)] to-[var(--vz-accent-vibrant)] bg-clip-text text-transparent hidden lg:inline drop-shadow-[0_0_10px_var(--vz-shadow-color)] filter brightness-110 tracking-tight whitespace-nowrap">
+          <span className="text-xl font-black bg-gradient-to-r from-[var(--vz-accent-vibrant)] via-[var(--vz-gradient-2)] to-[var(--vz-accent-vibrant)] bg-clip-text text-transparent sm:inline drop-shadow-[0_0_10px_var(--vz-shadow-color)] filter brightness-110 tracking-tight whitespace-nowrap">
             Veridian Zenith
           </span>
         </Link>
@@ -140,7 +140,6 @@ export const Navbar = () => {
               { name: t('nav.home'), path: '/' },
               { name: t('nav.about'), path: '/about' },
               { name: t('nav.projects'), path: '/projects' },
-              { name: t('nav.aur'), path: '/aur' },
             ].map((item) => (
               <Link
                 key={item.path}
@@ -172,6 +171,9 @@ export const Navbar = () => {
               <button onClick={() => changeLanguage('de')} className="px-2 py-1 text-xs rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable font-bold">DE</button>
               <button onClick={() => changeLanguage('ko')} className="px-2 py-1 text-xs rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable font-bold">KO</button>
               <button onClick={() => changeLanguage('ru')} className="px-2 py-1 text-xs rounded-md hover:bg-primary-themeable/10 text-secondary-themeable hover:text-primary-themeable font-bold">RU</button>
+            </div>
+            <div className="mt-4 text-[10px] font-medium text-secondary-themeable/40 uppercase tracking-[0.2em]">
+              Best viewed on desktop
             </div>
           </motion.div>
         )}
