@@ -3,7 +3,8 @@
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useIsMobile } from "../hooks/useIsMobile";
-import { useState } from "react";
+import { useAtmosphere } from "../hooks/useAtmosphere";
+import { useState, useMemo } from "react";
 
 
 const RUNES = [
@@ -23,6 +24,18 @@ type Rune = {
 
 
 export const BackgroundEffect = () => {
+  const { atmosphere } = useAtmosphere();
+
+  // Get theme-based gradient
+  const gradientStyle = useMemo(() => {
+    const gradients = {
+      default: "linear-gradient(135deg, rgba(215, 38, 56, 0.4) 0%, rgba(255, 179, 71, 0.4) 50%, rgba(255, 215, 0, 0.4) 100%)",
+      'midnight-void': "linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(99, 102, 241, 0.4) 50%, rgba(139, 92, 246, 0.4) 100%)",
+      'blood-moon': "linear-gradient(135deg, rgba(220, 38, 38, 0.4) 0%, rgba(239, 68, 68, 0.4) 50%, rgba(124, 45, 18, 0.4) 100%)",
+      'golden-zenith': "linear-gradient(135deg, rgba(245, 158, 11, 0.4) 0%, rgba(251, 191, 36, 0.4) 50%, rgba(217, 119, 6, 0.4) 100%)",
+    };
+    return gradients[atmosphere] || gradients.default;
+  }, [atmosphere]);
 
   const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll();
@@ -61,7 +74,7 @@ export const BackgroundEffect = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, rgba(215, 38, 56, 0.4) 0%, rgba(255, 179, 71, 0.4) 50%, rgba(255, 215, 0, 0.4) 100%)",
+          background: gradientStyle,
           opacity: 0.3
         }}
       />

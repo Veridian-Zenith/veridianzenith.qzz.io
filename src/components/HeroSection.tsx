@@ -60,7 +60,7 @@ export const HeroSection = () => {
             duration: 1.2,
             ease: [0.16, 1, 0.3, 1]
           }}
-          className="text-6xl sm:text-8xl font-black mb-6 bg-gradient-to-b from-amber-400 via-red-500 to-gold-500 bg-clip-text text-transparent filter brightness-110 tracking-tighter"
+          className="text-6xl sm:text-8xl font-black mb-6 bg-gradient-to-b from-amber-400 via-red-500 via-themeable to-gold-500 bg-clip-text text-transparent filter brightness-110 tracking-tighter"
         >
           {t('hero.title')}
         </motion.h1>
@@ -69,7 +69,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-xl sm:text-2xl text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed drop-shadow-lg"
+          className="text-xl sm:text-2xl text-secondary-themeable mb-6 max-w-2xl mx-auto leading-relaxed drop-shadow-lg"
         >
           {t('hero.subtitle')}
         </motion.p>
@@ -95,6 +95,16 @@ export const HeroSection = () => {
             <span className="text-white">{t('hero.summon')}</span> <span className="text-red-500 font-extrabold ml-1 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8) transition-all">{t('hero.architect')}</span>
           </InteractiveButton>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="text-gray-600 text-[10px] uppercase tracking-[0.3em] mt-12 font-bold hover:text-amber-500/60 transition-colors cursor-help"
+          title="Unlock the Zenith Terminal to explore commands and easter eggs"
+        >
+          💻 Press ` or Ctrl+Alt+T to invoke the terminal
+        </motion.p>
       </div>
     </section>
   );

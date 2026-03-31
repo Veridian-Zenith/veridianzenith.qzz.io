@@ -5,7 +5,7 @@ A high-end, mystical Nordic-inspired digital realm showcasing the artifacts and 
 ## 🌌 Core Vision
 
 - **Mystical Nordic Aesthetic**: Dark-only color scheme with Amber, Red, and Gold glows.
-- **System-First Design**: Focused on performance, minimalism, and technical precision.
+- **Function-First Design**: Every design element serves a purpose. Performance, utility, and technical precision guide our creations.
 - **Arcane Artifacts**: A curated showcase of core projects including AxiomOS, Voix, and Meshiji.
 - **Community Driven**: Integrated voting system to influence the focus of future development.
 
@@ -26,7 +26,7 @@ git clone https://github.com/Veridian-Zenith/veridianzenith.qzz.io.git
 cd veridianzenith.qzz.io
 
 # Install dependencies
-bun install
+bun i
 
 # Start the forge (development server)
 bun run dev

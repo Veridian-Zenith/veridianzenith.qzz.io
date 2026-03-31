@@ -128,11 +128,22 @@ export const ProjectsSection = () => {
         ))}
 
         {/* Placeholder for future growth */}
-        <div className="border border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center p-8 text-center bg-white/5 opacity-50">
+        <div className={cn(
+          "border border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center p-8 text-center bg-white/5 opacity-50",
+          isMobile && "min-w-[85vw] snap-center"
+        )}>
           <Terminal size={32} className="text-gray-500 mb-4" />
           <p className="text-gray-400 italic">More artifacts currently being forged in the void...</p>
         </div>
       </div>
+      {isMobile && (
+        <div className="flex justify-center gap-2 mt-4">
+          {STATIC_PROJECTS.map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/20" />
+          ))}
+          <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+        </div>
+      )}
     </section>
   );
 };

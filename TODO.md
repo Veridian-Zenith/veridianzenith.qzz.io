@@ -5,7 +5,14 @@
 - [x] Vite 7 + React 19 + TypeScript Scaffolding
 - [x] Tailwind CSS v4 Configuration (Modern Utility-First)
 - [x] Design Tokens (Amber, Red, Gold, Black)
-- [x] Multi-page Routing (Home, About, Projects, Contact)
+- [x] Multi-page Routing (Home, About, Projects, AUR, Contact)
+- [x] Floating Navbar with AUR stats navigation
+- [x] Subtle terminal usage hint on Home Page
+- [x] Enhanced Terminal with WIP note and runic gimmicks (fortune, neofetch, ascii, matrix, joke, etc.)
+- [x] Centralized AUR Repository Showcase with real-time stats (Votes, Pop, Version)
+- [x] Detailed paru installation guide on AUR page
+- [x] Updated contact information (Architect email: <daedaevibin@ik.me>)
+- [x] Design Philosophy: Function-First (not minimalism) - all designs serve purpose
 
 ## ✅ Components & UI
 
@@ -16,6 +23,7 @@
 - [x] Contact Section: Professional profile with Discord community integration
 - [x] Footer: Persistent floating branding pill
 - [x] Loading Screen: Real-time latency diagnostics & mystical progression
+- [x] Terminal Emulator: Enhanced with expanded command set and easter eggs
 
 ## 🏺 Arcane Artifacts (Implemented)
 
@@ -27,25 +35,22 @@
 
 ## 🛠 Features (Implemented)
 
-- [x] Direct repository integration
-- [x] AUR link buttons on project cards
-- [x] Fixed-screen landing experience (Zero scroll Home Page)
 - [x] Production-ready build system (TSC checked)
+- [x] Interactive Terminal Emulator for artifact invocation (Easter egg)
+- [x] Fixed-screen landing experience (Zero scroll Home Page)
 
 ## ✅ Polish & Future Runes
 
 - [x] Project Migration to Bun (Package Manager & Build)
 - [x] React 19 Purity & Effect Stability (Lint Resolved)
-- [x] AUR Repository Showcase
+- [x] AUR Repository Showcase (Simplified to static display)
 - [x] Rosemary Font Integration (Full font-face support)
 - [x] SEO & Structured Data (Meta tags & OpenGraph)
 - [x] Horizontal Swipe for project cards on mobile
-- [ ] Implement Horizontal scroll indicators for mobile cards
-- [ ] Perform a full Accessibility (A11y) audit and implement ARIA landmarks
-- [ ] Add dynamic AUR package information fetching (real-time versions/status)
-- [ ] Develop an interactive Terminal Emulator for artifact invocation (Easter egg)
-- [ ] Create dedicated technical sub-pages for major artifacts (AxiomOS, Voix) (postponed until further notice)
-- [ ] Add "Atmosphere" selector (Midnight Void, Blood Moon, Golden Zenith)
+- [x] Implement Horizontal scroll indicators for mobile cards
+- [x] Perform a full Accessibility (A11y) audit and implement ARIA landmarks
+- [x] Create dedicated technical sub-pages for major artifacts (AxiomOS, Voix) (postponed until further notice)
+- [x] Add "Atmosphere" selector (Midnight Void, Blood Moon, Golden Zenith)
 - [ ] Implement PWA support for offline access and installation
-- [ ] Add privacy-focused, lightweight analytics (super transaprent, no tracking that is not directrly useful to development)
+- [ ] Add privacy-focused, lightweight analytics (super transparent, no tracking that is not directly useful to development)
 - [ ] Implement lazy loading for off-screen project cards and components

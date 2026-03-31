@@ -1,16 +1,29 @@
 //! License: Open Software License 3.0 (OSL-3.0)
 //! Copyright (c) 2026 Dae Euhwa
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import {
   motion,
   useMotionValue,
   useSpring,
   useTransform,
 } from "framer-motion";
+import { useAtmosphere } from "../hooks/useAtmosphere";
 
 export const BrandDisplayPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { atmosphere } = useAtmosphere();
+
+  // Get theme colors based on atmosphere
+  const themeColors = useMemo(() => {
+    const colorMap = {
+      default: { shadow: "rgba(255,179,71", glow: "rgba(255,179,71" },
+      'midnight-void': { shadow: "rgba(99,102,241", glow: "rgba(99,102,241" },
+      'blood-moon': { shadow: "rgba(239,68,68", glow: "rgba(239,68,68" },
+      'golden-zenith': { shadow: "rgba(251,191,36", glow: "rgba(251,191,36" },
+    };
+    return colorMap[atmosphere] || colorMap.default;
+  }, [atmosphere]);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -83,9 +96,9 @@ export const BrandDisplayPage = () => {
             animate={{
               y: [0, -15, 0],
               filter: [
-                "drop-shadow(0 0 30px rgba(255,179,71,0.2)) brightness(1)",
-                "drop-shadow(0 0 50px rgba(255,179,71,0.4)) brightness(1.2)",
-                "drop-shadow(0 0 30px rgba(255,179,71,0.2)) brightness(1)",
+                `drop-shadow(0 0 30px ${themeColors.shadow},0.2)) brightness(1)`,
+                `drop-shadow(0 0 50px ${themeColors.glow},0.4)) brightness(1.2)`,
+                `drop-shadow(0 0 30px ${themeColors.shadow},0.2)) brightness(1)`,
               ],
             }}
             transition={{

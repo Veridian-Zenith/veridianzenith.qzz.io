@@ -43,6 +43,8 @@ const resources = {
 
       "aur.title": "AUR Repositories",
       "aur.subtitle": "Pre-compiled artifacts for Arch Linux, ready for direct integration.",
+      "aur.loading": "Fetching package data from the AUR...",
+      "aur.error": "Failed to fetch package data. Please try again later or check your internet connection.",
       "aur.maintainer": "Maintainer",
       "aur.install.title": "Installation Guide",
       "aur.install.comment": "# Install with yay",
@@ -103,6 +105,8 @@ const resources = {
 
       "aur.title": "Репозитории AUR",
       "aur.subtitle": "Предварительно скомпилированные артефакты для Arch Linux, готовые к прямой интеграции.",
+      "aur.loading": "Получение данных пакетов из AUR...",
+      "aur.error": "Не удалось получить данные пакета. Пожалуйста, попробуйте позже или проверьте подключение к Интернету.",
       "aur.maintainer": "Сопровождающий",
       "aur.install.title": "Руководство по установке",
       "aur.install.comment": "# Установить с помощью yay",
@@ -163,6 +167,8 @@ const resources = {
 
       "aur.title": "AUR-Repositorien",
       "aur.subtitle": "Vorkompilierte Artefakte für Arch Linux, bereit zur direkten Integration.",
+      "aur.loading": "Paktdaten vom AUR werden abgerufen...",
+      "aur.error": "Paktdaten konnten nicht abgerufen werden. Bitte versuchen Sie es später oder überprüfen Sie Ihre Internetverbindung.",
       "aur.maintainer": "Betreuer",
       "aur.install.title": "Installationsanleitung",
       "aur.install.comment": "# Mit yay installieren",
@@ -223,6 +229,8 @@ const resources = {
 
       "aur.title": "AUR 저장소",
       "aur.subtitle": "Arch Linux용으로 사전 컴파일된 아티팩트로, 직접 통합할 준비가 되어 있습니다.",
+      "aur.loading": "AUR에서 패키지 데이터를 가져오는 중입니다...",
+      "aur.error": "패키지 데이터를 가져올 수 없습니다. 나중에 다시 시도하거나 인터넷 연결을 확인하십시오.",
       "aur.maintainer": "관리자",
       "aur.install.title": "설치 안내서",
       "aur.install.comment": "# yay로 설치",

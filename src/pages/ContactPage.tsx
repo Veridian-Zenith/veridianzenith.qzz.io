@@ -17,8 +17,8 @@ export const ContactPage = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "daedaevibin@naver.com",
-      href: "mailto:daedaevibin@naver.com",
+      value: "daedaevibin@ik.me",
+      href: "mailto:daedaevibin@ik.me",
       color: "red"
     },
     {
@@ -63,7 +63,7 @@ export const ContactPage = () => {
           </p>
           <InteractiveButton
             variant="red"
-            onClick={() => window.location.href = 'mailto:daedaevibin@naver.com'}
+            onClick={() => window.location.href = 'mailto:daedaevibin@ik.me'}
             className="w-full sm:w-auto px-12 py-5 text-xl"
           >
             <span className="text-white">Summon</span> <span className="text-red-500 font-black ml-1 group-hover:drop-shadow-[0_0_12px_rgba(239,68,68,1)] transition-all">The Architect</span>
@@ -113,7 +113,7 @@ export const ContactPage = () => {
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <div className="flex items-center gap-4 mb-4">
               <MessageSquare size={40} className="text-[#5865F2]" />
-              <h2 className="text-3xl font-bold">Zenith Commons</h2>
+              <h2 className="text-3xl font-bold">Veridian Zenith</h2>
             </div>
             <p className="text-gray-400 max-w-md text-lg">
               Step into the collective void. Join our community for real-time discourse and project updates.

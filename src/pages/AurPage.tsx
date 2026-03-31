@@ -11,25 +11,25 @@ export const AurPage = () => {
 
   const packages = [
     {
-      id: 'veridian-zenith-git',
+      id: 'meshiji',
       icon: <Package className="text-amber-500" size={32} />,
-      title: 'veridian-zenith-git',
-      description: t('aur.packages.veridian-zenith-git.description'),
-      url: 'https://aur.archlinux.org/packages/veridian-zenith-git'
+      title: 'meshiji',
+      description: t('projects.meshiji.description'),
+      url: 'https://aur.archlinux.org/packages/meshiji'
     },
     {
-      id: 'veridian-icons-git',
+      id: 'voix',
       icon: <Download className="text-red-500" size={32} />,
-      title: 'veridian-icons-git',
-      description: t('aur.packages.veridian-icons-git.description'),
-      url: 'https://aur.archlinux.org/packages/veridian-icons-git'
+      title: 'voix',
+      description: t('projects.voix.description'),
+      url: 'https://aur.archlinux.org/packages/voix'
     },
     {
-      id: 'veridian-cursors',
+      id: 'peguni_draem-la',
       icon: <Shield className="text-gold-500" size={32} />,
-      title: 'veridian-cursors',
-      description: t('aur.packages.veridian-cursors.description'),
-      url: 'https://aur.archlinux.org/packages/veridian-cursors'
+      title: 'peguni_draem-la',
+      description: t('projects.peguni.description'),
+      url: 'https://aur.archlinux.org/packages/peguni_draem-la'
     }
   ];
 
@@ -52,18 +52,21 @@ export const AurPage = () => {
         {packages.map((pkg, i) => (
           <AnimatedCard key={pkg.id} delay={i * 0.1}>
             <div className="flex flex-col h-full">
-              <div className="mb-6">{pkg.icon}</div>
+              <div className="mb-6">
+                {pkg.icon}
+              </div>
               <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-amber-500 transition-colors">
                 {pkg.title}
               </h3>
-              <p className="text-gray-400 mb-8 leading-relaxed text-sm flex-grow">
+              <p className="text-gray-400 mb-6 leading-relaxed text-sm flex-grow">
                 {pkg.description}
               </p>
+
               <a
                 href={pkg.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-amber-500 font-bold hover:text-amber-400 transition-colors group/link"
+                className="flex items-center gap-2 text-amber-500 font-bold hover:text-amber-400 transition-colors group/link mt-auto"
               >
                 {t('projects.inspect')} <ExternalLink size={16} className="group-hover/link:translate-x-1 transition-transform" />
               </a>
@@ -85,13 +88,37 @@ export const AurPage = () => {
               {t('aur.install.title')}
             </h2>
           </div>
-          <div className="bg-black/60 rounded-2xl p-6 font-mono text-sm sm:text-base border border-white/5 relative group overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative z-10">
-              <div className="text-gray-500 mb-2">{t('aur.install.comment')}</div>
-              <div className="flex items-center gap-3">
-                <span className="text-amber-500 select-none">$</span>
-                <span className="text-gray-300">yay -S veridian-zenith-git</span>
+
+          {/* Installing paru section */}
+          <div className="mb-10 bg-white/5 rounded-2xl p-6 border border-white/10">
+            <h3 className="text-sm font-bold text-amber-500 uppercase tracking-[0.2em] mb-4">First: Install paru (AUR Helper)</h3>
+            <div className="bg-black/40 rounded-xl p-5 font-mono text-xs sm:text-sm text-gray-300 space-y-2 border border-white/5">
+              <div className="flex gap-3"><span className="text-amber-500 select-none">$</span><span>sudo pacman -S --needed base-devel</span></div>
+              <div className="flex gap-3"><span className="text-amber-500 select-none">$</span><span>git clone https://aur.archlinux.org/paru.git</span></div>
+              <div className="flex gap-3"><span className="text-amber-500 select-none">$</span><span>cd paru</span></div>
+              <div className="flex gap-3"><span className="text-amber-500 select-none">$</span><span>makepkg -si</span></div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-black/60 rounded-2xl p-6 font-mono text-sm border border-white/5 relative group overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="text-gray-500 mb-2"># Install with paru (Recommended)</div>
+                <div className="flex items-center gap-3">
+                  <span className="text-amber-500 select-none">$</span>
+                  <span className="text-gray-300">paru -S meshiji voix peguni_draem-la</span>
+                </div>
+              </div>
+            </div>
+            <div className="bg-black/60 rounded-2xl p-6 font-mono text-sm border border-white/5 relative group overflow-hidden opacity-70 hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="text-gray-500 mb-2"># Alternative: Install with yay</div>
+                <div className="flex items-center gap-3">
+                  <span className="text-red-500 select-none">$</span>
+                  <span className="text-gray-300">yay -S meshiji voix peguni_draem-la</span>
+                </div>
               </div>
             </div>
           </div>
@@ -101,7 +128,7 @@ export const AurPage = () => {
               {t('aur.maintainer')}: Veridian Zenith
             </div>
             <div className="hidden sm:block">
-              Architecture: x86_64, aarch64
+              Architecture: x86_64
             </div>
           </div>
         </div>

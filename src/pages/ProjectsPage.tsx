@@ -10,14 +10,6 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '../hooks/useIsMobile';
 
-const AUR_PROJECTS: Record<string, string> = {
-  axiomos: 'https://aur.archlinux.org/packages/axiomos-git',
-  voix: 'https://aur.archlinux.org/packages/voix-git',
-  meshiji: 'https://aur.archlinux.org/packages/meshiji',
-  peguni: 'https://aur.archlinux.org/packages/peguni-draem-la',
-  misc: 'https://aur.archlinux.org/packages/veridian-misc-tools',
-};
-
 const STATIC_PROJECTS = [
   {
     id: 'axiomos',
@@ -161,17 +153,6 @@ export const ProjectsPage = () => {
                     >
                       {t('projects.inspect')} <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </a>
-                    {AUR_PROJECTS[repo.id] && (
-                      <a
-                        href={AUR_PROJECTS[repo.id]}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors font-semibold text-sm border border-blue-500/30 px-3 py-1 rounded-lg bg-blue-500/5 hover:bg-blue-500/10"
-                      >
-                        <Box size={14} className="group-hover:scale-110 transition-transform" />
-                        <span>AUR</span>
-                      </a>
-                    )}
                   </div>
                 </div>
               </AnimatedCard>
@@ -179,11 +160,23 @@ export const ProjectsPage = () => {
           );
         })}
 
-        <div className="border border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center p-8 text-center bg-white/5 opacity-40 min-h-[250px]">
+        <div className={cn(
+          "border border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center p-8 text-center bg-white/5 opacity-40 min-h-[250px]",
+          isMobile && "min-w-[85vw] snap-center"
+        )}>
           <Terminal size={32} className="text-gray-500 mb-4" />
           <p className="text-gray-400 italic">{t('projects.future')}</p>
         </div>
       </div>
+
+      {isMobile && (
+        <div className="flex justify-center gap-2 mt-4">
+          {STATIC_PROJECTS.map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/20" />
+          ))}
+          <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+        </div>
+      )}
     </div>
   );
 };
