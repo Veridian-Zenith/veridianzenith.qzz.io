@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 export type Atmosphere = 'default' | 'midnight-void' | 'blood-moon' | 'golden-zenith';
 
@@ -48,18 +48,14 @@ const initialAtmosphere = initializeAtmosphere();
 
 export function useAtmosphere() {
   const [atmosphere, setAtmosphere] = useState<Atmosphere>(initialAtmosphere);
-  const [isLoaded, setIsLoaded] = useState(true);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
+  const [isLoaded] = useState(true);
 
   const switchAtmosphere = useCallback((atm: Atmosphere) => {
     setAtmosphere(atm);
     applyAtmosphereClass(atm);
     localStorage.setItem(ATMOSPHERE_STORAGE_KEY, atm);
     // Force a repaint to ensure styles update
-    document.documentElement.offsetHeight;
+    void document.documentElement.offsetHeight;
   }, []);
 
   return { atmosphere, switchAtmosphere, isLoaded };

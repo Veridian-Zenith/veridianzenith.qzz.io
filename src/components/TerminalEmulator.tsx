@@ -51,7 +51,7 @@ export const TerminalEmulator: React.FC<TerminalEmulatorProps> = ({ isOpen, onCl
           '█▓▒░ The void recognizes you ░▒▓█'
         ]);
         break;
-      case 'joke':
+      case 'joke': {
         const jokes = [
           "Why did the developer go dark mode? Because light mode got too close to the void.",
           "A SQL query walks into a bar, walks up to two tables and asks... can I join you?",
@@ -62,7 +62,8 @@ export const TerminalEmulator: React.FC<TerminalEmulatorProps> = ({ isOpen, onCl
         const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
         setHistory(prev => [...prev, randomJoke]);
         break;
-      case 'fortune':
+      }
+      case 'fortune': {
         const fortunes = [
           "The runes favor the bold.",
           "Digital artifacts are but echoes of the void.",
@@ -77,6 +78,7 @@ export const TerminalEmulator: React.FC<TerminalEmulatorProps> = ({ isOpen, onCl
         const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
         setHistory(prev => [...prev, randomFortune]);
         break;
+      }
       case 'whoami':
         setHistory(prev => [...prev, 'The Seeker / guest@zenith-void']);
         break;
